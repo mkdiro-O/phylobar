@@ -1,0 +1,5 @@
+*.rds
+*DS_Store*
+*.RData*
+*cache*
+vignettes/*html

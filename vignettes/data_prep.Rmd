@@ -1,0 +1,81 @@
+---
+title: "data_prep"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{data_prep}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r setup}
+library(TreeSummarizedExperiment)
+library(ape)
+library(phangorn)
+library(phylobar)
+library(phyloseq)
+library(purrr)
+```
+
+## `phyloseq` example
+
+```{r}
+data(GlobalPatterns)
+chlamydiae <- subset_taxa(GlobalPatterns, Phylum == "Chlamydiae")
+
+x <- t(otu_table(chlamydiae))
+tree <- phy_tree(chlamydiae)
+x[rowSums(x) == 0, 1] <- 1
+x <- x / rowSums(x)
+phylobar(x, tree, width = 900)
+```
+
+This constructs a tree from a taxonomic table.
+
+The first part is some problem specific preprocessing, to avoid the fact that
+some ancestor and descendant names look identical in this dataset for some
+reason.
+
+```{r}
+taxa <- tax_table(chlamydiae) |>
+  as.data.frame()
+taxa$ASV <- rownames(taxa)
+ranks <- c(rank_names(chlamydiae), "ASV")
+edges <- list()
+
+# Ensure all columns are character
+for (j in seq_len(ncol(taxa) - 1)) {
+  prefix <- paste0(substr(colnames(taxa)[j], 1, 1), "_")
+  taxa[, j] <- ifelse(is.na(taxa[, j]), NA, paste0(prefix, taxa[, j]))
+}
+```
+
+```{r}
+for (i in seq_len(nrow(taxa))) {
+  path <- taxa[i, ranks]
+  path <- as.character(path)
+  path <- path[!is.na(path) & path != ""]
+  if (length(path) > 1) {
+    for (j in seq_len(length(path) - 1)) {
+      edges[[length(edges) + 1]] <- c(path[j], path[j + 1])
+    }
+  }
+}
+
+edgelist <- do.call(rbind, edges)
+colnames(edgelist) <- c("ancestor", "descendant")
+edgelist <- unique(edgelist) # Remove duplicates if needed
+tax_tree <- as.phylo(edgelist)
+```
+
+```{r}
+phylobar(x, tax_tree, width = 900)
+```

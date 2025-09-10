@@ -1,0 +1,32 @@
+---
+title: "stream-test"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{stack-test}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+```{r setup}
+library(fs)
+library(jsonlite)
+library(phylobar)
+library(tidyverse)
+data_dir <- path("../../../data")
+#data_dir <- path("data")
+```
+
+```{r, out.width = 900}
+stream_data <- read_json(data_dir / "stream.json")
+labels <- read_json(data_dir / "labels_stream.json")
+phylobar(stream_data, labels, width = 900, rel_width=0.2)
+```
