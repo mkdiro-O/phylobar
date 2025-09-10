@@ -1,0 +1,50 @@
+---
+title: "`TreeSummarizedExperiment` examples"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{data_prep}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r}
+library(ape)
+library(phylobar)
+library(miaViz)
+library(scater)
+```
+
+This example comes from
+
+https://microbiome.github.io/miaViz/articles/miaViz.html
+
+It shows how to create a stacked bar tree from a TreeSummarizedExperiment.
+
+```{r setup}
+data(GlobalPatterns, package = "mia")
+prev_species <- getPrevalent(GlobalPatterns, rank = "Species", detection = 0.01)
+GlobalPatterns <- GlobalPatterns[rowData(GlobalPatterns)$Species %in% prev_species, ]
+GlobalPatterns <- transformAssay(GlobalPatterns, method = "relabundance")
+```
+
+```{r}
+x <- t(assay(GlobalPatterns, "relabundance")) |>
+    as.data.frame()
+x <- x[, colSums(x) > 0]
+
+tree <- rowTree(GlobalPatterns) |>
+   keep.tip(colnames(x))
+```
+
+```{r}
+phylobar(as.data.frame(x), tree)
+```

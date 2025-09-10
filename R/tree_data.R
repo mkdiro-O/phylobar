@@ -57,6 +57,10 @@ node_hierarchy <- function(tree, totals, node = NULL) {
 #' @return A list with tree_data and labels.
 #' @export
 phylobar_data <- function(x, tree, hclust_order = TRUE) {
+    if (tree$node.label[1] == "") {
+        tree$node.label[1] <- "root"
+    }
+
     totals <- node_totals(tree, x)
     for (j in seq_len(ncol(x))) {
         tax_id <- colnames(x)[j]
