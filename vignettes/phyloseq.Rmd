@@ -37,11 +37,10 @@ x <- x / rowSums(x)
 phylobar(x, tree, width = 900)
 ```
 
-This constructs a tree from a taxonomic table.
-
-The first part is some problem specific preprocessing, to avoid the fact that
-some ancestor and descendant names look identical in this dataset for some
-reason.
+This creates the same type of visualization but using a taxonomic hierarchy
+rather than a phylogeny.  We have some problem specific preprocessing to deal
+with the fact that some ancestor and descendant names look identical in this
+dataset for some reason.
 
 ```{r}
 taxa <- tax_table(chlamydiae) |>
@@ -50,7 +49,6 @@ taxa$ASV <- rownames(taxa)
 ranks <- c(rank_names(chlamydiae), "ASV")
 edges <- list()
 
-# Ensure all columns are character
 for (j in seq_len(ncol(taxa) - 1)) {
   prefix <- paste0(substr(colnames(taxa)[j], 1, 1), "_")
   taxa[, j] <- ifelse(is.na(taxa[, j]), NA, paste0(prefix, taxa[, j]))
@@ -60,23 +58,6 @@ for (j in seq_len(ncol(taxa) - 1)) {
 The part below should probably become a helper function.
 
 ```{r}
-for (i in seq_len(nrow(taxa))) {
-  path <- taxa[i, ranks]
-  path <- as.character(path)
-  path <- path[!is.na(path) & path != ""]
-  if (length(path) > 1) {
-    for (j in seq_len(length(path) - 1)) {
-      edges[[length(edges) + 1]] <- c(path[j], path[j + 1])
-    }
-  }
-}
-
-edgelist <- do.call(rbind, edges)
-colnames(edgelist) <- c("ancestor", "descendant")
-edgelist <- unique(edgelist) # Remove duplicates if needed
-tax_tree <- as.phylo(edgelist)
-```
-
-```{r}
+tax_tree <- taxonomy_to_tree(taxa)
 phylobar(x, tax_tree, width = 900)
 ```
