@@ -38,6 +38,8 @@ node_hierarchy <- function(tree, totals, node = NULL) {
         node_idx <- node - Ntip(tree)
         node_name <- tree$node.label[node_idx]
         children_nodes <- Children(tree, node)
+        names(children_nodes) <- NULL
+
         children <- map(children_nodes, ~ node_hierarchy(tree, totals, .x))
         list(
             name = node_name,
