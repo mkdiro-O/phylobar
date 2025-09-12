@@ -1,12 +1,13 @@
 Package: phylobar
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Interactive construction of stacked barplots using hierarchies
+Version: 0.99.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+    person("Kris", "Sankaran", , "ksankaran@wisc.edu", role = c("aut", "cre", "fnd"), comment = c(ORCID = "0000-0002-9415-1971"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: CC0
 Encoding: UTF-8
+URL: https://github.com/mkdiro-O/phylobar
+BugReports: https://github.com/mkdiro-O/phylobar/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests: 
@@ -14,5 +15,9 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Depends: 
-    R (>= 3.5)
-LazyData: true
+    R (>= 4.5.0),
+    phyloseq,
+    htmlwidgets,
+    ape,
+    phangorn
+biocViews: Software, Phylogenetics, Visualization
