@@ -30,7 +30,7 @@ node_hierarchy <- function(tree, totals, node = NULL) {
         tip_name <- tree$tip.label[node]
         list(
             name = tip_name,
-            value = totals[[tip_name]],
+            value = matrix(totals[[tip_name]]),
             summary = sum(totals[[tip_name]]),
             children = NA
         )
@@ -43,7 +43,7 @@ node_hierarchy <- function(tree, totals, node = NULL) {
         children <- map(children_nodes, ~ node_hierarchy(tree, totals, .x))
         list(
             name = node_name,
-            value = as.numeric(totals[[node_name]]),
+            value = matrix(totals[[node_name]]),
             summary = sum(totals[[node_name]]),
             children = children
         )

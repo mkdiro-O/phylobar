@@ -8,16 +8,15 @@
 #' @return An object of class 'phylo' representing the tree structure.
 #' @export
 edgelist_to_phylo <- function(edgelist) {
-    nodes <- unique(c(edgelist))
+    # Identify tips and internal nodes
     tips <- setdiff(edgelist[,2], edgelist[,1])
-    internals <- setdiff(nodes, tips)
+    internals <- setdiff(unique(edgelist[,1]), tips)
 
-    # Tips: 1 to n, Internals: n+1 to n+Nnode
+    # Assign indices: tips 1:n, internals n+1:n+Nnode
     tip_ids <- setNames(seq_along(tips), tips)
     internal_ids <- setNames(length(tips) + seq_along(internals), internals)
     node_ids <- c(tip_ids, internal_ids)
 
-    # construct the tree object
     edge <- cbind(node_ids[edgelist[, 1]], node_ids[edgelist[, 2]])
     phylo <- list(
         edge = edge,
@@ -57,7 +56,7 @@ taxonomy_to_tree <- function(taxa) {
     }
 
     # merge into a phylogeny
-    do.call(rbind, edges) |
-        unique() |
+    do.call(rbind, edges) |>
+        unique() |>
         edgelist_to_phylo()
 }
