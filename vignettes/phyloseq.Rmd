@@ -55,7 +55,7 @@ for (j in seq_len(ncol(taxa) - 1)) {
 }
 ```
 
-The part below should probably become a helper function.
+Now we can make the visualization.
 
 ```{r}
 tax_tree <- taxonomy_to_tree(taxa)

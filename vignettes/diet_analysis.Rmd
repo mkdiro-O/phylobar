@@ -1,0 +1,48 @@
+---
+title: "Diet Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mouse_data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+
+```{r}
+library(phylobar)
+library(phyloseq)
+library(DESeq2)
+library(MicrobiomeStat)
+```
+
+```{r}
+data(diet)
+diet
+```
+
+```{r}
+diet_mstat <- mStat_convert_phyloseq_to_data_obj(diet)
+diet_mstat <- mStat_normalize_data(diet_mstat, "DESeq")
+x <- t(diet_mstat$data.obj.norm$feature.tab)
+```
+
+```{r}
+taxa <- tax_table(diet)
+taxa[, 1] <- paste0("p_", taxa[, 1])
+taxa[, 2] <- paste0("f_", taxa[, 2])
+taxa <- cbind(Kingdom = "k_Bacteria", taxa)
+tree <- taxonomy_to_tree(taxa)
+```
+
+```{r}
+phylobar(x, tree, width=800)
+```
