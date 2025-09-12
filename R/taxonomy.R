@@ -61,3 +61,22 @@ taxonomy_to_tree <- function(taxa) {
         unique() |>
         edgelist_to_phylo()
 }
+
+#' Add rank prefixes to taxonomic matrix values.
+#'
+#' For each value in the taxonomic matrix (except the last column), adds a
+#' prefix based on the first character of the column (rank) name. For example,
+#' if the column is "Genus", the prefix will be "G_".
+#'
+#' @param taxa A character matrix with columns representing taxonomic ranks and
+#' rows representing taxa.
+#' @return A character matrix with prefixes added to each value (except the last
+#' column).
+#' @export
+add_prefix <- function(taxa) {
+    for (j in seq_len(ncol(taxa) - 1)) {
+        prefix <- substr(colnames(taxa)[j], 1, 1)
+        taxa[, j] <- paste0(prefix, "_", taxa[, j])
+    }
+    taxa
+}
