@@ -36,12 +36,7 @@ x <- readRDS(data_dir / "noisyMicrobiome.rds") |>
 
 # cluster to find representatives
 x_mat <- column_to_rownames(x, "sample")
-fit <- hclust(dist(x_mat))
-clusters <- cutree(fit, k = 50)
-
-# one representative sample per cluster
-representatives <- tapply(rownames(x_mat), clusters, \(k) k[1])
-x_mat <- x_mat[x$sample %in% representatives, ]
+x_mat <- subset_cluster(x)
 ```
 
 It seems that some of the internal node labels appear multiple times. Let's make
