@@ -9,8 +9,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
@@ -32,14 +32,14 @@ Let's construct a tree from the taxonomy and make sure it's valid.
 
 ```{r}
 tree <- taxa |>
-  select(-X1, X1) |>
-  mutate(
-    across(
-      everything(), 
-      ~if_else(str_ends(., "_"), NA, .)
-      )
-  ) |>
-  taxonomy_to_tree()
+    select(-X1, X1) |>
+    mutate(
+        across(
+            everything(), 
+            ~if_else(str_ends(., "_"), NA, .)
+        )
+    ) |>
+    taxonomy_to_tree()
 
 checkValidPhylo(tree)
 ```
@@ -57,12 +57,12 @@ Now we can melt the tensor.
 
 ```{r}
 x <- normal[sample_order, species_order, ] |>
-  aperm(c(3, 1, 2)) |>
-  matrix(nrow = dim(normal)[3] * nrow(normal), ncol = ncol(normal))
+    aperm(c(3, 1, 2)) |>
+    matrix(nrow = dim(normal)[3] * nrow(normal), ncol = ncol(normal))
 
 rownames(x) <- apply(
-  expand.grid(rownames(normal)[sample_order], c(0, 1, 4, 7)),
-  1, paste, collapse = "-"
+    expand.grid(rownames(normal)[sample_order], c(0, 1, 4, 7)),
+    1, paste, collapse = "-"
 )
 ```
 
@@ -72,4 +72,7 @@ Finally we convert to compositions and visualize.
 comp <- x / rowSums(x)
 colnames(comp) <- colnames(normal)[species_order]
 phylobar(comp, tree, hclust_order = FALSE)
+```
+```{r}
+sessionInfo()
 ```

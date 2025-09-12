@@ -9,10 +9,10 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  message = FALSE,
-  warning = FALSE
+    collapse = TRUE,
+    comment = "#>",
+    message = FALSE,
+    warning = FALSE
 )
 ```
 
@@ -25,7 +25,10 @@ library(MicrobiomeStat)
 ```
 
 ```{r}
-data(diet)
+dietpath <- tempfile(fileext = ".rda")
+download.file("https://go.wisc.edu/l68i2z", dietpath, mode = "wb")
+diet <- get(load(dietpath))
+
 diet
 ```
 
@@ -45,4 +48,8 @@ tree <- taxonomy_to_tree(taxa)
 
 ```{r}
 phylobar(x, tree, width=800)
+```
+
+```{r}
+sessionInfo()
 ```

@@ -9,10 +9,10 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  message = FALSE,
-  warning = FALSE
+    collapse = TRUE,
+    comment = "#>",
+    message = FALSE,
+    warning = FALSE
 )
 ```
 
@@ -44,14 +44,14 @@ dataset for some reason.
 
 ```{r}
 taxa <- tax_table(chlamydiae) |>
-  as.data.frame()
+    as.data.frame()
 taxa$ASV <- rownames(taxa)
 ranks <- c(rank_names(chlamydiae), "ASV")
 edges <- list()
 
 for (j in seq_len(ncol(taxa) - 1)) {
-  prefix <- paste0(substr(colnames(taxa)[j], 1, 1), "_")
-  taxa[, j] <- ifelse(is.na(taxa[, j]), NA, paste0(prefix, taxa[, j]))
+    prefix <- paste0(substr(colnames(taxa)[j], 1, 1), "_")
+    taxa[, j] <- ifelse(is.na(taxa[, j]), NA, paste0(prefix, taxa[, j]))
 }
 ```
 
@@ -60,4 +60,7 @@ Now we can make the visualization.
 ```{r}
 tax_tree <- taxonomy_to_tree(taxa)
 phylobar(x, tax_tree, width = 900)
+```
+```{r}
+sessionInfo()
 ```

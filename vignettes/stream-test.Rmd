@@ -9,10 +9,10 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  warning = FALSE,
-  message = FALSE
+    collapse = TRUE,
+    comment = "#>",
+    warning = FALSE,
+    message = FALSE
 )
 ```
 
@@ -29,4 +29,8 @@ data_dir <- path("../../../data")
 stream_data <- read_json(data_dir / "stream.json")
 labels <- read_json(data_dir / "labels_stream.json")
 phylobar(stream_data, labels, width = 900, rel_width=0.2)
+```
+
+```{r}
+sessionInfo()
 ```

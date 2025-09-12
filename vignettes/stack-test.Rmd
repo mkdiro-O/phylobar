@@ -9,10 +9,10 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  warning = FALSE,
-  message = FALSE
+    collapse = TRUE,
+    comment = "#>",
+    warning = FALSE,
+    message = FALSE
 )
 ```
 
@@ -28,11 +28,11 @@ data_dir <- path("../../../data")
 ```{r}
 phylo <- read.tree(data_dir / "FeatureTable.tre")
 metadata <- readRDS(data_dir / "noisyMetaData.rds") |>
-  rownames_to_column("sample")
+    rownames_to_column("sample")
 x <- readRDS(data_dir / "noisyMicrobiome.rds") |>
-  t() |>
-  data.frame() |>
-  rownames_to_column("sample")
+    t() |>
+    data.frame() |>
+    rownames_to_column("sample")
 
 # cluster to find representatives
 x_mat <- column_to_rownames(x, "sample")
@@ -58,4 +58,7 @@ x_mat <- x_mat / rowSums(x_mat)
 
 ```{r}
 phylobar(x_mat, filtered_tree, width = 900, sample_show_all = FALSE)
+```
+```{r}
+sessionInfo()
 ```

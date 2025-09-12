@@ -9,10 +9,10 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  message = FALSE,
-  warning = FALSE
+    collapse = TRUE,
+    comment = "#>",
+    message = FALSE,
+    warning = FALSE
 )
 ```
 
@@ -32,7 +32,9 @@ It shows how to create a stacked bar tree from a TreeSummarizedExperiment.
 ```{r setup}
 data(GlobalPatterns, package = "mia")
 prev_species <- getPrevalent(GlobalPatterns, rank = "Species", detection = 0.01)
-GlobalPatterns <- GlobalPatterns[rowData(GlobalPatterns)$Species %in% prev_species, ]
+GlobalPatterns <- GlobalPatterns[
+    rowData(GlobalPatterns)$Species %in% prev_species,
+]
 GlobalPatterns <- transformAssay(GlobalPatterns, method = "relabundance")
 ```
 
@@ -42,9 +44,13 @@ x <- t(assay(GlobalPatterns, "relabundance")) |>
 x <- x[, colSums(x) > 0]
 
 tree <- rowTree(GlobalPatterns) |>
-   keep.tip(colnames(x))
+    keep.tip(colnames(x))
 ```
 
 ```{r}
 phylobar(as.data.frame(x), tree)
+```
+
+```{r}
+sessionInfo()
 ```

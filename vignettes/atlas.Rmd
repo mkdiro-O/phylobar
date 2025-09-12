@@ -9,8 +9,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
@@ -23,15 +23,15 @@ library(microbiome)
 ```{r}
 data(atlas1006)
 pseq3 <- atlas1006 |>
-  subset_samples(DNA_extraction_method == "r") |>
-  transform(transform = "compositional")
+    subset_samples(DNA_extraction_method == "r") |>
+    transform(transform = "compositional")
 ```
 
 A naive tree construction would have loops!
 
 ```{r}
 tree <- taxonomy_to_tree(tax_table(pseq3))
-ape::checkValidPhylo(tree)
+checkValidPhylo(tree)
 ```
 
 We can add prefixes.
@@ -42,7 +42,7 @@ taxa <- cbind(Kingdom = "Bacteria", taxa)
 taxa <- add_prefix(taxa)
 
 tree <- taxonomy_to_tree(taxa)
-ape::checkValidPhylo(tree)
+checkValidPhylo(tree)
 ```
 
 ```{r}
@@ -60,4 +60,8 @@ x_sub <- x_sub[, colSums(x_sub) > 0]
 leaves_to_keep <- intersect(tree$tip.label, colnames(x_sub))
 filtered_tree <- drop.tip(tree, setdiff(tree$tip.label, leaves_to_keep))
 phylobar(x_sub, filtered_tree)
+```
+
+```{r}
+sessionInfo()
 ```

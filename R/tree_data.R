@@ -11,7 +11,9 @@ node_totals <- function(tree, x_mat) {
     for (node in node_ids) {
         desc_tips <- Descendants(tree, node, type = "tips")[[1]]
         tip_labels <- tree$tip.label[desc_tips]
-        totals[[as.character(node)]] <- rowSums(x_mat[, tip_labels, drop = FALSE])
+        totals[[as.character(node)]] <- rowSums(
+            x_mat[, tip_labels, drop = FALSE]
+        )
     }
     totals
 }
