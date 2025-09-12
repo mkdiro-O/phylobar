@@ -17,6 +17,7 @@ edgelist_to_phylo <- function(edgelist) {
     internal_ids <- setNames(length(tips) + seq_along(internals), internals)
     node_ids <- c(tip_ids, internal_ids)
 
+    # construct the tree object
     edge <- cbind(node_ids[edgelist[, 1]], node_ids[edgelist[, 2]])
     phylo <- list(
         edge = edge,
