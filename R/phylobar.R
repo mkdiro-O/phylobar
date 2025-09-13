@@ -1,10 +1,24 @@
-#' Tree + Stacked Bars
-#'
-#' <Add Description>
-#'
-#' @import htmlwidgets
-#'
-#' @export
+#" check that the input has the necessary labels
+check_inputs <- function(x, tree) {
+    if (is.null(rownames(x))) {
+        rownames(x) <- paste0("sample_", seq_len(nrow(x)))
+    }
+    if (is.null(colnames(x))) {
+        colnames(x) <- tree$tip.label
+    }
+    if (is.null(tree$node.label)) {
+        tree$node.label <- paste0("node", seq_len(tree$Nnode))
+    }
+    list(x = x, tree = tree)
+}
+
+#" Tree + Stacked Bars
+#"
+#" <Add Description>
+#"
+#" @import htmlwidgets
+#"
+#" @export
 phylobar <- function(
     x,
     tree,
@@ -17,7 +31,7 @@ phylobar <- function(
     sample_label_space = 50,
     sample_magnify = 1.5,
     sample_show_all = TRUE,
-    elementId = NULL,
+    element_id = NULL,
     rel_width = 0.4,
     rel_space = 10
 ) {
@@ -27,8 +41,9 @@ phylobar <- function(
             "#7b9cc4ff", "#c47ba0ff", "#e1d07eff"
         )
     }
+    checked <- check_inputs(x, tree)
 
-    inputs <- phylobar_data(x, tree, hclust_order)
+    inputs <- phylobar_data(checked$x, checked$tree, hclust_order)
     opts <- list(
         rel_width = rel_width,
         rel_space = rel_space,
@@ -40,7 +55,7 @@ phylobar <- function(
     )
 
     htmlwidgets::createWidget(
-        name = 'phylobar',
+        name = "phylobar",
         x = list(
             tree_data = inputs$tree_data,
             labels = inputs$labels,
@@ -49,7 +64,7 @@ phylobar <- function(
         ),
         width = width,
         height = height,
-        package = 'phylobar',
-        elementId = elementId
+        package = "phylobar",
+        elementId = element_id
     )
 }
