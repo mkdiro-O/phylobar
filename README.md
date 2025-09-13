@@ -40,7 +40,7 @@ phylobar(samples, tree)
 
 <figure>
 <img
-src="https://uwmadison.box.com/shared/static/5y9rq69w280sjukxnwg4a4vbu7t1tq5o.gif"
+src="https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/rtree_recording.gif"
 alt="quickstart" />
 <figcaption aria-hidden="true">quickstart</figcaption>
 </figure>
