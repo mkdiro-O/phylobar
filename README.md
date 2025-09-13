@@ -38,7 +38,7 @@ samples <- matrix(rpois(100 * 20, 1), 100, 20)
 phylobar(samples, tree)
 ```
 
-![](https://drive.google.com/file/d/1AGTZ5OtzNWEbZpWWDsROlqZOwM_j2bWr/view?usp=sharing)
+![](https://drive.google.com/uc?export=download&id=1AGTZ5OtzNWEbZpWWDsROlqZOwM_j2bWr)
 
 GitHub doesn’t allow us to include interactive blocks within this
 README, which is why we only have a recording above. You can interact
