@@ -6,16 +6,16 @@ a stacked barplot by interactively “painting” an associated tree. This
 is an alternative to defining a color palette using a fixed taxonomic
 resolution. It also helps avoid the issue of grouping all rare taxa into
 a color for “other” – since species can be chosen selectively, we can
-paint a few rare taxa but not the rest. Here is the package in action:
+paint a few rare taxa but not the rest (see the quickstart below for a
+recording).
 
 The main plotting function, phylobar, takes two inputs, a table of
 potentially normalized counts and a tree structure, which can come
 either from a phylogeny or a table of taxonomic assignments. See the
 vignettes for examples of converting alternative data formats (e.g.,
-phyloseq) into this input format.
-
-You can export any interactive snapshot to an SVG file by using the SVG
-crowbar package as illustrated in the “Exporting Views” vignettes.
+phyloseq) into this input format. You can export any interactive
+snapshot to an SVG file by using the SVG crowbar package as illustrated
+in the “Exporting Views” vignettes.
 
 ## Installation
 
@@ -35,7 +35,7 @@ library(phylobar)
 
 tree <- rtree(20)
 samples <- matrix(rpois(100 * 20, 1), 100, 20)
-phylobar(samples, tree, hclust_order = FALSE)
+phylobar(samples, tree)
 ```
 
 ![](README_files/figure-gfm/rtree_recording.gif)
@@ -48,12 +48,12 @@ spacebar.
 
 ## Common Tasks
 
-- Building a tree from a taxonomy. Rather than interacting with abstract
+- Building a tree from a taxonomy: Rather than interacting with abstract
   phylogenetic trees it can be helpful to choose stacked bar color using
   taxonomic assignments. This vignette gets a quick overview of
   constructing trees from taxonomy tables, including checks to make sure
   that the input is formatted properly.  
-- Exporting views. While interactivity is useful for exploration, we
+- Exporting views: While interactivity is useful for exploration, we
   often need to export a specific static view to discuss with others.
   This vignette gives an alternative to simple screenshots that
   preserves image quality and supports, editing and software like
