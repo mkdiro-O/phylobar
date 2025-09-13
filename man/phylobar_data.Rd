@@ -20,3 +20,12 @@ A list with tree_data and labels.
 \description{
 Prepare tree data for phylobar visualization
 }
+\examples{
+library(ape)
+set.seed(1)
+tree <- rtree(5)
+x <- matrix(runif(15), nrow = 3)
+colnames(x) <- tree$tip.label
+rownames(x) <- paste0("sample", 1:3)
+phylobar_data(x, tree)
+}

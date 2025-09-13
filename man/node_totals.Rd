@@ -6,7 +6,27 @@
 \usage{
 node_totals(tree, x_mat)
 }
+\arguments{
+\item{tree}{An object of class phylo, representing the tree structure. Must
+have tip labels matching the columns of x_mat.}
+
+\item{x_mat}{A numeric matrix of abundances, with samples in rows and
+features (tips) in columns. Column names should correspond to tree tip}
+}
+\value{
+A named list where each element corresponds to an internal node (by
+node label) and contains a vector of totals for each sample, computed by
+summing abundances over all descendant tips.
+}
 \description{
 This loops over all internal nodes in the tree and takes the sum over all
 descendant taxa, for each sample.
+}
+\examples{
+library(ape)
+set.seed(1)
+tree <- rtree(5)
+x_mat <- matrix(runif(15), ncol = 5)
+colnames(x_mat) <- tree$tip.label
+node_totals(tree, x_mat)
 }

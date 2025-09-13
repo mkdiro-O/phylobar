@@ -19,3 +19,12 @@ For each value in the taxonomic matrix (except the last column), adds a
 prefix based on the first character of the column (rank) name. For example,
 if the column is "Genus", the prefix will be "G_".
 }
+\examples{
+taxa <- matrix(
+  c("Firmicutes", "Bacilli", "Lactobacillales",
+    "Proteobacteria", "Gammaproteobacteria", "Enterobacterales"),
+  ncol = 3, byrow = TRUE,
+  dimnames = list(NULL, c("Phylum", "Class", "Order"))
+)
+add_prefix(taxa)
+}

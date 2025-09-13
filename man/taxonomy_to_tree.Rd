@@ -19,3 +19,25 @@ Creates a phylo from a taxonomic tree, skipping over any NA assignments.
 Assumes that the columns are sorted from coarsest to finest taxonomic
 resolution.
 }
+\examples{
+taxa <- matrix(
+  c("Firmicutes", "Bacilli", "Lactobacillales",
+    "Proteobacteria", "Gammaproteobacteria", "Enterobacterales"),
+  ncol = 3, byrow = TRUE,
+  dimnames = list(NULL, c("Phylum", "Class", "Order"))
+)
+tree <- taxonomy_to_tree(taxa)
+str(tree)
+
+# A more involved example with missing values
+taxa <- matrix(
+  c("Firmicutes", "Bacilli", "Lactobacillales", "ASV1",
+    "Proteobacteria", "Gammaproteobacteria", "Enterobacterales", "ASV2",
+    "Firmicutes", "Bacilli", NA, "ASV3"),
+  ncol = 4, byrow = TRUE,
+  dimnames = list(NULL, c("Phylum", "Class", "Order", "ASV"))
+)
+taxmat <- add_prefix(taxa)
+tree <- taxonomy_to_tree(taxmat)
+str(tree)
+}

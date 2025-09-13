@@ -16,13 +16,59 @@ phylobar(
   sample_label_space = 50,
   sample_magnify = 1.5,
   sample_show_all = TRUE,
-  elementId = NULL,
+  element_id = NULL,
   rel_width = 0.4,
   rel_space = 10
 )
 }
+\arguments{
+\item{x}{A matrix of abundances. Samples along rows, features along columns.}
+
+\item{tree}{A n object of class phylo, representing the tree structure.}
+
+\item{hclust_order}{Logical; if TRUE, reorder rows/columns by hierarchical
+clustering.}
+
+\item{palette}{Character vector of colors for stacked bars. If NULL, uses
+default palette: c( "#9c7bbaff", "#6eb8acff", "#ce7b7bff", "#7b9cc4ff",
+"#c47ba0ff", "#e1d07eff").}
+
+\item{width}{Width of the widget in pixels. If NULL, uses window default.}
+
+\item{height}{Height of the widget in pixels. If NULL, uses window default.}
+
+\item{sample_font_size}{Font size for sample labels (integer).}
+
+\item{sample_label_margin}{Margin between sample labels and bars in pixels.}
+
+\item{sample_label_space}{Space allocated for sample labels in pixels.}
+
+\item{sample_magnify}{Magnification factor for hovered sample labels.}
+
+\item{sample_show_all}{Logical; if TRUE, show all sample labels.}
+
+\item{element_id}{Optional HTML element ID to attach the widget to.}
+
+\item{rel_width}{Width of the tree panel relative to the overall
+visualization. Defaults to 0.4.}
+
+\item{rel_space}{Space between tree and barplot panels in pixels.}
+}
+\value{
+An htmlwidget visualization attached to the element element_id on
+}
 \description{
-\if{html}{\out{
-<Add Description>
-}}
+\code{phylobar} is visualization package that makes it possible to construct a
+stacked barplot by interactively "painting" an associated tree. This is an
+alternative to defining a color palette using a fixed taxonomic resolution.
+It also helps avoid the issue of grouping all rare taxa into a color for
+"other" since species can be chosen selectively, we can paint a few rare taxa
+but not the rest.
+}
+\examples{
+library(ape)
+set.seed(1)
+tree <- rtree(5)
+x <- matrix(rpois(15), ncol = 5)
+phylobar(x, tree)
 }

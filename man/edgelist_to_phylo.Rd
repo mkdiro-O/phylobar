@@ -17,3 +17,16 @@ An object of class 'phylo' representing the tree structure.
 Takes a two column matrix (parents -> descendants) and constructs an ape
 phylo object from it.
 }
+\examples{
+# Example edge list: parent -> child
+edgelist <- matrix(
+  c("A", "B",
+    "A", "C",
+    "B", "D",
+    "B", "E"),
+  ncol = 2, byrow = TRUE,
+  dimnames = list(NULL, c("parent", "child"))
+)
+tree <- edgelist_to_phylo(edgelist)
+str(tree)
+}

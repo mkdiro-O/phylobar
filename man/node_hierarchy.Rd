@@ -6,7 +6,29 @@
 \usage{
 node_hierarchy(tree, totals, node = NULL)
 }
+\arguments{
+\item{tree}{An object of class phylo, representing the tree structure.}
+
+\item{totals}{A named list of node totals, as returned by node_totals.}
+
+\item{node}{Name of the node from which to start a recursion. Defaults to the
+root node.}
+}
+\value{
+A nested list representing the hierarchy, with each node containing '
+its name, value, summary, and children (if any).
+}
 \description{
 This reshapes the list output from node_totals into the hierarchical format
 needed for the d3 tree visualization.
+}
+\examples{
+library(ape)
+set.seed(1)
+tree <- rtree(5)
+x_mat <- matrix(runif(15), ncol = 5)
+colnames(x_mat) <- tree$tip.label
+
+totals <- node_totals(tree, x_mat)
+node_hierarchy(tree, totals)
 }

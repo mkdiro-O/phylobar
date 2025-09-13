@@ -20,3 +20,8 @@ them using hierarchical clustering. One representative row is selected
 from each cluster, which helps in visualizing a large dataset in a
 semi-representative way.
 }
+\examples{
+mat <- matrix(rnorm(1000), nrow = 100)
+result <- subset_cluster(mat, k = 10)
+dim(result) # only 10 representatives
+}
