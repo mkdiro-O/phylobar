@@ -38,7 +38,12 @@ samples <- matrix(rpois(100 * 20, 1), 100, 20)
 phylobar(samples, tree)
 ```
 
-![](https://uwmadison.box.com/shared/static/5y9rq69w280sjukxnwg4a4vbu7t1tq5o.gif)
+<figure>
+<img
+src="https://uwmadison.box.com/shared/static/5y9rq69w280sjukxnwg4a4vbu7t1tq5o.gif"
+alt="quickstart" />
+<figcaption aria-hidden="true">quickstart</figcaption>
+</figure>
 
 GitHub doesn’t allow us to include interactive blocks within this
 README, which is why we only have a recording above. You can interact
