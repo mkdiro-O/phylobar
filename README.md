@@ -85,3 +85,10 @@ discussion, and some classics from this area include (). The package
 itself is implemented using the wonderful htmlwidgets package for
 linking are with javascript. The js code for phylobar is available on
 npm as phylobar-js.
+
+## Contact
+
+You can reach us by creating an
+[Issue](https://github.com/mkdiro-O/phylobar/issues) in the package
+repository or sending an email to <ksankaran@wisc.edu>. We appreciate
+your trying out the package and will try our best to reply promptly.
