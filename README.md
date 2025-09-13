@@ -1,1 +1,87 @@
+
 # phylobar
+
+`phylobar` is visualization package that makes it possible to construct
+a stacked barplot by interactively “painting” an associated tree. This
+is an alternative to defining a color palette using a fixed taxonomic
+resolution. It also helps avoid the issue of grouping all rare taxa into
+a color for “other” – since species can be chosen selectively, we can
+paint a few rare taxa but not the rest. Here is the package in action:
+
+The main plotting function, phylobar, takes two inputs, a table of
+potentially normalized counts and a tree structure, which can come
+either from a phylogeny or a table of taxonomic assignments. See the
+vignettes for examples of converting alternative data formats (e.g.,
+phyloseq) into this input format.
+
+You can export any interactive snapshot to an SVG file by using the SVG
+crowbar package as illustrated in the “Exporting Views” vignettes.
+
+## Installation
+
+You can install the development version of phylobar using:
+
+``` r
+remotes::install_packages("mkdir-o/phylobar")
+```
+
+## Quick Start
+
+This block applies phylobar to a small random data set:
+
+``` r
+library(ape)
+library(phylobar)
+
+tree <- rtree(20)
+samples <- matrix(rpois(100 * 20, 1), 100, 20)
+phylobar(samples, tree, hclust_order = FALSE)
+```
+
+![](README_files/figure-gfm/rtree_recording.gif)
+
+GitHub doesn’t allow us to include interactive blocks within this
+README, which is why we only have a recording above. You can interact
+with the output at this link. Clicking a node collapses a subtree.
+Double clicking introduces a new color. To freeze the view, press the
+spacebar.
+
+## Common Tasks
+
+- Building a tree from a taxonomy. Rather than interacting with abstract
+  phylogenetic trees it can be helpful to choose stacked bar color using
+  taxonomic assignments. This vignette gets a quick overview of
+  constructing trees from taxonomy tables, including checks to make sure
+  that the input is formatted properly.  
+- Exporting views. While interactivity is useful for exploration, we
+  often need to export a specific static view to discuss with others.
+  This vignette gives an alternative to simple screenshots that
+  preserves image quality and supports, editing and software like
+  illustrator or inkscape.
+- Customizing style: Phylobar supports a few styling customizations,
+  like changing the size of the text labels or the color palette. This
+  vignette walks through currently available options.  
+- Subsetting to representative samples: Stacked bar plots can be
+  cumbersome when there are many samples (e.g., \> 1000) present,
+  because the bars become too thin. This vignette includes some helper
+  functions to create views from representative samples.
+
+## Reference
+
+The full function reference can be found at this page.
+
+## Learn More
+
+Some more fully developed data analysis examples can be found in the
+following vignettes.
+
+We’ve included small screen recordings showing how these views can be
+helpful for tasks like quality control, intergroup comparison, and
+longitudal analysis.
+
+The design of this package is inspired by the focus-plus-context
+principle in data visualization. Our paper gives a more in-depth
+discussion, and some classics from this area include (). The package
+itself is implemented using the wonderful htmlwidgets package for
+linking are with javascript. The js code for phylobar is available on
+npm as phylobar-js.
