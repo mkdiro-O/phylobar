@@ -4,3 +4,5 @@
 *cache*
 vignettes/*html
 inst/doc
+*.Rbuildignore
+README.html
