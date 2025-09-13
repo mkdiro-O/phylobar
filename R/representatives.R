@@ -9,6 +9,10 @@
 #' @param k The number of clusters to form (default is 100).
 #' @return A matrix containing one representative row from each cluster.
 #' @export
+#' @examples
+#' mat <- matrix(rnorm(1000), nrow = 100)
+#' result <- subset_cluster(mat, k = 10)
+#' dim(result) # only 10 representatives
 subset_cluster <- function(x, k = 100) {
     fit <- hclust(dist(x))
     clusters <- cutree(fit, k = k)

@@ -6,6 +6,18 @@
 #' @param edgelist A two-column matrix where each row represents a
 #' parent-descendant relationship.
 #' @return An object of class 'phylo' representing the tree structure.
+#' @examples
+#' # Example edge list: parent -> child
+#' edgelist <- matrix(
+#'   c("A", "B",
+#'     "A", "C",
+#'     "B", "D",
+#'     "B", "E"),
+#'   ncol = 2, byrow = TRUE,
+#'   dimnames = list(NULL, c("parent", "child"))
+#' )
+#' tree <- edgelist_to_phylo(edgelist)
+#' str(tree)
 #' @export
 edgelist_to_phylo <- function(edgelist) {
     # Identify tips and internal nodes
@@ -40,6 +52,27 @@ edgelist_to_phylo <- function(edgelist) {
 #' ranks (sorted coarsest to finest) and rows representing taxa. NA or empty
 #' values are skipped.
 #' @return An object of class 'phylo' representing the taxonomic tree.
+#' @examples
+#' taxa <- matrix(
+#'   c("Firmicutes", "Bacilli", "Lactobacillales",
+#'     "Proteobacteria", "Gammaproteobacteria", "Enterobacterales"),
+#'   ncol = 3, byrow = TRUE,
+#'   dimnames = list(NULL, c("Phylum", "Class", "Order"))
+#' )
+#' tree <- taxonomy_to_tree(taxa)
+#' str(tree)
+#' 
+#' # A more involved example with missing values
+#' taxa <- matrix(
+#'   c("Firmicutes", "Bacilli", "Lactobacillales", "ASV1",
+#'     "Proteobacteria", "Gammaproteobacteria", "Enterobacterales", "ASV2",
+#'     "Firmicutes", "Bacilli", NA, "ASV3"),
+#'   ncol = 4, byrow = TRUE,
+#'   dimnames = list(NULL, c("Phylum", "Class", "Order", "ASV"))
+#' )
+#' taxmat <- add_prefix(taxa)
+#' tree <- taxonomy_to_tree(taxmat)
+#' str(tree)
 #' @export
 taxonomy_to_tree <- function(taxa) {
     edges <- list()
@@ -73,6 +106,14 @@ taxonomy_to_tree <- function(taxa) {
 #' @return A character matrix with prefixes added to each value (except the last
 #' column).
 #' @export
+#' @examples
+#' taxa <- matrix(
+#'   c("Firmicutes", "Bacilli", "Lactobacillales",
+#'     "Proteobacteria", "Gammaproteobacteria", "Enterobacterales"),
+#'   ncol = 3, byrow = TRUE,
+#'   dimnames = list(NULL, c("Phylum", "Class", "Order"))
+#' )
+#' add_prefix(taxa)
 add_prefix <- function(taxa) {
     for (j in seq_len(ncol(taxa) - 1)) {
         prefix <- substr(colnames(taxa)[j], 1, 1)
