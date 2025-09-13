@@ -1,6 +1,6 @@
 ---
 title: "hfhs"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{hfhs}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,6 +1,6 @@
 ---
 title: "Diet Data"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{mouse_data}
   %\VignetteEngine{knitr::rmarkdown}

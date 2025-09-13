@@ -1,6 +1,6 @@
 ---
 title: "stream-test"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{stack-test}
   %\VignetteEngine{knitr::rmarkdown}

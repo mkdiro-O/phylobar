@@ -1,8 +1,8 @@
 ---
-title: "`phyloseq` examples"
-output: rmarkdown::html_vignette
+title: "Global Patterns"
+output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{data_prep}
+  %\VignetteIndexEntry{global_patterns}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

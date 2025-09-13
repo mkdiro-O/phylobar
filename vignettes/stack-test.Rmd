@@ -1,6 +1,6 @@
 ---
 title: "stack-test"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{stack-test}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,11 +21,13 @@ library(fs)
 library(phylobar)
 library(ape)
 library(tibble)
-data_dir <- path("../../../data")
-#data_dir <- path("data")
+#data_dir <- path("../../../data")
+data_dir <- path("data")
 ```
 
-```{r}
+In this step ...
+
+```{r, read_in_data}
 phylo <- read.tree(data_dir / "FeatureTable.tre")
 metadata <- readRDS(data_dir / "noisyMetaData.rds") |>
     rownames_to_column("sample")
