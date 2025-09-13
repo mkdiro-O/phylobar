@@ -38,12 +38,7 @@ samples <- matrix(rpois(100 * 20, 1), 100, 20)
 phylobar(samples, tree)
 ```
 
-<figure>
-<img
-src="https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/rtree_recording.gif"
-alt="quickstart" />
-<figcaption aria-hidden="true">quickstart</figcaption>
-</figure>
+![](https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/rtree_recording.gif)
 
 GitHub doesn’t allow us to include interactive blocks within this
 README, which is why we only have a recording above. You can interact
