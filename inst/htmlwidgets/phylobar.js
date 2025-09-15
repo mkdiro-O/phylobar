@@ -7,11 +7,11 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
     let tree_data, neighborhoods, feature_map, b_scale, rscale, stacks, labels,
       palette, opts;
-
     // initialize the HTML skeleton
     let svg = d3.select(el).append("svg")
       .attr("width", width)
       .attr("height", height)
+    el.frozen = false
 
     svg.append("g").attr("id", "barplot");
     svg.append("g").attr("id", "tree");
@@ -83,4 +83,3 @@ HTMLWidgets.widget({
     };
   }
 });
-
