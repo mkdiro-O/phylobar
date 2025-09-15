@@ -37,16 +37,16 @@ HTMLWidgets.widget({
         labels = x.labels;
         palette = x.palette;
         opts = x.opts;
+        opts.x_max = opts.rel_width * width
         tree_data = x.tree_data;
 
-        x_max = opts.rel_width * width
-        let tree = phylobar.make_tree(tree_data, x_max, height);
+        let tree = phylobar.make_tree(tree_data, opts.x_max, opts.rel_height * height);
         tree.each(d => { d._children = null});
 
         feature_map = phylobar.create_feature_map(tree);
         b_scale = phylobar.stack_scales(
           labels, phylobar.stack_data(tree.leaves(), labels),
-          x_extent=[opts.rel_space + x_max, width],
+          x_extent=[opts.rel_space + opts.x_max, width],
           y_extent=[height - opts.sample_label_space, 0]
         );
 
@@ -55,19 +55,19 @@ HTMLWidgets.widget({
         stacks = phylobar.stack_data(tree.leaves(), labels);
 
         phylobar.update_tree(el, tree, rscale, link_gen,  palette, color_sets);
-        phylobar.update_stack(el, stacks, b_scale, labels, feature_map, palette, color_sets);
-        phylobar.update_event_listeners(el, tree, neighborhoods, feature_map, palette, color_sets, true, x_max);
-        phylobar.update_tree_labels(el, color_sets, feature_map, tree.descendants());
-        phylobar.update_sample_labels(el, b_scale, labels, opts, x_max);
+        phylobar.update_stack(el, stacks, b_scale, labels, feature_map, palette, color_sets, opts);
+        phylobar.update_event_listeners(el, tree, neighborhoods, feature_map, palette, color_sets, true, opts);
+        phylobar.update_tree_labels(el, color_sets, feature_map, tree.descendants(), opts);
+        phylobar.update_sample_labels(el, b_scale, labels, opts);
         phylobar.update_resolution(
           el, neighborhoods, tree, stacks, labels, palette, color_sets, 
-          feature_map, opts, b_scale, rscale, link_gen, width, height, x_max
+          feature_map, opts, b_scale, rscale, link_gen, width, height
         )
       },
 
       resize: function(width, height) {
         if (!tree_data || !feature_map || !b_scale) return;
-        let tree = phylobar.make_tree(tree_data, opts.rel_width * width, height);
+        let tree = phylobar.make_tree(tree_data, opts.rel_width * width, opts.rel_height * height);
         feature_map = phylobar.create_feature_map(tree);
         b_scale = phylobar.stack_scales(
           labels, phylobar.stack_data(tree.leaves(), labels),
@@ -77,8 +77,8 @@ HTMLWidgets.widget({
 
         neighborhoods = d3.Delaunay.from(tree.descendants().map(d => [d.x, d.y + 10]));
         phylobar.update_tree(el, tree, rscale, link_gen, palette, color_sets);
-        phylobar.update_stack(el, stacks, b_scale, labels, feature_map, palette, color_sets);
-        phylobar.update_event_listeners(el, tree, neighborhoods, feature_map, palette, color_sets, false, x_max);
+        phylobar.update_stack(el, stacks, b_scale, labels, feature_map, palette, color_sets, opts);
+        phylobar.update_event_listeners(el, tree, neighborhoods, feature_map, palette, color_sets, false, opts);
       }
     };
   }
