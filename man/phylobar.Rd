@@ -18,19 +18,23 @@ phylobar(
   sample_show_all = TRUE,
   element_id = NULL,
   rel_width = 0.4,
-  rel_space = 10
+  rel_height = 0.85,
+  rel_space = 10,
+  legend_mode = FALSE,
+  legend_x_start = 5,
+  legend_spacing = 16
 )
 }
 \arguments{
 \item{x}{A matrix of abundances. Samples along rows, features along columns.}
 
-\item{tree}{A n object of class phylo, representing the tree structure.}
+\item{tree}{An object of class phylo, representing the tree structure.}
 
 \item{hclust_order}{Logical; if TRUE, reorder rows/columns by hierarchical
 clustering.}
 
 \item{palette}{Character vector of colors for stacked bars. If NULL, uses
-default palette: c( "#9c7bbaff", "#6eb8acff", "#ce7b7bff", "#7b9cc4ff",
+default palette: c("#9c7bbaff", "#6eb8acff", "#ce7b7bff", "#7b9cc4ff",
 "#c47ba0ff", "#e1d07eff").}
 
 \item{width}{Width of the widget in pixels. If NULL, uses window default.}
@@ -52,13 +56,26 @@ default palette: c( "#9c7bbaff", "#6eb8acff", "#ce7b7bff", "#7b9cc4ff",
 \item{rel_width}{Width of the tree panel relative to the overall
 visualization. Defaults to 0.4.}
 
+\item{rel_height}{Relative height of the tree in the overall visualization.
+Defaults to 0.85. Adjust this if you need more/less space for the legend.}
+
 \item{rel_space}{Space between tree and barplot panels in pixels.}
+
+\item{legend_mode}{Logical; if TRUE (default), display labels for the painted
+subtrees in a legend near the bottom of the tree.  If FALSE, include the
+labels within the tree itself.}
+
+\item{legend_x_start}{Horizontal starting position (in pixels) for the
+legend. Defaults to 4.}
+
+\item{legend_spacing}{Vertical spacing (in pixels) between legend entries.}
 }
 \value{
 An htmlwidget visualization attached to the element element_id on
+the output HTML page.
 }
 \description{
-\code{phylobar} is visualization package that makes it possible to construct a
+\code{phylobar} is a visualization package that makes it possible to construct a
 stacked barplot by interactively "painting" an associated tree. This is an
 alternative to defining a color palette using a fixed taxonomic resolution.
 It also helps avoid the issue of grouping all rare taxa into a color for
