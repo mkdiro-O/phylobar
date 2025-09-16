@@ -20,7 +20,7 @@ phylobar(
   rel_width = 0.4,
   rel_height = 0.85,
   rel_space = 10,
-  legend_mode = FALSE,
+  legend_mode = TRUE,
   legend_x_start = 5,
   legend_spacing = 16
 )
