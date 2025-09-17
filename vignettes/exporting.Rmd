@@ -1,0 +1,36 @@
+---
+title: "Exporting to SVG"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Exporting to SVG}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ape)
+library(phylobar)
+
+tree <- rtree(20)
+samples <- matrix(rpois(100 * 20, 1), 100, 20)
+phylobar(samples, tree, width=800)
+```
+
+# Step 1: Exporting from Browser
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pb55u7kL7NA?si=held0jZZtjdN4rNJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-external="1"></iframe>
+
+# Step 2: Open in Editor
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UdnBCg_JONA?si=QvQ1Wdoe0b2W-BE_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-external="1"></iframe>
+
+# Step 3: Modify and Save
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AB9GU1H6Uxs?si=HviKesdsayKz9OTi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-external="1"></iframe>
