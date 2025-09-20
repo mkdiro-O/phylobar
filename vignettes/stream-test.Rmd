@@ -22,12 +22,12 @@ library(phylobar)
 library(tidyverse)
 ```
 
-
 ```{r}
 smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, round_degree = 2, bandwidth = 5) {
     # Round timepoints
     df <- df |>
         mutate(time_bin = round_degree * round(.data[[time_col]] / round_degree)) |>
+        arrange(time_bin) |>
         group_by(time_bin) |>
         summarise(
             value = (sum(value) + pseudocount) / (n() + pseudocount)
@@ -44,28 +44,35 @@ smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, roun
 }
 ```
 
+For data cleaning, it will be helpful to have the phyloseq components as data.frames.
+
 ```{r}
 ps <- readRDS("vignettes/zhang2023-ps.rds")
-x_mat <- t(otu_table(ps))
+x_mat <- t(otu_table(ps)) |>
+    data.frame() |>
+    rownames_to_column("sample")
 metadata <- sample_data(ps) |>
-  as.data.frame() |>
-  rownames_to_column("sample")
+    as.data.frame() |>
+    rownames_to_column("sample")
+```
 
-x_smooth <- data.frame(x_mat) |>
-    rownames_to_column("sample") |>
-    left_join(metadata) |>
+```{r}
+x_smooth <- x_mat |>
+    left_join(metadata, by = "sample") |>
     filter(timepoint >= -5, timepoint <= 55) |>
     select(id, timepoint, starts_with("OTU")) |>
-    pivot_longer(starts_with("OTU"), names_to = "feature") %>%
-    split(.$feature) |>
-    map_dfr(~ smooth_time_series(.), .id = "feature") |>
+    pivot_longer(starts_with("O"), names_to = "feature", values_to = "value") |>
+    group_by(feature) |>
+    group_modify(~ smooth_time_series(.x)) |>
     pivot_wider(names_from = feature, values_from = smooth_value) |>
     column_to_rownames("time_bin")
 ```
 
+## Phylobar Visualization
+
 ```{r, out.width = 900}
 x_smooth <- x_smooth / rowSums(x_smooth)
-phylobar(x_smooth, phy_tree(ps), width = 900, rel_width=0.2)
+phylobar(x_smooth, phy_tree(ps), width = 900, hclust_order = FALSE)
 ```
 
 ```{r}
