@@ -1,0 +1,211 @@
+---
+title: "Oral Microbiome in Cancer Patients"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Oral Microbiome in Cancer Patients}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    warning = FALSE,
+    message = FALSE
+)
+```
+
+Mucositis is a painful and common side effect of many cancer treatments for head
+and neck cancers. Recently, Zhang et al. (2023) uncovered links between the
+progression of mucositis and the composition of the oral microbiome. They
+studied a cohort of more than 150 patients over time and collected 16S rRNA
+sequencing data to understand how microbiome community profiles relate to
+mucositis severity.  We will revisit these data in this vignette. The dataset is
+available in the accompanying ExperimentData package, `CancerOralMicrobiome`,
+which can be downloaded and installed from Bioconductor using
+`BiocManager::install("CancerOralMicrobiome")`.
+
+In the first part, we will analyze the data at the sample level. We will compute
+a summary of mucositis severity across all patients and use this to organize the
+bars in a phylobar plot. This will allow us to draw conclusions at both the
+individual OTU and higher community levels, reflecting the subtle effects
+reported by Zhang et al. In the second part, we will focus on temporal trends.
+Rather than visualizing the composition for individual patients, we will compute
+smoothed time series relative to the date of cancer treatment initiation,
+stratified by mucositis severity. This will allow us to identify patterns in
+microbiome dynamics that appear to be associated with mucositis progression.
+
+# Setup
+
+The block below loads the relevant packages. We use the tidyverse packages for
+preprocessing.
+
+```{r setup}
+library(ape)
+library(dplyr)
+library(phylobar)
+library(tibble)
+library(tidyr)
+```
+
+Next, we load the data, which is organized as a phyloseq object with slots for
+the phylogenetic tree, sample metadata, and sample-level abundances.
+
+```{r, read_in_data}
+ps <- readRDS("zhang2023-ps.rds")
+```
+
+# Sample-Level Analysis
+
+We now begin the sample-level analysis. The original dataset includes 1103
+samples. To simplify visualization, we subset to 100 representative samples
+chosen from a clustering with $K = 100$, as implemented by `subset_cluster`. In
+the subsetted data, rows correspond to representative samples and columns
+correspond to OTU abundances. We do not filter any OTUs,
+
+```{r}
+x_mat <- t(otu_table(ps))
+x_mat <- x_mat / rowSums(x_mat)
+x_mat <- subset_cluster(x_mat, k = 100)
+```
+
+## Sample Order
+
+By default,  phylobar orders samples in the stacked bar plot according to sample
+similarity. While this creates clean visualizations, it fails to address our
+primary interest: how variation in community composition relates to mucositis.
+Therefore, we instead order the samples by the mucositis severity of the
+patients from which they were gathered. The block below computes patient-level
+averages of mucositis severity and then organizes samples first by patient
+severity and, within each patient, by time relative to treatment initiation.
+
+```{r}
+sample_order <- data.frame(sample_data(ps)) |>
+  rownames_to_column("sample") |>
+  group_by(id) |>
+  mutate(mean_mucositis = mean(mucositis)) |>
+  ungroup() |>
+  arrange(mean_mucositis, timepoint) |>
+  pull(sample)
+```
+
+Although the ordering includes every sample in the dataset, our plots use only
+the representative subset from the clustering step. We finalize the ordering by
+subsetting the sample order accordingly. 
+
+```{r}
+row_ix <- sample_order[sample_order %in% rownames(x_mat)]
+col_ix <- hclust(dist(t(x_mat)))$order
+```
+
+## Visualization
+
+The reorganized matrix is then used as input to phylobar. Samples to the right
+in the stacked bar have more severe mucositis on average. We use the argument
+`sample_show_fall = FALSE` to use the custom ordering defined above. The
+`sample_label_space = 75` argument gives a bit of extra vertical space for the
+sample labels, which are a bit longer than usual.
+
+```{r}
+phylobar(
+  x_mat[row_ix, col_ix],
+  phy_tree(ps),
+  width = 900,
+  hclust_order = FALSE,
+  sample_font_size = 6,
+  sample_label_space = 75
+)
+```
+
+## Interpretation
+
+We highlight a few interesting findings using screenshots from the interactive
+plots. For example, the tallest bar on the far left is one of 16 (out of 1103)
+samples that has more than 10 reads of OTU 200, and it is in fact dominated by
+this OTU 200. This suggests possible contamination or quality-control issues.
+
+![](https://i.imgur.com/HV1XIfZ.png)
+
+Next, we highlight two phylogenetic subtrees to explore associations with
+mucositis severity. In the subtree labeled in purple (descendants of node
+0.859.2), higher abundance appears to be associated with lower severity -- the
+purples bars are larger on the left hand side of the stacked barplot. In
+contrast, in the green subtree (descendants of node 0.948.4), higher abundances
+are associated with higher severity. 
+
+![](https://i.imgur.com/40rvMjG.png)
+
+Next, we collapse a few subtrees, resulting in a smaller tree layout and letting
+us focus on some of the remaining phylogenetic groups. We then highlight a bar
+(red) with large values in one of the severe mucositis patients. THe associated
+strain, OTU0910, shows high abundance in a relatively small number of patients,
+and those patients tend to experience worse than average mucositis.
+
+![](https://i.imgur.com/YpvNxEa.png)
+
+# Temporal Analysis
+
+```{r}
+smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, round_degree = 2, bandwidth = 5) {
+    # Round timepoints
+    df <- df |>
+        mutate(time_bin = round_degree * round(.data[[time_col]] / round_degree)) |>
+        arrange(time_bin) |>
+        group_by(time_bin) |>
+        summarise(
+            value = (sum(value) + pseudocount) / (n() + pseudocount)
+        )
+    
+    # Fill gaps with 0
+    tibble(time_bin = seq(min(df$time_bin), max(df$time_bin), by = round_degree)) |>
+        left_join(df, by = "time_bin") |>
+        mutate(value = replace_na(value, 0)) |>
+        reframe(
+            smooth_value = ksmooth(time_bin, value, "normal", bandwidth, n.points = n())$y,
+            time_bin = ksmooth(time_bin, value, "normal", bandwidth, n.points = n())$x
+        )
+}
+```
+
+```{r}
+x_mat <- t(otu_table(ps)) |>
+    data.frame() |>
+    rownames_to_column("sample")
+metadata <- sample_data(ps) |>
+    data.frame() |>
+    rownames_to_column("sample") |>
+    group_by(id) |>
+    mutate(mean_mucositis = mean(mucositis))
+```
+
+```{r}
+x_long_format <- x_mat |>
+    left_join(metadata, by = "sample") |>
+    filter(between(timepoint, -5, 55)) |>
+    select(id, timepoint, mean_mucositis, starts_with("OTU")) |>
+    pivot_longer(starts_with("O"), names_to = "feature", values_to = "value")
+
+x_smooth <- x_long_format |>
+    group_by(feature, severity = if_else(mean_mucositis > 3.5, "S", "NS")) |>
+    group_modify(~ smooth_time_series(.x)) |>
+    unite(row, time_bin, severity, sep = "") |>
+    pivot_wider(names_from = feature, values_from = smooth_value) |>
+    column_to_rownames("row")
+```
+
+```{r}
+x_smooth <- x_smooth / rowSums(x_smooth)
+phylobar(
+  x_smooth, 
+  phy_tree(ps), 
+  width = 900, 
+  hclust_order = FALSE
+)
+```
+
+# Session Info
+
+```{r}
+sessionInfo()
+```
