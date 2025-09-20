@@ -1,0 +1,105 @@
+---
+title: "Global Patterns Dataset Examples"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{global_patterns}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+This vignette demonstrates how to create phylogenetic bar charts using the Global Patterns dataset with both `TreeSummarizedExperiment` and `phyloseq` objects.
+
+## Setup
+
+```{r setup}
+library(ape)
+library(phangorn)
+library(phylobar)
+library(phyloseq)
+library(purrr)
+library(miaViz)
+library(scater)
+```
+
+## TreeSummarizedExperiment Approach
+
+This example comes from the [miaViz
+documentation](https://microbiome.github.io/miaViz/articles/miaViz.html) and
+shows how to create a stacked bar tree from a TreeSummarizedExperiment.
+
+```{r tse-data-prep}
+# Load and prepare TreeSummarizedExperiment data
+data(GlobalPatterns, package = "mia")
+prev_species <- getPrevalent(GlobalPatterns, rank = "Species", detection = 0.01)
+GlobalPatterns_tse <- GlobalPatterns[
+    rowData(GlobalPatterns)$Species %in% prev_species,
+]
+GlobalPatterns_tse <- transformAssay(GlobalPatterns_tse, method = "relabundance")
+```
+
+```{r tse-phylobar}
+# Extract abundance matrix and filter empty columns
+x_tse <- t(assay(GlobalPatterns_tse, "relabundance")) |>
+    as.data.frame()
+x_tse <- x_tse[, colSums(x_tse) > 0]
+
+# Extract and filter tree
+tree_tse <- rowTree(GlobalPatterns_tse) |>
+    keep.tip(colnames(x_tse))
+
+# Create phylogenetic bar chart
+phylobar(x_tse, tree_tse)
+```
+
+## phyloseq Approach
+
+### Using Phylogenetic Tree
+
+```{r phyloseq-phylo}
+# Subset to Chlamydiae for focused example
+data(GlobalPatterns, package = "phyloseq")
+chlamydiae <- subset_taxa(GlobalPatterns, Phylum == "Chlamydiae")
+
+# Extract and normalize abundance data
+x_phylo <- t(otu_table(chlamydiae))
+tree_phylo <- phy_tree(chlamydiae)
+
+# Handle zero-sum rows and normalize
+x_phylo[rowSums(x_phylo) == 0, 1] <- 1
+x_phylo <- x_phylo / rowSums(x_phylo)
+
+# Create phylogenetic bar chart
+phylobar(x_phylo, tree_phylo, width = 900)
+```
+
+### Using Taxonomic Hierarchy
+
+This creates the same type of visualization but using a taxonomic hierarchy
+rather than a phylogeny. We need some problem-specific preprocessing to deal
+with the fact that some ancestor and descendant names look identical in this
+dataset.
+
+```{r phyloseq-taxonomy}
+# Extract and preprocess taxonomy table
+taxa <- tax_table(chlamydiae) |>
+    as.data.frame()
+taxa$ASV <- rownames(taxa)
+tree <- add_prefix(tree)
+
+# Convert taxonomy to tree and create visualization
+tax_tree <- taxonomy_to_tree(taxa)
+phylobar(x_phylo, tax_tree, width = 900)
+```
+
+```{r session-info}
+sessionInfo()
+```
