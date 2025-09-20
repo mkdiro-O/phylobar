@@ -17,18 +17,55 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(fs)
 library(jsonlite)
 library(phylobar)
 library(tidyverse)
-data_dir <- path("../../../data")
-#data_dir <- path("data")
+```
+
+
+```{r}
+smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, round_degree = 2, bandwidth = 5) {
+    # Round timepoints
+    df <- df |>
+        mutate(time_bin = round_degree * round(.data[[time_col]] / round_degree)) |>
+        group_by(time_bin) |>
+        summarise(
+            value = (sum(value) + pseudocount) / (n() + pseudocount)
+        )
+    
+    # Fill gaps with 0
+    tibble(time_bin = seq(min(df$time_bin), max(df$time_bin), by = round_degree)) |>
+        left_join(df, by = "time_bin") |>
+        mutate(value = replace_na(value, 0)) |>
+        reframe(
+            smooth_value = ksmooth(time_bin, value, "normal", bandwidth, n.points = n())$y,
+            time_bin = ksmooth(time_bin, value, "normal", bandwidth, n.points = n())$x
+        )
+}
+```
+
+```{r}
+ps <- readRDS("vignettes/zhang2023-ps.rds")
+x_mat <- t(otu_table(ps))
+metadata <- sample_data(ps) |>
+  as.data.frame() |>
+  rownames_to_column("sample")
+
+x_smooth <- data.frame(x_mat) |>
+    rownames_to_column("sample") |>
+    left_join(metadata) |>
+    filter(timepoint >= -5, timepoint <= 55) |>
+    select(id, timepoint, starts_with("OTU")) |>
+    pivot_longer(starts_with("OTU"), names_to = "feature") %>%
+    split(.$feature) |>
+    map_dfr(~ smooth_time_series(.), .id = "feature") |>
+    pivot_wider(names_from = feature, values_from = smooth_value) |>
+    column_to_rownames("time_bin")
 ```
 
 ```{r, out.width = 900}
-stream_data <- read_json(data_dir / "stream.json")
-labels <- read_json(data_dir / "labels_stream.json")
-phylobar(stream_data, labels, width = 900, rel_width=0.2)
+x_smooth <- x_smooth / rowSums(x_smooth)
+phylobar(x_smooth, phy_tree(ps), width = 900, rel_width=0.2)
 ```
 
 ```{r}

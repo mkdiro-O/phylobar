@@ -17,50 +17,22 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(fs)
 library(phylobar)
 library(ape)
-library(tibble)
-#data_dir <- path("../../../data")
-data_dir <- path("data")
 ```
 
 In this step ...
 
 ```{r, read_in_data}
-phylo <- read.tree(data_dir / "FeatureTable.tre")
-metadata <- readRDS(data_dir / "noisyMetaData.rds") |>
-    rownames_to_column("sample")
-x <- readRDS(data_dir / "noisyMicrobiome.rds") |>
-    t() |>
-    data.frame() |>
-    rownames_to_column("sample")
-
-# cluster to find representatives
-x_mat <- column_to_rownames(x, "sample")
-x_mat <- subset_cluster(x)
-```
-
-It seems that some of the internal node labels appear multiple times. Let's make
-the names unique.
-
-```{r}
-phylo$node.label[1] <- "root"
-phylo$node.label <- make.unique(phylo$node.label)
-```
-
-This filters the entire tree to just those that appear in the noisyMicrobiome
-`rds` object.
-
-```{r}
-leaves_to_keep <- intersect(phylo$tip.label, colnames(x_mat))
-filtered_tree <- drop.tip(phylo, setdiff(phylo$tip.label, leaves_to_keep))
+ps <- readRDS("vignettes/zhang2023-ps.rds")
+x_mat <- subset_cluster(t(otu_table(ps)))
 x_mat <- x_mat / rowSums(x_mat)
 ```
 
 ```{r}
-phylobar(x_mat, filtered_tree, width = 900, sample_show_all = FALSE)
+phylobar(x_mat, phy_tree(ps), width = 900, sample_show_all = FALSE)
 ```
+
 ```{r}
 sessionInfo()
 ```
