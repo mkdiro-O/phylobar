@@ -1,8 +1,8 @@
 ---
-title: "stream-test"
+title: "Oral Cancer Microbiome"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{stack-test}
+  %\VignetteIndexEntry{Oral Cancer Microbiome}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,10 +17,51 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(jsonlite)
 library(phylobar)
+library(ape)
 library(tidyverse)
 ```
+
+In this step ...
+
+```{r, read_in_data}
+ps <- readRDS("vignettes/zhang2023-ps.rds")
+```
+
+```{r}
+x_mat <- t(otu_table(ps))
+x_mat <- x_mat / rowSums(x_mat)
+x_mat <- subset_cluster(x_mat, k = 100)
+```
+
+```{r}`
+sample_order <- data.frame(sample_data(ps)) |>
+  rownames_to_column("sample") |>
+  group_by(id) |>
+  mutate(mean_mucositis = mean(mucositis)) |>
+  ungroup() |>
+  arrange(mean_mucositis, timepoint) |>
+  pull(sample)
+```
+
+```{r}
+# Order rowas and columns using data above.
+row_ix <- sample_order[sample_order %in% rownames(x_mat)]
+col_ix <- hclust(dist(t(x_mat)))$order
+```
+
+```{r}
+phylobar(
+  x_mat[row_ix, col_ix],
+  phy_tree(ps),
+  width = 900,
+  sample_show_all = FALSE,
+  hclust_order = FALSE,
+  sample_label_space = 75
+)
+```
+
+### Streamgraph Visualization
 
 ```{r}
 smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, round_degree = 2, bandwidth = 5) {
@@ -44,35 +85,41 @@ smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, roun
 }
 ```
 
-For data cleaning, it will be helpful to have the phyloseq components as data.frames.
-
 ```{r}
-ps <- readRDS("vignettes/zhang2023-ps.rds")
 x_mat <- t(otu_table(ps)) |>
     data.frame() |>
     rownames_to_column("sample")
 metadata <- sample_data(ps) |>
-    as.data.frame() |>
-    rownames_to_column("sample")
+    data.frame() |>
+    rownames_to_column("sample") |>
+    left_join(mucositis)
 ```
 
 ```{r}
-x_smooth <- x_mat |>
+x_long_format <- x_mat |>
     left_join(metadata, by = "sample") |>
-    filter(timepoint >= -5, timepoint <= 55) |>
-    select(id, timepoint, starts_with("OTU")) |>
-    pivot_longer(starts_with("O"), names_to = "feature", values_to = "value") |>
-    group_by(feature) |>
+    filter(between(timepoint, -5, 55)) |>
+    select(id, timepoint, mean_mucositis, starts_with("OTU")) |>
+    pivot_longer(starts_with("O"), names_to = "feature", values_to = "value")
+
+x_smooth <- x_long_format |>
+    group_by(feature, severity = if_else(mean_mucositis > 3.5, "S", "NS")) |>
     group_modify(~ smooth_time_series(.x)) |>
+    unite(row, time_bin, severity, sep = "") |>
     pivot_wider(names_from = feature, values_from = smooth_value) |>
-    column_to_rownames("time_bin")
+    column_to_rownames("row")
 ```
 
 ## Phylobar Visualization
 
-```{r, out.width = 900}
+```{r}
 x_smooth <- x_smooth / rowSums(x_smooth)
-phylobar(x_smooth, phy_tree(ps), width = 900, hclust_order = FALSE)
+phylobar(
+  x_smooth, 
+  phy_tree(ps), 
+  width = 900, 
+  hclust_order = FALSE
+)
 ```
 
 ```{r}
