@@ -19,8 +19,8 @@ knitr::opts_chunk$set(
 Diet is a key factor shaping the gut microbiome. In a recent mouse study, 
 researchers profiled gut microbial communities under different dietary conditions 
 to examine how nutrient intake influences community structure. The dataset, available
- as a phyloseq object, includes microbial feature tables, taxonomic annotations, 
- and sample metadata.
+as a phyloseq object, includes microbial feature tables, taxonomic annotations, 
+and sample metadata.
 
 In this vignette, we use these data to demonstrate how phylobar can produce 
 phylogenetically informed visualizations of microbiome composition. We begin 
