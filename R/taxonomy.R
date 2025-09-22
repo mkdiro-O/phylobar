@@ -117,7 +117,8 @@ taxonomy_to_tree <- function(taxa) {
 add_prefix <- function(taxa) {
     for (j in seq_len(ncol(taxa) - 1)) {
         prefix <- substr(colnames(taxa)[j], 1, 1)
-        taxa[, j] <- paste0(prefix, "_", taxa[, j])
+        non_na <- !is.na(taxa[, j])
+        taxa[non_na, j] <- paste0(prefix, "_", taxa[non_na, j])
     }
     taxa
 }
