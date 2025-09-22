@@ -70,7 +70,7 @@ x_mat <- x_mat / rowSums(x_mat)
 x_mat <- subset_cluster(x_mat, k = 100)
 ```
 
-## Sample Order
+## Sample order
 
 By default,  phylobar orders samples in the stacked bar plot according to sample
 similarity. While this creates clean visualizations, it fails to address our
@@ -125,7 +125,7 @@ plots. For example, the tallest bar on the far left is one of 16 (out of 1103)
 samples that has more than 10 reads of OTU 200, and it is in fact dominated by
 this OTU 200. This suggests possible contamination or quality-control issues.
 
-![](https://i.imgur.com/HV1XIfZ.png)
+![A questionable OTU that seems to dominate one of the samples](https://i.imgur.com/HV1XIfZ.png)
 
 Next, we highlight two phylogenetic subtrees to explore associations with
 mucositis severity. In the subtree labeled in purple (descendants of node
@@ -134,7 +134,7 @@ purples bars are larger on the left hand side of the stacked barplot. In
 contrast, in the green subtree (descendants of node 0.948.4), higher abundances
 are associated with higher severity. 
 
-![](https://i.imgur.com/40rvMjG.png)
+![A few high-level phylogenetic groups that seem to be associated with mucositis severity.](https://i.imgur.com/40rvMjG.png)
 
 Next, we collapse a few subtrees, resulting in a smaller tree layout and letting
 us focus on some of the remaining phylogenetic groups. We then highlight a bar
@@ -142,9 +142,23 @@ us focus on some of the remaining phylogenetic groups. We then highlight a bar
 strain, OTU0910, shows high abundance in a relatively small number of patients,
 and those patients tend to experience worse than average mucositis.
 
-![](https://i.imgur.com/YpvNxEa.png)
+![By collapsing parts of the tree, we can study patterns in a few isolated leaves without losing context of the entire tree.](https://i.imgur.com/YpvNxEa.png)
 
 # Temporal Analysis
+
+The example above visualizes stacked bars for each sample. However, we might be
+more interested in temporal trends averaged across all samples—for example, how
+microbiome community structures change over the course of treatment among people
+with more vs. less severe mucositis. In the next part, we'll create a
+streamgraph alternative to the stacked bars above, where the stream is defined
+by time relative to start of treatment.
+
+## Streamgraph helpers
+
+The helper function below computes a kernel smoothing of abundances for each
+species over time. We consider windows of size two days and take the average
+across all patients within that window. A final Gaussian kernel averaging is
+applied to further smooth across adjacent windows.
 
 ```{r}
 smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, round_degree = 2, bandwidth = 5) {
@@ -168,6 +182,13 @@ smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, roun
 }
 ```
 
+The block below converts the original phyloseq object into a pair of data
+frames, since this format is easier to manipulate with dplyr. We also compute
+the average mucositis score for each individual, identified by the ID column.
+This derived feature is useful for understanding disease severity. An
+alternative analysis could also consider latent class grouping, as discussed in
+Zhang et al. (2023).
+
 ```{r}
 x_mat <- t(otu_table(ps)) |>
     data.frame() |>
@@ -178,6 +199,17 @@ metadata <- sample_data(ps) |>
     group_by(id) |>
     mutate(mean_mucositis = mean(mucositis))
 ```
+
+## Input data preparation
+
+We now reshape the data into long-format so that we can apply the smoothing
+function separately across each species (`feature` in the data below) and
+disease severity level. Several patients have very late follow-up measurements,
+but we focus only on those within 55 days of treatment. The result, `x_smooth`,
+applies the kernel smoothing separately to mroe vs. less severe mucositis cases,
+then combines the results into a single matrix—first grouped by severity, then
+sorted by time. This allows us to study the two trends within a single stacked
+bar plot.
 
 ```{r}
 x_long_format <- x_mat |>
@@ -192,17 +224,52 @@ x_smooth <- x_long_format |>
     unite(row, time_bin, severity, sep = "") |>
     pivot_wider(names_from = feature, values_from = smooth_value) |>
     column_to_rownames("row")
+x_smooth <- x_smooth / rowSums(x_smooth)
 ```
 
+## Visualization
+
+We can now create our phylobar visualization, using the same phylogenetic tree
+as above. The x-axis labels indicate severity and time window. All of the more
+severe cases are shown on the left side of the figure.
+
 ```{r}
-x_smooth <- x_smooth / rowSums(x_smooth)
 phylobar(
-  x_smooth, 
-  phy_tree(ps), 
-  width = 900, 
+  x_smooth,
+  phy_tree(ps),
+  width = 900,
   hclust_order = FALSE
 )
 ```
+
+## Interpretation
+
+Browsing across different phylogenetic groups, we see that the descendants of
+0.538 are more abundant at the early time points in patients with more severe
+mucositis. In both the higher and lower severity groups, however, the abundance
+of this subtree decreases over time. In contrast, OTU0911 remains roughly stable
+across both groups. In the final few time windows for the lower severity group,
+it appears to become slightly more abundant, though this may be an artifact of
+averaging over the smaller number of samples available at 55 days after
+treatment start.
+
+![An overview phylobar streamgraph, showing a few high-level taxonomic groups with differential trajectories across high and low severity groups](https://i.imgur.com/bQmh0IV.png)
+
+Interacting next with the stacked bars, we can identify several individual OTUs
+of interest. For example, OTU0307 (highlighted in purple) becomes more abundant
+at later time points, especially among patients with low mucositis. This could
+represent a candidate species for designing a therapy aimed at managing
+mucositis. OTU0297 (green) appears briefly midway through treatment and into
+recovery among low-severity cases, illustrating the transient effects that can
+arise in microbiome data. Finally, OTU0943 appears slightly more abundant among
+those with lower severity, though the effect is tentative.
+
+![A zoomed in phylobar streamgraph, focusing on some OTUs of interest.](https://i.imgur.com/iIcbMs0.png)
+
+These observations emerged after only a few minutes of interacting with the
+phylobar visualization. This highlights the exploratory potential of the
+approach and shows how the same dataset can be viewed at multiple phylogenetic
+resolutions to uncover biologically meaningful trends.
 
 # Session Info
 
