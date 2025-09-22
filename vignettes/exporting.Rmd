@@ -7,10 +7,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r opts, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
@@ -34,3 +34,7 @@ phylobar(samples, tree, width=800)
 # Step 3: Modify and Save
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AB9GU1H6Uxs?si=HviKesdsayKz9OTi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-external="1"></iframe>
+
+```{r session}
+sessionInfo()
+```

@@ -2,12 +2,12 @@
 title: "Global Patterns Dataset Examples"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{global_patterns}
+  %\VignetteIndexEntry{Global Patterns Dataset Examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r opts, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
     comment = "#>",
@@ -16,68 +16,48 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette demonstrates how to create phylogenetic bar charts using the Global Patterns dataset with both `TreeSummarizedExperiment` and `phyloseq` objects.
+This vignette demonstrates how to create phylobar plots using either phyloseq or
+TreeSummarizedExperiment objects. We'll work with the same dataset
+(GlobalPatterns) stored in both formats.
 
 ## Setup
 
 ```{r setup}
-library(ape)
-library(phangorn)
 library(phylobar)
 library(phyloseq)
-library(purrr)
 library(miaViz)
 library(scater)
 ```
 
-## TreeSummarizedExperiment Approach
+## phyloseq Inputs
 
-This example comes from the [miaViz
-documentation](https://microbiome.github.io/miaViz/articles/miaViz.html) and
-shows how to create a stacked bar tree from a TreeSummarizedExperiment.
-
-```{r tse-data-prep}
-# Load and prepare TreeSummarizedExperiment data
-data(GlobalPatterns, package = "mia")
-prev_species <- getPrevalent(GlobalPatterns, rank = "Species", detection = 0.01)
-GlobalPatterns_tse <- GlobalPatterns[
-    rowData(GlobalPatterns)$Species %in% prev_species,
-]
-GlobalPatterns_tse <- transformAssay(GlobalPatterns_tse, method = "relabundance")
-```
-
-```{r tse-phylobar}
-# Extract abundance matrix and filter empty columns
-x_tse <- t(assay(GlobalPatterns_tse, "relabundance")) |>
-    as.data.frame()
-x_tse <- x_tse[, colSums(x_tse) > 0]
-
-# Extract and filter tree
-tree_tse <- rowTree(GlobalPatterns_tse) |>
-    keep.tip(colnames(x_tse))
-
-# Create phylogenetic bar chart
-phylobar(x_tse, tree_tse)
-```
-
-## phyloseq Approach
-
-### Using Phylogenetic Tree
+We will first study how to use phylobar on phyloseq objects. The block below
+sets the global pattern status and subsets to the Chlamydia subtree. We can
+extract the relevant sample composition using the otu_table accessor function.
 
 ```{r phyloseq-phylo}
-# Subset to Chlamydiae for focused example
 data(GlobalPatterns, package = "phyloseq")
 chlamydiae <- subset_taxa(GlobalPatterns, Phylum == "Chlamydiae")
-
-# Extract and normalize abundance data
 x_phylo <- t(otu_table(chlamydiae))
+```
+
+### Phylogenetic Tree Tree
+
+Our first approach will use the phylogenetic tree to support hierarchical
+interaction. The tree can be extracted from the phyloseq object using
+`phy_tree`. We first subsetted to only the chlamydia subtree. There are now some
+samples without any observed counts.  Therefore, we will remove the samples from
+the view.
+
+```{r handle-zeros}
 tree_phylo <- phy_tree(chlamydiae)
-
-# Handle zero-sum rows and normalize
-x_phylo[rowSums(x_phylo) == 0, 1] <- 1
+x_phylo <- x_phylo[rowSums(x_phylo) > 0, ]
 x_phylo <- x_phylo / rowSums(x_phylo)
+```
 
-# Create phylogenetic bar chart
+We can now create our phylobar plot.
+
+```{r phylobar-phyloseq}
 phylobar(x_phylo, tree_phylo, width = 900)
 ```
 
@@ -86,18 +66,72 @@ phylobar(x_phylo, tree_phylo, width = 900)
 This creates the same type of visualization but using a taxonomic hierarchy
 rather than a phylogeny. We need some problem-specific preprocessing to deal
 with the fact that some ancestor and descendant names look identical in this
-dataset.
+dataset. The `add_prefix` helper ensures that the names are distinct between
+parents and children by adding in the taxonomic rank to each name.
 
 ```{r phyloseq-taxonomy}
-# Extract and preprocess taxonomy table
 taxa <- tax_table(chlamydiae) |>
     as.data.frame()
 taxa$ASV <- rownames(taxa)
-tree <- add_prefix(tree)
+taxa <- phylobar::add_prefix(taxa)
+```
 
-# Convert taxonomy to tree and create visualization
+Now we can create a phylo tree object associated with the original taxonomy. 
+Note that this is not a binary tree, since several taxonomic categories
+descended from a single node.
+
+```{r construct_taxonomy}
 tax_tree <- taxonomy_to_tree(taxa)
+plot(tax_tree)
+```
+
+Given our new taxonomy and the earlier sample information, we can now create a
+phylobar plot.
+
+```{r phylobar-taxon}
 phylobar(x_phylo, tax_tree, width = 900)
+```
+
+## TreeSummarizedExperiment Inputs
+
+This example comes from the 
+[miaViz documentation](https://microbiome.github.io/miaViz/articles/miaViz.html) 
+and shows how to create a stacked bar tree from a TreeSummarizedExperiment.
+We'll filter down to only those species that are present in at least one percent
+of all samples. In this example we'll use a relative abundance transformation,
+so that we left with a composition of our plot rather than a more general
+stacked bar plot.
+
+```{r tse-data-prep}
+data(GlobalPatterns, package = "mia")
+prev_species <- getPrevalent(GlobalPatterns, rank = "Species", detection = 0.01)
+GlobalPatterns_tse <- GlobalPatterns[
+    rowData(GlobalPatterns)$Species %in% prev_species,
+]
+GlobalPatterns_tse <- transformAssay(
+    GlobalPatterns_tse, 
+    method = "relabundance"
+)
+```
+
+Let's keep only those taxes that are observed in at least one sample. We also
+need to filter the tree to reflect this reduced subset of taxa.
+
+```{r tse-phylobar-x}
+x_tse <- t(assay(GlobalPatterns_tse, "relabundance"))
+x_tse <- x_tse[, colSums(x_tse) > 0]
+tree_tse <- rowTree(GlobalPatterns_tse) |>
+    keep.tip(colnames(x_tse))
+```
+
+With these inputs, we can generate the phylobar visualization. This view didn't
+subset to the chlamydia class, which is why we have a larger tree here. But
+hopefully it's clear that TreeSummarizedExperiment and phyloseq can essentially
+be used interchangeably when constructing the necessary inputs for these
+visualizations.
+
+```{r phylobar-tse}
+phylobar(x_tse, tree_tse, width = 900)
 ```
 
 ```{r session-info}

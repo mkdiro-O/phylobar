@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r knitr_options, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
     comment = "#>",
@@ -52,8 +52,8 @@ library(tidyr)
 Next, we load the data, which is organized as a phyloseq object with slots for
 the phylogenetic tree, sample metadata, and sample-level abundances.
 
-```{r, read_in_data}
-ps <- readRDS("zhang2023-ps.rds")
+```{r read_in_data}
+ps <- readRDS("zhang2023-ps-v2.rds")
 ```
 
 # Sample-Level Analysis
@@ -64,10 +64,19 @@ chosen from a clustering with $K = 100$, as implemented by `subset_cluster`. In
 the subsetted data, rows correspond to representative samples and columns
 correspond to OTU abundances. We do not filter any OTUs,
 
-```{r}
+```{r filter_and_subset}
+keep_ix <- rowMeans(otu_table(ps) > 0) > 0.01
+ps <- prune_taxa(taxa_names(ps)[keep_ix], ps)
 x_mat <- t(otu_table(ps))
-x_mat <- x_mat / rowSums(x_mat)
 x_mat <- subset_cluster(x_mat, k = 100)
+```
+
+One issue is that two OTUs now never appear among the visualized samples.  Let's
+add a small pseudocount to make sure each leaf node has at least some mass.
+
+```{r normalize}
+x_mat[1, which(colSums(x_mat) == 0)] <- .00001
+x_mat <- x_mat / rowSums(x_mat)
 ```
 
 ## Sample order
@@ -80,21 +89,21 @@ patients from which they were gathered. The block below computes patient-level
 averages of mucositis severity and then organizes samples first by patient
 severity and, within each patient, by time relative to treatment initiation.
 
-```{r}
+```{r sample_order}
 sample_order <- data.frame(sample_data(ps)) |>
-  rownames_to_column("sample") |>
-  group_by(id) |>
-  mutate(mean_mucositis = mean(mucositis)) |>
-  ungroup() |>
-  arrange(mean_mucositis, timepoint) |>
-  pull(sample)
+    rownames_to_column("sample") |>
+    group_by(id) |>
+    mutate(mean_mucositis = mean(mucositis)) |>
+    ungroup() |>
+    arrange(mean_mucositis, timediff) |>
+    pull(sample)
 ```
 
 Although the ordering includes every sample in the dataset, our plots use only
 the representative subset from the clustering step. We finalize the ordering by
 subsetting the sample order accordingly. 
 
-```{r}
+```{r compute_order_indices}
 row_ix <- sample_order[sample_order %in% rownames(x_mat)]
 col_ix <- hclust(dist(t(x_mat)))$order
 ```
@@ -107,14 +116,14 @@ in the stacked bar have more severe mucositis on average. We use the argument
 `sample_label_space = 75` argument gives a bit of extra vertical space for the
 sample labels, which are a bit longer than usual.
 
-```{r}
+```{r plot_sample_phylobar}
 phylobar(
-  x_mat[row_ix, col_ix],
-  phy_tree(ps),
-  width = 900,
-  hclust_order = FALSE,
-  sample_font_size = 6,
-  sample_label_space = 75
+    x_mat[row_ix, col_ix],
+    phy_tree(ps),
+    width = 900,
+    hclust_order = FALSE,
+    sample_font_size = 6,
+    sample_label_space = 75
 )
 ```
 
@@ -160,9 +169,9 @@ species over time. We consider windows of size two days and take the average
 across all patients within that window. A final Gaussian kernel averaging is
 applied to further smooth across adjacent windows.
 
-```{r}
-smooth_time_series <- function(df, time_col = "timepoint", pseudocount = 1, round_degree = 2, bandwidth = 5) {
-    # Round timepoints
+```{r smooth_time_series}
+smooth_time_series <- function(df, time_col = "timediff", pseudocount = 1, round_degree = 2, bandwidth = 5) {
+    # Round timediffs
     df <- df |>
         mutate(time_bin = round_degree * round(.data[[time_col]] / round_degree)) |>
         arrange(time_bin) |>
@@ -189,7 +198,7 @@ This derived feature is useful for understanding disease severity. An
 alternative analysis could also consider latent class grouping, as discussed in
 Zhang et al. (2023).
 
-```{r}
+```{r convert_to_dataframes}
 x_mat <- t(otu_table(ps)) |>
     data.frame() |>
     rownames_to_column("sample")
@@ -211,11 +220,11 @@ then combines the results into a single matrix—first grouped by severity, then
 sorted by time. This allows us to study the two trends within a single stacked
 bar plot.
 
-```{r}
+```{r prepare_smoothing_input}
 x_long_format <- x_mat |>
     left_join(metadata, by = "sample") |>
-    filter(between(timepoint, -5, 55)) |>
-    select(id, timepoint, mean_mucositis, starts_with("OTU")) |>
+    filter(between(timediff, -5, 55)) |>
+    select(id, timediff, mean_mucositis, starts_with("OTU")) |>
     pivot_longer(starts_with("O"), names_to = "feature", values_to = "value")
 
 x_smooth <- x_long_format |>
@@ -233,12 +242,12 @@ We can now create our phylobar visualization, using the same phylogenetic tree
 as above. The x-axis labels indicate severity and time window. All of the more
 severe cases are shown on the left side of the figure.
 
-```{r}
+```{r plot_timeseries_phylobar}
 phylobar(
-  x_smooth,
-  phy_tree(ps),
-  width = 900,
-  hclust_order = FALSE
+    x_smooth,
+    phy_tree(ps),
+    width = 900,
+    hclust_order = FALSE
 )
 ```
 
@@ -273,6 +282,6 @@ resolutions to uncover biologically meaningful trends.
 
 # Session Info
 
-```{r}
+```{r session_info}
 sessionInfo()
 ```
