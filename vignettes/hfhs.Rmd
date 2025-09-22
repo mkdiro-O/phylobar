@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r knitr_options, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
     comment = "#>",
@@ -23,7 +23,7 @@ library(ape)
 library(stringr)
 ```
 
-```{r}
+```{r data}
 data(HFHSdata)
 normal <- HFHSdata$OTUdata_Normal
 taxa <- HFHSdata$filtered_taxonomy
@@ -31,7 +31,7 @@ taxa <- HFHSdata$filtered_taxonomy
 
 Let's construct a tree from the taxonomy and make sure it's valid.
 
-```{r}
+```{r tree_construction}
 tree <- taxa |>
     select(-X1, X1) |>
     mutate(
@@ -47,7 +47,7 @@ checkValidPhylo(tree)
 
 Let's manually reorder to reflect time and host at time 0.
 
-```{r}
+```{r ordering}
 comp0 <- normal[,, 1]
 comp0 <- comp0 / rowSums(comp0)
 sample_order <- hclust(dist(comp0))$order
@@ -56,7 +56,7 @@ species_order <- hclust(dist(t(comp0)))$order
 
 Now we can melt the tensor.
 
-```{r}
+```{r melt}
 x <- normal[sample_order, species_order, ] |>
     aperm(c(3, 1, 2)) |>
     matrix(nrow = dim(normal)[3] * nrow(normal), ncol = ncol(normal))
@@ -69,11 +69,12 @@ rownames(x) <- apply(
 
 Finally we convert to compositions and visualize.
 
-```{r}
+```{r visualize}
 comp <- x / rowSums(x)
 colnames(comp) <- colnames(normal)[species_order]
 phylobar(comp, tree, hclust_order = FALSE)
 ```
-```{r}
+
+```{r session}
 sessionInfo()
 ```
