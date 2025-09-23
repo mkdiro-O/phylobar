@@ -10,7 +10,7 @@ HTMLWidgets.widget({
     // initialize the HTML skeleton
     let svg = d3.select(el).append("svg")
       .attr("width", width)
-      .attr("height", height)
+      .attr("height", height - 25)
     el.frozen = false
 
     svg.append("g").attr("id", "barplot");
@@ -40,7 +40,7 @@ HTMLWidgets.widget({
         opts.x_max = opts.rel_width * width
         tree_data = x.tree_data;
 
-        let tree = phylobar.make_tree(tree_data, opts.x_max, opts.rel_height * height);
+        let tree = phylobar.make_tree(tree_data, opts.x_max, opts.rel_height * (height - 25));
         tree.each(d => { d._children = null});
 
         feature_map = phylobar.create_feature_map(tree);
@@ -53,6 +53,11 @@ HTMLWidgets.widget({
         rscale = phylobar.radius_scale(tree);
         neighborhoods = d3.Delaunay.from(tree.descendants().map(d => [d.x, d.y + 10]));
         stacks = phylobar.stack_data(tree.leaves(), labels);
+
+        // search tools
+        phylobar.create_search(el); 
+        phylobar.populate_search(el, tree);
+        phylobar.search_handler(el, tree, palette, color_sets, feature_map, opts) 
 
         phylobar.update_tree(el, tree, rscale, link_gen,  palette, color_sets);
         phylobar.update_stack(el, stacks, b_scale, labels, feature_map, palette, color_sets, opts);
@@ -67,7 +72,7 @@ HTMLWidgets.widget({
 
       resize: function(width, height) {
         if (!tree_data || !feature_map || !b_scale) return;
-        let tree = phylobar.make_tree(tree_data, opts.rel_width * width, opts.rel_height * height);
+        let tree = phylobar.make_tree(tree_data, opts.rel_width * width, opts.rel_height * (height - 25));
         feature_map = phylobar.create_feature_map(tree);
         b_scale = phylobar.stack_scales(
           labels, phylobar.stack_data(tree.leaves(), labels),
