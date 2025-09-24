@@ -101,7 +101,7 @@ sample_order <- data.frame(sample_data(ps)) |>
 
 Although the ordering includes every sample in the dataset, our plots use only
 the representative subset from the clustering step. We finalize the ordering by
-subsetting the sample order accordingly. 
+subsetting the sample order accordingly.
 
 ```{r compute_order_indices}
 row_ix <- sample_order[sample_order %in% rownames(x_mat)]
@@ -134,16 +134,30 @@ plots. For example, the tallest bar on the far left is one of 16 (out of 1103)
 samples that has more than 10 reads of OTU 200, and it is in fact dominated by
 this OTU 200. This suggests possible contamination or quality-control issues.
 
-![A questionable OTU that seems to dominate one of the samples](https://i.imgur.com/HV1XIfZ.png)
+<!-- Replaced Markdown image with HTML figure to keep source lines short -->
+<figure>
+  <img src="https://i.imgur.com/fuIRxOv.png"
+       alt="Questionable OTU dominating a sample" />
+  <figcaption>
+    A questionable OTU that seems to dominate one of the samples.
+  </figcaption>
+</figure>
 
 Next, we highlight two phylogenetic subtrees to explore associations with
 mucositis severity. In the subtree labeled in purple (descendants of node
 0.859.2), higher abundance appears to be associated with lower severity -- the
 purples bars are larger on the left hand side of the stacked barplot. In
 contrast, in the green subtree (descendants of node 0.948.4), higher abundances
-are associated with higher severity. 
+are associated with higher severity.
 
-![A few high-level phylogenetic groups that seem to be associated with mucositis severity.](https://i.imgur.com/40rvMjG.png)
+<figure>
+  <img src="https://i.imgur.com/SVPR6fY.png"
+       alt="High-level phylogenetic groups linked to mucositis" />
+  <figcaption>
+    A few high-level phylogenetic groups that seem to be associated with
+    mucositis severity.
+  </figcaption>
+</figure>
 
 Next, we collapse a few subtrees, resulting in a smaller tree layout and letting
 us focus on some of the remaining phylogenetic groups. We then highlight a bar
@@ -151,7 +165,14 @@ us focus on some of the remaining phylogenetic groups. We then highlight a bar
 strain, OTU0910, shows high abundance in a relatively small number of patients,
 and those patients tend to experience worse than average mucositis.
 
-![By collapsing parts of the tree, we can study patterns in a few isolated leaves without losing context of the entire tree.](https://i.imgur.com/YpvNxEa.png)
+<figure>
+  <img src="https://i.imgur.com/9mYiMBg.png"
+       alt="Collapsed tree focusing on a isolated leaf." />
+  <figcaption>
+    By collapsing parts of the tree, we can study patterns in a few isolated
+    leaves without losing context of the entire tree.
+  </figcaption>
+</figure>
 
 # Temporal Analysis
 
@@ -179,7 +200,7 @@ smooth_time_series <- function(df, time_col = "timediff", pseudocount = 1, round
         summarise(
             value = (sum(value) + pseudocount) / (n() + pseudocount)
         )
-    
+
     # Fill gaps with 0
     tibble(time_bin = seq(min(df$time_bin), max(df$time_bin), by = round_degree)) |>
         left_join(df, by = "time_bin") |>
@@ -262,7 +283,14 @@ it appears to become slightly more abundant, though this may be an artifact of
 averaging over the smaller number of samples available at 55 days after
 treatment start.
 
-![An overview phylobar streamgraph, showing a few high-level taxonomic groups with differential trajectories across high and low severity groups](https://i.imgur.com/bQmh0IV.png)
+<figure>
+  <img src="https://i.imgur.com/bQmh0IV.png"
+       alt="Phylobar streamgraph overview of taxonomic trajectories" />
+  <figcaption>
+    An overview phylobar streamgraph, showing a few high-level taxonomic
+    groups with differential trajectories across high and low severity groups.
+  </figcaption>
+</figure>
 
 Interacting next with the stacked bars, we can identify several individual OTUs
 of interest. For example, OTU0307 (highlighted in purple) becomes more abundant
@@ -273,7 +301,13 @@ recovery among low-severity cases, illustrating the transient effects that can
 arise in microbiome data. Finally, OTU0943 appears slightly more abundant among
 those with lower severity, though the effect is tentative.
 
-![A zoomed in phylobar streamgraph, focusing on some OTUs of interest.](https://i.imgur.com/iIcbMs0.png)
+<figure>
+  <img src="https://i.imgur.com/iIcbMs0.png"
+       alt="Zoomed phylobar streamgraph highlighting OTUs of interest" />
+  <figcaption>
+    A zoomed in phylobar streamgraph, focusing on some OTUs of interest.
+  </figcaption>
+</figure>
 
 These observations emerged after only a few minutes of interacting with the
 phylobar visualization. This highlights the exploratory potential of the
