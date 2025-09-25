@@ -14,6 +14,17 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Introduction
+
+Once you identify an interesting view, how can you share it with others? First,
+you could press the Escape key to freeze the view, so that it doesn't respond to
+any other mouse interactions. From there, you could always take a screenshot,
+but if you want to preserve more details (or add some notes within the figure
+itself), you could instead export it to a Scalable Graphics (SVG), as discussed
+in this vignette. For this to work, you will need to use Google Chrome and
+install the bookmarklet [SVG Crowbar 2](https://nytimes.github.io/svg-crowbar/).
+We'll illustrate the process using the simple randomly generatred tree below.
+
 ```{r setup}
 library(ape)
 library(phylobar)
@@ -25,15 +36,48 @@ phylobar(samples, tree, width=800)
 
 # Step 1: Exporting from Browser
 
+Once you have the bookmarklet installed, you can press it to download any of the
+phylobar figures in a Quarto or Rmarkdown notebook. In the recording below, we
+pressed Escape after painting the blue subtree. Then we could move to our
+bookmarks bar without changing the view. Clicking the bookmarklet brings up a
+"SVG # (Download)" button that you can click, and the associated graphic will
+appear in your Downloads folder. Note that you can scroll down to other phylobar
+visualizations and you would see other buttons for downloading those plots.
+
+<div style="text-align: center;">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pb55u7kL7NA?si=held0jZZtjdN4rNJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-external="1"></iframe>
+</div>
 
 # Step 2: Open in Editor
 
+The downloaded file is an ordinary SVG, which means it can be edited in any
+image editor designed for vector graphics. For example, in the recording below,
+we open the downloaded figure using Inkscape, a free and open source vector
+graphics editor. Notice that the components of the phylobar plot are already
+organized into layers.. For example, there is a layer for the barplot, sublayers
+for each sample, and a final sublayer for the taxa within the samples. This
+layer structure reflects the original DOM structure created by the D3
+visualization code. The recording below shows how we can navigate this layer
+structure within Inkscape.
+
+
+<div style="text-align: center;">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UdnBCg_JONA?si=QvQ1Wdoe0b2W-BE_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-external="1"></iframe>
+</div>
 
 # Step 3: Modify and Save
 
+From here, we could edit if we want (e.g., to add a comment about an interesting
+pattern). We are then able to export into other formats that might be more
+accessible to others, e.g., one that we can embed in slides or add to a word
+document.  In the recording below, we use the layer structure shown in the
+previous snippet to modify the green subtree so that it uses dashed (rather than
+solid) lines to link the nodes. Once we have our final version, we export the
+graphic to PNG format.
+
+<div style="text-align: center;">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AB9GU1H6Uxs?si=HviKesdsayKz9OTi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-external="1"></iframe>
+</div>
 
 ```{r session}
 sessionInfo()
