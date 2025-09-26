@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
     comment = "#>",
@@ -15,27 +15,47 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+The Human Intestinal Tract (HITChip) Atlas dataset is a widely used reference 
+for studying variation in the gut microbiome across diverse individuals. 
+The dataset is available in the microbiome package as atlas1006, and
+includes microbial abundances along with metadata such as extraction method,
+subject information, and taxonomic annotations.
+
+In this vignette, we demonstrate how to use phylobar to create
+phylogeny-aware visualizations of the atlas data. We will walk through tree
+construction, highlight potential pitfalls in taxonomic labeling, and generate
+visualizations that summarize variation across samples.
+
+```{r load-libs}
 library(ape)
 library(phylobar)
 library(microbiome)
 ```
 
-```{r}
+# Setup
+We begin by loading the mouse diet study data, which is stored remotely and 
+can be loaded into R as a phyloseq object.
+
+```{r download-data}
 data(atlas1006)
 pseq3 <- atlas1006 |>
     subset_samples(DNA_extraction_method == "r") |>
     transform(transform = "compositional")
 ```
 
-A naive tree construction would have loops!
+Next, we load the atlas1006 dataset. For simplicity, we focus on samples
+with the r DNA extraction method and transform abundances into compositional
+form (so each sample sums to 1).
 
 ```{r}
 tree <- taxonomy_to_tree(tax_table(pseq3))
 checkValidPhylo(tree)
 ```
 
-We can add prefixes.
+A naive attempt to build a taxonomy-based tree can fail, because duplicate names
+across different levels of the taxonomy may result in loops. To address this, we 
+add level-specific prefixes (e.g., p_ for phylum, f_ for family), ensuring that 
+ancestor and descendant nodes have unique labels.
 
 ```{r}
 taxa <- tax_table(pseq3)
@@ -46,13 +66,18 @@ tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
 ```
 
+With a valid tree and abundance matrix, we can generate a phylobar plot.
+Here, samples are arranged along the x-axis, with stacked bars representing
+taxonomic abundances, aligned with the corresponding branches of the tree.
+
 ```{r}
 x <- t(otu_table(pseq3))
 phylobar(x, tree, sample_show_all = FALSE, rel_width = 0.2)
 ```
 
-We could subsample if we want a slightly simpler plot. Most of the conclusions
-remain the same.
+Because the full dataset is complex, we can simplify the visualization by
+subsampling representative samples. This preserves the main conclusions
+while reducing visual clutter.
 
 ```{r}
 x_sub <- subset_cluster(x)
@@ -62,6 +87,26 @@ leaves_to_keep <- intersect(tree$tip.label, colnames(x_sub))
 filtered_tree <- drop.tip(tree, setdiff(tree$tip.label, leaves_to_keep))
 phylobar(x_sub, filtered_tree)
 ```
+
+# Interpretation
+
+There are many interesting patterns in the atlas dataset. This plot highlights 
+the species Enterobacter aerogenes within the atlas dataset. While the taxon 
+is present across a wide set of samples, its abundance is relatively low and 
+sparse, with only a narrow band of samples showing notable representation. This 
+pattern underscores the uneven distribution of certain opportunistic taxa that
+although they appear in many hosts, they rarely dominate the community structure.
+
+![](https://imgur.com/a/GXmFDLe.png)
+
+In contrast, this plot illustrates the phylum Firmicutes. Here we observe consistently 
+high abundances across nearly all samples, shown by the purple shading in the
+stacked bars. The prominence of Firmicutes reflects its well-established role as 
+a dominant member part of the human gut microbiome. 
+
+![](https://imgur.com/a/3G02iBi.png)
+
+# Session Info
 
 ```{r}
 sessionInfo()
