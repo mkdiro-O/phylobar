@@ -98,13 +98,13 @@ mice display a co-dominance of Firmicutes (purple) and Bacteroidetes (teal), but
 sample_52 shows a clear Firmicutes dominance, underscoring how dietary interventions
 can shift the balance between these two phyla.
 
-![](https://imgur.com/a/soZPl5i.png)
+![](https://i.imgur.com/6ZYEBEA.png)
 
 Next, we observe the abundance of the Clostridium cluster IV family acros samples.
 The variability in its abundance suggests that while Clostridium cluster IV is 
 widespread, its contribution to community structure differs across individuals or conditions.
 
-![](https://imgur.com/a/TGBiIg3.png)
+![](https://i.imgur.com/RVot4qv.png)
 
 
 # Session Info
