@@ -52,10 +52,10 @@ tree <- taxonomy_to_tree(tax_table(pseq3))
 checkValidPhylo(tree)
 ```
 
-A naive attempt to build a taxonomy-based tree can fail, because duplicate names
-across different levels of the taxonomy may result in loops. To address this, we 
-add level-specific prefixes (e.g., p_ for phylum, f_ for family), ensuring that 
-ancestor and descendant nodes have unique labels.
+A naive attempt to build a taxonomy-based tree can fail, because duplicate 
+names across different levels of the taxonomy may result in loops. To 
+address this, we add level-specific prefixes (e.g., p_ for phylum, 
+f_ for family), ensuring that ancestor and descendant nodes have unique labels.
 
 ```{r}
 taxa <- tax_table(pseq3)
@@ -90,24 +90,30 @@ phylobar(x_sub, filtered_tree)
 
 # Interpretation
 
-There are many interesting patterns in the atlas dataset revealing distinct patterns
-in the human intestinal. For example, Enterobacter aerogenes appears across
-a broad range of samples, but generally at low relative abundance. Only one sample 
-shows notable representation, creating a narrow band in the stacked barplot. This patchy
-distribution is a characteristic of opportunistic or conditionally rare taxa, which may be
-present in many individuals but rarely dominate the community structure. Such patterns
-have been previously been described as examples of bimodal or "tipping element" behavior, 
-where a taxon is abundant in some hosts but nearly absent in others (Lahti et al. 2014).
+There are many interesting patterns in the atlas dataset revealing 
+distinct patterns in the human intestinal. For example, Enterobacter 
+aerogenes appears across a broad range of samples, but generally at
+low relative abundance. Only one sample shows notable representation, 
+creating a narrow band in the stacked barplot. This patchy distribution 
+is a characteristic of opportunistic or conditionally rare taxa, which 
+may be present in many individuals but rarely dominate the community 
+structure. Such patterns have been previously been described as examples 
+of bimodal or "tipping element" behavior, where a taxon is abundant 
+in some hosts but nearly absent in others.
+(https://pmc.ncbi.nlm.nih.gov/articles/PMC4102116/pdf/ncomms5344.pdf)
 
 ![](https://i.imgur.com/uj1avu1.png)
 
-Next, this screenshot highlights the dominance of Firmicutes (yellow) and Bacteroidetes
-(purple) in the human gut microbiome. While these two phyla are prevalent across nearly
-all samples, their relative proportions vary widely. Some samples are Firmicutes-dominant,
-while others are Bacteroidetes-dominant. This variability reflects the complex interplay
-of host genetics, diet, and environmental factors that shape the gut microbiome.
+Next, this screenshot highlights the dominance of Firmicutes (yellow) 
+and Bacteroidetes (purple) in the human gut microbiome. While these 
+two phyla are prevalent across nearly all samples, their relative 
+proportions vary widely. Some samples are Firmicutes-dominant,
+while others are Bacteroidetes-dominant. This variability reflects 
+the complex interplay of host genetics, diet, and environmental factors 
+that shape the gut microbiome.
 
 ![](https://i.imgur.com/qUZoXZh.png)
+
 # Session Info
 
 ```{r}
