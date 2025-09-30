@@ -90,22 +90,24 @@ phylobar(x_sub, filtered_tree)
 
 # Interpretation
 
-There are many interesting patterns in the atlas dataset. This plot highlights 
-the species Enterobacter aerogenes within the atlas dataset. While the taxon 
-is present across a wide set of samples, its abundance is relatively low and 
-sparse, with only a narrow band of samples showing notable representation. This 
-pattern underscores the uneven distribution of certain opportunistic taxa that
-although they appear in many hosts, they rarely dominate the community structure.
+There are many interesting patterns in the atlas dataset revealing distinct patterns
+in the human intestinal. For example, Enterobacter aerogenes appears across
+a broad range of samples, but generally at low relative abundance. Only one sample 
+shows notable representation, creating a narrow band in the stacked barplot. This patchy
+distribution is a characteristic of opportunistic or conditionally rare taxa, which may be
+present in many individuals but rarely dominate the community structure. Such patterns
+have been previously been described as examples of bimodal or "tipping element" behavior, 
+where a taxon is abundant in some hosts but nearly absent in others (Lahti et al. 2014).
 
-![](https://imgur.com/a/GXmFDLe.png)
+![](https://i.imgur.com/uj1avu1.png)
 
-In contrast, this plot illustrates the phylum Firmicutes. Here we observe consistently 
-high abundances across nearly all samples, shown by the purple shading in the
-stacked bars. The prominence of Firmicutes reflects its well-established role as 
-a dominant member part of the human gut microbiome. 
+Next, this screenshot highlights the dominance of Firmicutes (yellow) and Bacteroidetes
+(purple) in the human gut microbiome. While these two phyla are prevalent across nearly
+all samples, their relative proportions vary widely. Some samples are Firmicutes-dominant,
+while others are Bacteroidetes-dominant. This variability reflects the complex interplay
+of host genetics, diet, and environmental factors that shape the gut microbiome.
 
-![](https://imgur.com/a/3G02iBi.png)
-
+![](https://i.imgur.com/qUZoXZh.png)
 # Session Info
 
 ```{r}
