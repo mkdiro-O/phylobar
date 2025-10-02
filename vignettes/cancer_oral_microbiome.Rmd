@@ -53,7 +53,9 @@ Next, we load the data, which is organized as a phyloseq object with slots for
 the phylogenetic tree, sample metadata, and sample-level abundances.
 
 ```{r read_in_data}
-ps <- readRDS("zhang2023-ps-v2.rds")
+f <- tempfile()
+download.file("zenodo.org/records/17179980/files/zhang2023-ps.rds", f) # will be replaced by ExperimentHub package, CancerOralMicrobiome
+ps <- readRDS(f)
 ```
 
 # Sample-Level Analysis

@@ -16,16 +16,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-Diet is a key factor shaping the gut microbiome. In a recent mouse study, 
-researchers profiled gut microbial communities under different dietary conditions 
+Diet is a key factor shaping the gut microbiome. In a recent mouse study,
+researchers profiled gut microbial communities under different dietary conditions
 to examine how nutrient intake influences community structure. The dataset, available
-as a phyloseq object, includes microbial feature tables, taxonomic annotations, 
+as a phyloseq object, includes microbial feature tables, taxonomic annotations,
 and sample metadata.
 
-In this vignette, we use these data to demonstrate how phylobar can produce 
-phylogenetically informed visualizations of microbiome composition. We begin 
-by normalizing feature abundances and reconstructing the taxonomic tree. We 
-then generate a phylobar plot to highlight community shifts across diet groups, 
+In this vignette, we use these data to demonstrate how phylobar can produce
+phylogenetically informed visualizations of microbiome composition. We begin
+by normalizing feature abundances and reconstructing the taxonomic tree. We
+then generate a phylobar plot to highlight community shifts across diet groups,
 with a focus on clades where dietary effects are most pronounced.
 
 ```{r load-libs}
@@ -36,28 +36,26 @@ library(MicrobiomeStat)
 ```
 
 # Setup
-We begin by loading the mouse diet study data, which is stored remotely and 
+We begin by loading the mouse diet study data, which is stored remotely and
 can be loaded into R as a phyloseq object.
 
 ```{r download-data}
-dietpath <- tempfile(fileext = ".rda")
-download.file("https://go.wisc.edu/l68i2z", dietpath, mode = "wb")
-diet <- get(load(dietpath))
-
-diet
+data("dietswap", package="microbiome")
+diet_temp <- subset_samples(dietswap, timepoint == 1)
+diet <- subset_taxa(diet_temp, taxa_sums(diet_temp) > 0)
 ```
 
 To prepare the data for visualization, we first convert the phyloseq object
 into a MicrobiomeStat object using `mStat_convert_phyloseq_to_data_obj()`.
 This enables us to apply DESeq2 normalization, which corrects for sequencing
 depth differences across samples. We then transpose the normalized feature
-matrix so that rows correspond to taxa and columns to samples, as expected by 
+matrix so that rows correspond to taxa and columns to samples, as expected by
 `phylobar()`.
 
-Unlike relative-abundance normalization, DESeq2 does not constrain sample totals 
-to equal one. This distinction highlights the flexibility of our functions, 
-since phylobar can accommodate both compositional and non-compositional inputs. 
-After normalization, we transpose the feature matrix so that rows correspond to taxa 
+Unlike relative-abundance normalization, DESeq2 does not constrain sample totals
+to equal one. This distinction highlights the flexibility of our functions,
+since phylobar can accommodate both compositional and non-compositional inputs.
+After normalization, we transpose the feature matrix so that rows correspond to taxa
 and columns to samples, as required by `phylobar()`.
 
 ```{r preprocess}
@@ -66,12 +64,12 @@ diet_mstat <- mStat_normalize_data(diet_mstat, "DESeq")
 x <- t(diet_mstat$data.obj.norm$feature.tab)
 ```
 
-Next, we construct a taxonomy-based tree from the available annotations. To ensure 
-that ancestor and descendant nodes remain uniquely identifiable, we add prefixes to 
-each taxonomic level (e.g., `p_` for phylum, `f_` for family). Without this step, 
-different levels can share the same names, which would prevent the taxonomy from being 
-converted into a valid tree. The prefixed taxonomy table is then passed to 
-`taxonomy_to_tree()`, producing a hierarchical tree that will serve as the backbone 
+Next, we construct a taxonomy-based tree from the available annotations. To ensure
+that ancestor and descendant nodes remain uniquely identifiable, we add prefixes to
+each taxonomic level (e.g., `p_` for phylum, `f_` for family). Without this step,
+different levels can share the same names, which would prevent the taxonomy from being
+converted into a valid tree. The prefixed taxonomy table is then passed to
+`taxonomy_to_tree()`, producing a hierarchical tree that will serve as the backbone
 for visualization.
 
 ```{r build-tree}
@@ -82,9 +80,9 @@ taxa <- cbind(Kingdom = "k_Bacteria", taxa)
 tree <- taxonomy_to_tree(taxa)
 ```
 
-At this point, we have two aligned objects ready for visualization: a normalized 
-abundance matrix (x) and a taxonomy-derived tree (tree). We now pass these objects 
-to `phylobar()`. The resulting plot shows stacked bar charts of taxa abundances, 
+At this point, we have two aligned objects ready for visualization: a normalized
+abundance matrix (x) and a taxonomy-derived tree (tree). We now pass these objects
+to `phylobar()`. The resulting plot shows stacked bar charts of taxa abundances,
 aligned with the hierarchical tree structure.
 
 ```{r render-phylobar}
@@ -93,15 +91,15 @@ phylobar(x, tree, width=800)
 
 # Interpretation
 
-We showcase several notable patterns using screenshots from the interactive plots: most 
-mice display a co-dominance of Firmicutes (purple) and Bacteroidetes (teal), but 
+We showcase several notable patterns using screenshots from the interactive plots: most
+mice display a co-dominance of Firmicutes (purple) and Bacteroidetes (teal), but
 sample_52 shows a clear Firmicutes dominance, underscoring how dietary interventions
 can shift the balance between these two phyla.
 
 ![](https://i.imgur.com/6ZYEBEA.png)
 
 Next, we observe the abundance of the Clostridium cluster IV family acros samples.
-The variability in its abundance suggests that while Clostridium cluster IV is 
+The variability in its abundance suggests that while Clostridium cluster IV is
 widespread, its contribution to community structure differs across individuals or conditions.
 
 ![](https://i.imgur.com/RVot4qv.png)
