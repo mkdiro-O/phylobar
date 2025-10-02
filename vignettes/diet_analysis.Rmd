@@ -1,8 +1,8 @@
 ---
-title: "Diet Data"
+title: "Differences in the Community Composition due to Diet"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{mouse_data}
+  %\VignetteIndexEntry{Differences in the Community Composition due to Diet}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

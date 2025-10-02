@@ -1,8 +1,8 @@
 ---
-title: "Oral Microbiome in Cancer Patients"
+title: "Oral Microbiome and Mucositis Severity in Cancer Patients"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Oral Microbiome in Cancer Patients}
+  %\VignetteIndexEntry{Oral Microbiome and Mucositis Severity in Cancer Patients}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
