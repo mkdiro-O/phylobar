@@ -1,4 +1,3 @@
-
 # phylobar
 
 `phylobar` is visualization package that makes it possible to construct
@@ -21,7 +20,7 @@ in the “Exporting Views” vignettes.
 
 You can install the development version of phylobar using:
 
-``` r
+```r
 remotes::install_packages("mkdir-o/phylobar")
 ```
 
@@ -29,7 +28,7 @@ remotes::install_packages("mkdir-o/phylobar")
 
 This block applies phylobar to a small random data set:
 
-``` r
+```r
 library(ape)
 library(phylobar)
 
@@ -72,7 +71,7 @@ spacebar.
 ## Reference
 
 The full function reference can be found here:
-<https://mkdiro-o.github.io/phylobar/reference.html>.
+<https://mkdiro-o.github.io/phylobar/reference/index.html>.
 
 ## Learn More
 
