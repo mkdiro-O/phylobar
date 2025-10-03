@@ -1,7 +1,7 @@
 Package: phylobar
 Title: Interactive construction of stacked barplots using hierarchies
 Version: 0.99.0
-Authors@R: 
+Authors@R:
     c(
         person("Kris", "Sankaran", , "ksankaran@wisc.edu", role = c("aut", "cre", "fnd"), comment = c(ORCID = "0000-0002-9415-1971")),
         person("Megan", "Kuo", , "", role = c("aut"))
@@ -13,12 +13,13 @@ URL: https://github.com/mkdiro-O/phylobar
 BugReports: https://github.com/mkdiro-O/phylobar/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Suggests: 
+Suggests:
     knitr,
     rmarkdown,
+    microbiome,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
-Depends: 
+Depends:
     R (>= 4.5.0),
     phyloseq,
     htmlwidgets,

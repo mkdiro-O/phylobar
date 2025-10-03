@@ -52,23 +52,27 @@ spacebar.
   phylogenetic trees it can be helpful to choose stacked bar color using
   taxonomic assignments. This vignette gets a quick overview of
   constructing trees from taxonomy tables, including checks to make sure
-  that the input is formatted properly.  
-- Exporting views: While interactivity is useful for exploration, we
-  often need to export a specific static view to discuss with others.
-  This vignette gives an alternative to simple screenshots that
-  preserves image quality and supports, editing and software like
-  illustrator or inkscape.
+  that the input is formatted properly.
+- [Exporting
+  views](https://mkdiro-o.github.io/phylobar/articles/exporting.html):
+  While interactivity is useful for exploration, we often need to export
+  a specific static view to discuss with others. This vignette gives an
+  alternative to simple screenshots that preserves image quality and
+  supports, editing and software like illustrator or inkscape.
 - Customizing style: Phylobar supports a few styling customizations,
   like changing the size of the text labels or the color palette. This
-  vignette walks through currently available options.  
-- Subsetting to representative samples: Stacked bar plots can be
-  cumbersome when there are many samples (e.g., \> 1000) present,
-  because the bars become too thin. This vignette includes some helper
-  functions to create views from representative samples.
+  vignette walks through currently available options.
+- [Subsetting to representative
+  samples](https://mkdiro-o.github.io/phylobar/reference/subset_cluster.html):
+  Stacked bar plots can be cumbersome when there are many samples (e.g.,
+  \> 1000) present, because the bars become too thin. This vignette
+  includes some helper functions to create views from representative
+  samples.
 
 ## Reference
 
-The full function reference can be found at this page.
+The full function reference can be found here:
+<https://mkdiro-o.github.io/phylobar/reference.html>.
 
 ## Learn More
 
