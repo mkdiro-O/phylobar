@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Diet Data • phylobar</title>
+<title>Differences in the Community Composition due to Diet • phylobar</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Diet Data">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Differences in the Community Composition due to Diet">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,11 +33,11 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/atlas.html">atlas</a></li>
-    <li><a class="dropdown-item" href="../articles/cancer_oral_microbiome.html">Oral Microbiome in Cancer Patients</a></li>
-    <li><a class="dropdown-item" href="../articles/diet_analysis.html">Diet Data</a></li>
+<li><a class="dropdown-item" href="../articles/atlas.html">Tipping Points in the Atlas 1006 Dataset</a></li>
+    <li><a class="dropdown-item" href="../articles/cancer_oral_microbiome.html">Oral Microbiome and Mucositis Severity in Cancer Patients</a></li>
+    <li><a class="dropdown-item" href="../articles/diet_analysis.html">Differences in the Community Composition due to Diet</a></li>
     <li><a class="dropdown-item" href="../articles/exporting.html">Exporting to SVG</a></li>
-    <li><a class="dropdown-item" href="../articles/global_patterns.html">Global Patterns Dataset Examples</a></li>
+    <li><a class="dropdown-item" href="../articles/global_patterns.html">Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset</a></li>
     <li><a class="dropdown-item" href="../articles/hfhs.html">The effect of a high-fat high-sugar (HFHS) diet on the mouse microbiome</a></li>
   </ul>
 </li>
@@ -62,7 +62,7 @@
 <script src="diet_analysis_files/phylobar-0.0.1/phylobar-R.min.js"></script><script src="diet_analysis_files/phylobar-binding-0.99.0/phylobar.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Diet Data</h1>
+      <h1>Differences in the Community Composition due to Diet</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/mkdiro-O/phylobar/blob/HEAD/vignettes/diet_analysis.Rmd" class="external-link"><code>vignettes/diet_analysis.Rmd</code></a></small>
@@ -94,15 +94,9 @@ where dietary effects are most pronounced.</p>
 <p>We begin by loading the mouse diet study data, which is stored
 remotely and can be loaded into R as a phyloseq object.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dietpath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".rda"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://go.wisc.edu/l68i2z"</span>, <span class="va">dietpath</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
-<span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">dietpath</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">diet</span></span>
-<span><span class="co">#&gt; phyloseq-class experiment-level object</span></span>
-<span><span class="co">#&gt; otu_table()   OTU Table:         [ 119 taxa and 38 samples ]</span></span>
-<span><span class="co">#&gt; sample_data() Sample Data:       [ 38 samples by 8 sample variables ]</span></span>
-<span><span class="co">#&gt; tax_table()   Taxonomy Table:    [ 119 taxa by 3 taxonomic ranks ]</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"dietswap"</span>, package<span class="op">=</span><span class="st">"microbiome"</span><span class="op">)</span></span>
+<span><span class="va">diet_temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/subset_samples-methods.html" class="external-link">subset_samples</a></span><span class="op">(</span><span class="va">dietswap</span>, <span class="va">timepoint</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/subset_taxa-methods.html" class="external-link">subset_taxa</a></span><span class="op">(</span><span class="va">diet_temp</span>, <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/taxa_sums.html" class="external-link">taxa_sums</a></span><span class="op">(</span><span class="va">diet_temp</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>To prepare the data for visualization, we first convert the phyloseq
 object into a MicrobiomeStat object using
 <code><a href="https://cafferychen777.github.io/MicrobiomeStat/reference/mStat_convert_phyloseq_to_data_obj.html" class="external-link">mStat_convert_phyloseq_to_data_obj()</a></code>. This enables us to
@@ -150,9 +144,8 @@ hierarchical tree structure.</p>
 <p>We showcase several notable patterns using screenshots from the
 interactive plots: most mice display a co-dominance of Firmicutes
 (purple) and Bacteroidetes (teal), but sample_52 shows a clear
-Firmicutesremotes::install_github(“author/LUPINE”) dominance,
-underscoring how dietary interventions can shift the balance between
-these two phyla.</p>
+Firmicutes dominance, underscoring how dietary interventions can shift
+the balance between these two phyla.</p>
 <p><img src="https://i.imgur.com/6ZYEBEA.png"></p>
 <p>Next, we observe the abundance of the Clostridium cluster IV family
 acros samples. The variability in its abundance suggests that while
