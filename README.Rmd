@@ -55,7 +55,7 @@ color. To freeze the view, press the spacebar.
 
 ## Reference
 
-The full function reference can be found here: [https://mkdiro-o.github.io/phylobar/reference/](https://mkdiro-o.github.io/phylobar/reference/).
+The full function reference can be found here: [https://mkdiro-o.github.io/phylobar/reference/index.html](https://mkdiro-o.github.io/phylobar/reference/index.html).
 
 ## Learn More
 Some more fully developed data analysis examples can be found in the following
