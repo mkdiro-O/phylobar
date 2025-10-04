@@ -22,6 +22,7 @@ semi-representative way.
 }
 \examples{
 mat <- matrix(rnorm(1000), nrow = 100)
+rownames(mat) <- seq_len(100)
 result <- subset_cluster(mat, k = 10)
 dim(result) # only 10 representatives
 }

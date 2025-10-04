@@ -28,5 +28,6 @@ set.seed(1)
 tree <- rtree(5)
 x_mat <- matrix(runif(15), ncol = 5)
 colnames(x_mat) <- tree$tip.label
+tree$node.label <- as.character(seq_len(tree$Nnode))
 node_totals(tree, x_mat)
 }

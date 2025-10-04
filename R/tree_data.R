@@ -18,6 +18,7 @@
 #' tree <- rtree(5)
 #' x_mat <- matrix(runif(15), ncol = 5)
 #' colnames(x_mat) <- tree$tip.label
+#' tree$node.label <- as.character(seq_len(tree$Nnode))
 #' node_totals(tree, x_mat)
 #' @export
 node_totals <- function(tree, x_mat) {
@@ -53,7 +54,11 @@ node_totals <- function(tree, x_mat) {
 #' x_mat <- matrix(runif(15), ncol = 5)
 #' colnames(x_mat) <- tree$tip.label
 #'
-#' totals <- node_totals(tree, x_mat)
+#' tree$node.label <- as.character(seq_len(tree$Nnode))
+#' totals <- c(
+#'   node_totals(tree, x_mat)
+#'   as.list(data.frame(x_mat)))
+#' )
 #' node_hierarchy(tree, totals)
 #' @export
 node_hierarchy <- function(tree, totals, node = NULL) {

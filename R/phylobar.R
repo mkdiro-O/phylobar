@@ -60,7 +60,7 @@ check_inputs <- function(x, tree) {
 #' library(ape)
 #' set.seed(1)
 #' tree <- rtree(5)
-#' x <- matrix(rpois(15), ncol = 5)
+#' x <- matrix(rpois(15, 1), ncol = 5)
 #' phylobar(x, tree)
 #' @export
 phylobar <- function(
