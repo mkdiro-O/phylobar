@@ -40,7 +40,7 @@ We begin by loading the mouse diet study data, which is stored remotely and
 can be loaded into R as a phyloseq object.
 
 ```{r download-data}
-data("dietswap", package="microbiome")
+data("dietswap", package = "microbiome")
 diet_temp <- subset_samples(dietswap, timepoint == 1)
 diet <- subset_taxa(diet_temp, taxa_sums(diet_temp) > 0)
 ```
@@ -73,9 +73,8 @@ converted into a valid tree. The prefixed taxonomy table is then passed to
 for visualization.
 
 ```{r build-tree}
-taxa <- tax_table(diet)
-taxa[, 1] <- add_prefix("p_", taxa[, 1])
-taxa[, 2] <- add_prefix("f_", taxa[, 2])
+taxa <- tax_table(diet) |>
+    phylobar::add_prefix()
 taxa <- cbind(Kingdom = "k_Bacteria", taxa)
 tree <- taxonomy_to_tree(taxa)
 ```
@@ -86,7 +85,7 @@ to `phylobar()`. The resulting plot shows stacked bar charts of taxa abundances,
 aligned with the hierarchical tree structure.
 
 ```{r render-phylobar}
-phylobar(x, tree, width=800)
+phylobar(x, tree, width = 800)
 ```
 
 # Interpretation

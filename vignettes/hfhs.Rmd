@@ -27,7 +27,7 @@ Static stacked bar plots often hide changes that occur at specific taxonomic lev
 
 # Setup
 
-The following code block loads the packages required for this analysis. 
+The following code block loads the packages required for this analysis.
 ```{r setup}
 library(phylobar)   # phylogeny-aware bar plots
 library(LUPINE)     # HFHS example dataset
@@ -47,14 +47,14 @@ taxa <- HFHSdata$filtered_taxonomy
 
 # Taxonomy-based tree construction
 
-We begin by constructing a taxonomy-based tree from the taxonomic annotations provided in the dataset. The `taxonomy_to_tree` function from the phylobar package is used to convert the taxonomic data into a phylogenetic tree structure. 
+We begin by constructing a taxonomy-based tree from the taxonomic annotations provided in the dataset. The `taxonomy_to_tree` function from the phylobar package is used to convert the taxonomic data into a phylogenetic tree structure.
 
 ```{r tree_construction}
 tree <- taxa |>
     select(-X1, X1) |>
     mutate(
         across(
-            everything(), 
+            everything(),
             ~if_else(str_ends(., "_"), NA, .)
         )
     ) |>
@@ -84,27 +84,27 @@ comp_norm <- comp_norm / rowSums(comp_norm)
 sample_order1 <- hclust(dist(comp_norm))$order
 species_order <- hclust(dist(t(comp_norm)))$order
 
-# Now order the HFHS samples 
+# Now order the HFHS samples
 comp_hfhs <- hfhs_day7
 comp_hfhs <- comp_hfhs / rowSums(comp_hfhs)
-sample_order2 <- hclust(dist(comp_hfhs))$order 
+sample_order2 <- hclust(dist(comp_hfhs))$order
 
 # Combine the sample orders
 sample_order <- c(rownames(normal_day7)[sample_order1], rownames(hfhs_day7)[sample_order2])
 
 # Reorder the combined data
-x <- all_day7[sample_order, species_order] 
+x <- all_day7[sample_order, species_order]
 ```
 
 
-Finally we convert to compositions and visualize. 
+Finally we convert to compositions and visualize.
 
 ```{r visualize}
 comp <- x / rowSums(x)
 colnames(comp) <- colnames(all_day7)[species_order]
 phylobar(comp, tree, hclust_order = FALSE, sample_font_size = 9)
 ```
-Lets select Bacteroidia class from the dropdown and see the effect of diet on this class. 
+Lets select Bacteroidia class from the dropdown and see the effect of diet on this class.
 
 
 ## Interpretation

@@ -2,7 +2,7 @@
 title: "Building Trees from Taxonomies"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset}
+  %\VignetteIndexEntry{Building Trees from Taxonomies}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
