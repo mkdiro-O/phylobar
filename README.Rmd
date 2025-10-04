@@ -5,21 +5,21 @@ output:
 
 # phylobar
 
-`phylobar` is visualization package that makes it possible to construct a
-stacked barplot by interactively "painting" an associated tree. This is an
-alternative to defining a color palette using a fixed taxonomic resolution. It
-also helps avoid the issue of grouping all rare taxa into a color for "other" --
-since species can be chosen selectively, we can paint a few rare taxa but not
-the rest (see the quickstart below for a recording).
+phylobar is a visualization package for constructing stacked barplots by
+interactively "painting" an associated tree. This is an alternative to defining
+a color palette at a fixed taxonomic resolution. It also helps avoid the issue
+of grouping all rare taxa into a color for "other" — you can selectively
+highlight specific rare taxa while leaving others at their background color.
 
-The main plotting function, phylobar, takes two inputs, a table of potentially
-normalized counts and a tree structure, which can come either from a phylogeny
-or a table of taxonomic assignments. See the vignettes for examples of
-converting alternative data formats (e.g., phyloseq) into this input format.
-You can export any interactive snapshot to an SVG file by using the SVG crowbar
-package as illustrated in the "Exporting Views" vignettes.
+The main function, phylobar, takes two inputs: a table of potentially
+normalized counts and a tree structure which can come from either a phylogeny or
+a table of taxonomic assignments. The vignettes show how to convert alternative
+data formats (e.g., phyloseq) into this input format. You can export interactive
+snapshots to SVG using the SVG crowbar package, as shown in the "Exporting
+Views" vignette.
 
 ## Installation
+
 You can install the development version of phylobar using:
 
 ```{r, installation, eval = FALSE}
@@ -41,10 +41,11 @@ phylobar(samples, tree)
 
 ![](https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/rtree_recording.gif)
 
-GitHub doesn't allow us to include interactive blocks within this README, which
-is why we only have a recording above. You can interact with the output at this
-link. Clicking a node collapses a subtree. Double clicking introduces a new
-color. To freeze the view, press the spacebar.
+GitHub doesn't support interactive blocks in READMEs, so we've included a
+recording above. You can interact with other example output in our precompiled
+[articles](https://mkdiro-o.github.io/phylobar/articles). Click a node to
+collapse a subtree, press the control key to introduce a new color, and press
+the escape key to freeze the view.
 
 ## Common Tasks
 
@@ -58,21 +59,17 @@ color. To freeze the view, press the spacebar.
 The full function reference can be found here: [https://mkdiro-o.github.io/phylobar/reference/index.html](https://mkdiro-o.github.io/phylobar/reference/index.html).
 
 ## Learn More
-Some more fully developed data analysis examples can be found in the following
-vignettes.
 
-We've included small screen recordings showing how these views can be helpful
-for tasks like quality control, intergroup comparison, and longitudal analysis.
-
-The design of this package is inspired by the focus-plus-context principle in
-data visualization. Our paper gives a more in-depth discussion, and some
-classics from this area include (). The package itself is implemented using the
-wonderful htmlwidgets package for linking are with javascript. The js code for
-phylobar is available on npm as phylobar-js.
+Additional vignettes provide fully developed examples for quality control, cross
+group comparison, and longitudinal analysis.  The package design follows the
+focus-plus-context principle in data visualization -- our paper provides an
+in-depth discussion. The package is implemented using the htmlwidgets package
+for R-JavaScript integration. The JavaScript code is available on npm as
+phylobar-js.
 
 ## Contact
 
 You can reach us by creating an
-[Issue](https://github.com/mkdiro-O/phylobar/issues) in the package repository
-or sending an email to [ksankaran@wisc.edu](mailto:ksankaran@wisc.edu). We
-appreciate your trying out the package and will try our best to reply promptly.
+[Issue]((https://github.com/mkdiro-O/phylobar/issues)) or emailing
+[ksankaran@wisc.edu](mailto:ksankaran@wisc.edu). We appreciate your interest and
+will respond promptly.

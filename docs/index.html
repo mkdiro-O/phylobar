@@ -38,9 +38,10 @@
 <li><a class="dropdown-item" href="articles/atlas.html">Tipping Points in the Atlas 1006 Dataset</a></li>
     <li><a class="dropdown-item" href="articles/cancer_oral_microbiome.html">Oral Microbiome and Mucositis Severity in Cancer Patients</a></li>
     <li><a class="dropdown-item" href="articles/diet_analysis.html">Differences in the Community Composition due to Diet</a></li>
-    <li><a class="dropdown-item" href="articles/exporting.html">Exporting to SVG</a></li>
+    <li><a class="dropdown-item" href="articles/exporting.html">Exporting to Vector Graphics Format</a></li>
     <li><a class="dropdown-item" href="articles/global_patterns.html">Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset</a></li>
     <li><a class="dropdown-item" href="articles/hfhs.html">The effect of a high-fat high-sugar (HFHS) diet on the mouse microbiome</a></li>
+    <li><a class="dropdown-item" href="articles/taxonomies.html">Building Trees from Taxonomies</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -60,8 +61,8 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="phylobar">phylobar<a class="anchor" aria-label="anchor" href="#phylobar"></a>
 </h1></div>
-<p><code>phylobar</code> is visualization package that makes it possible to construct a stacked barplot by interactively “painting” an associated tree. This is an alternative to defining a color palette using a fixed taxonomic resolution. It also helps avoid the issue of grouping all rare taxa into a color for “other” – since species can be chosen selectively, we can paint a few rare taxa but not the rest (see the quickstart below for a recording).</p>
-<p>The main plotting function, phylobar, takes two inputs, a table of potentially normalized counts and a tree structure, which can come either from a phylogeny or a table of taxonomic assignments. See the vignettes for examples of converting alternative data formats (e.g., phyloseq) into this input format. You can export any interactive snapshot to an SVG file by using the SVG crowbar package as illustrated in the “Exporting Views” vignettes.</p>
+<p>phylobar is a visualization package for constructing stacked barplots by interactively “painting” an associated tree. This is an alternative to defining a color palette at a fixed taxonomic resolution. It also helps avoid the issue of grouping all rare taxa into a color for “other” — you can selectively highlight specific rare taxa while leaving others at their background color.</p>
+<p>The main function, phylobar, takes two inputs: a table of potentially normalized counts and a tree structure which can come from either a phylogeny or a table of taxonomic assignments. The vignettes show how to convert alternative data formats (e.g., phyloseq) into this input format. You can export interactive snapshots to SVG using the SVG crowbar package, as shown in the “Exporting Views” vignette.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -81,36 +82,35 @@
 <span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fl">20</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/phylobar.html">phylobar</a></span><span class="op">(</span><span class="va">samples</span>, <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/rtree_recording.gif"></p>
-<p>GitHub doesn’t allow us to include interactive blocks within this README, which is why we only have a recording above. You can interact with the output at this link. Clicking a node collapses a subtree. Double clicking introduces a new color. To freeze the view, press the spacebar.</p>
+<p>GitHub doesn’t support interactive blocks in READMEs, so we’ve included a recording above. You can interact with other example output in our precompiled <a href="https://mkdiro-o.github.io/phylobar/articles" class="external-link">articles</a>. Click a node to collapse a subtree, press the control key to introduce a new color, and press the escape key to freeze the view.</p>
 </div>
 <div class="section level2">
 <h2 id="common-tasks">Common Tasks<a class="anchor" aria-label="anchor" href="#common-tasks"></a>
 </h2>
 <ul>
-<li>Building a tree from a taxonomy: Rather than interacting with abstract phylogenetic trees it can be helpful to choose stacked bar color using taxonomic assignments. This vignette gets a quick overview of constructing trees from taxonomy tables, including checks to make sure that the input is formatted properly.</li>
-<li>
-<a href="https://mkdiro-o.github.io/phylobar/articles/exporting.html">Exporting views</a>: While interactivity is useful for exploration, we often need to export a specific static view to discuss with others. This vignette gives an alternative to simple screenshots that preserves image quality and supports, editing and software like illustrator or inkscape.</li>
 <li>Customizing style: Phylobar supports a few styling customizations, like changing the size of the text labels or the color palette. This vignette walks through currently available options.</li>
 <li>
-<a href="https://mkdiro-o.github.io/phylobar/reference/subset_cluster.html">Subsetting to representative samples</a>: Stacked bar plots can be cumbersome when there are many samples (e.g., &gt; 1000) present, because the bars become too thin. This vignette includes some helper functions to create views from representative samples.</li>
+<a href="https://mkdiro-o.github.io/phylobar/articles/taxonomies.html" class="external-link">Building a tree from a taxonomy</a>: Rather than interacting with abstract phylogenetic trees it can be helpful to choose stacked bar color using taxonomic assignments. This vignette gets a quick overview of constructing trees from taxonomy tables, including checks to make sure that the input is formatted properly.</li>
+<li>
+<a href="https://mkdiro-o.github.io/phylobar/articles/exporting.html" class="external-link">Exporting views</a>: While interactivity is useful for exploration, we often need to export a specific static view to discuss with others. This vignette gives an alternative to simple screenshots that preserves image quality and supports, editing and software like illustrator or inkscape.</li>
+<li>
+<a href="https://mkdiro-o.github.io/phylobar/reference/subset_cluster.html" class="external-link">Subsetting to representative samples</a>: Stacked bar plots can be cumbersome when there are many samples (e.g., &gt; 1000) present, because the bars become too thin. This vignette includes some helper functions to create views from representative samples.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
 </h2>
-<p>The full function reference can be found here: <a href="https://mkdiro-o.github.io/phylobar/reference.html" class="uri">https://mkdiro-o.github.io/phylobar/reference.html</a>.</p>
+<p>The full function reference can be found here: <a href="https://mkdiro-o.github.io/phylobar/reference/index.html" class="external-link uri">https://mkdiro-o.github.io/phylobar/reference/index.html</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="learn-more">Learn More<a class="anchor" aria-label="anchor" href="#learn-more"></a>
 </h2>
-<p>Some more fully developed data analysis examples can be found in the following vignettes.</p>
-<p>We’ve included small screen recordings showing how these views can be helpful for tasks like quality control, intergroup comparison, and longitudal analysis.</p>
-<p>The design of this package is inspired by the focus-plus-context principle in data visualization. Our paper gives a more in-depth discussion, and some classics from this area include (). The package itself is implemented using the wonderful htmlwidgets package for linking are with javascript. The js code for phylobar is available on npm as phylobar-js.</p>
+<p>Additional vignettes provide fully developed examples for quality control, cross group comparison, and longitudinal analysis. The package design follows the focus-plus-context principle in data visualization – our paper provides an in-depth discussion. The package is implemented using the htmlwidgets package for R-JavaScript integration. The JavaScript code is available on npm as phylobar-js.</p>
 </div>
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
 </h2>
-<p>You can reach us by creating an <a href="https://github.com/mkdiro-O/phylobar/issues" class="external-link">Issue</a> in the package repository or sending an email to <a href="mailto:ksankaran@wisc.edu" class="email">ksankaran@wisc.edu</a>. We appreciate your trying out the package and will try our best to reply promptly.</p>
+<p>You can reach us by creating an <a href="(https://github.com/mkdiro-O/phylobar/issues)" class="external-link">Issue</a> or emailing <a href="mailto:ksankaran@wisc.edu" class="email">ksankaran@wisc.edu</a>. We appreciate your interest and will respond promptly.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -141,7 +141,9 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Kris Sankaran <br><small class="roles"> Author, maintainer, funder </small> <a href="https://orcid.org/0000-0002-9415-1971" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Megan Kuo <br><small class="roles"> Author </small>   </li>
+<li>Megan Kuo <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Saritha Kodikara <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Jiadong Mao <br><small class="roles"> Author, maintainer </small>   </li>
 </ul>
 </div>
 
@@ -152,7 +154,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Kris Sankaran, Megan Kuo.</p>
+  <p>Developed by Kris Sankaran, Megan Kuo, Saritha Kodikara, Jiadong Mao.</p>
 </div>
 
 <div class="pkgdown-footer-right">
