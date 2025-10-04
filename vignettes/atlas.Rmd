@@ -26,7 +26,7 @@ phylogeny-aware visualizations of the atlas data. We will walk through tree
 construction, highlight potential pitfalls in taxonomic labeling, and generate
 visualizations that summarize variation across samples.
 
-```{r load-libs}
+```{r libraries}
 library(ape)
 library(phylobar)
 library(microbiome)
@@ -47,7 +47,7 @@ Next, we load the atlas1006 dataset. For simplicity, we focus on samples
 with the r DNA extraction method and transform abundances into compositional
 form (so each sample sums to 1).
 
-```{r}
+```{r naive-tree}
 tree <- taxonomy_to_tree(tax_table(pseq3))
 checkValidPhylo(tree)
 ```
@@ -57,7 +57,7 @@ names across different levels of the taxonomy may result in loops. To
 address this, we add level-specific prefixes (e.g., p_ for phylum,
 f_ for family), ensuring that ancestor and descendant nodes have unique labels.
 
-```{r}
+```{r valid-tree}
 taxa <- tax_table(pseq3)
 taxa <- cbind(Kingdom = "Bacteria", taxa)
 taxa <- add_prefix(taxa)
@@ -70,7 +70,7 @@ With a valid tree and abundance matrix, we can generate a phylobar plot.
 Here, samples are arranged along the x-axis, with stacked bars representing
 taxonomic abundances, aligned with the corresponding branches of the tree.
 
-```{r}
+```{r phylobar-full}
 x <- t(otu_table(pseq3))
 phylobar(x, tree, sample_show_all = FALSE, rel_width = 0.2)
 ```
@@ -79,7 +79,7 @@ Because the full dataset is complex, we can simplify the visualization by
 subsampling representative samples. This preserves the main conclusions
 while reducing visual clutter.
 
-```{r}
+```{r phylobar-subset}
 x_sub <- subset_cluster(x)
 x_sub <- x_sub[, colSums(x_sub) > 0]
 
@@ -116,6 +116,6 @@ that shape the gut microbiome.
 
 # Session Info
 
-```{r}
+```{r session}
 sessionInfo()
 ```

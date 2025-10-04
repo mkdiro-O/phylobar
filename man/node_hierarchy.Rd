@@ -31,8 +31,8 @@ colnames(x_mat) <- tree$tip.label
 
 tree$node.label <- as.character(seq_len(tree$Nnode))
 totals <- c(
-  node_totals(tree, x_mat)
-  as.list(data.frame(x_mat)))
+  node_totals(tree, x_mat),
+  as.list(data.frame(x_mat))
 )
 node_hierarchy(tree, totals)
 }

@@ -27,7 +27,7 @@ collects examples from other vignettes of the common issues that can arise when
 constructing a taxonomy  tree and goes into more depth about the strategies that
 were used to address them.
 
-```{r setup}
+```{r setup, message=FALSE}
 library(ape)
 library(dplyr)
 library(phylobar)
@@ -36,14 +36,14 @@ library(stringr)
 
 # Checking that that the induced tree is correct
 
-Before looking at potential issues, let’s review how to check whether an input
+Before looking at potential issues, let's review how to check whether an input
 tree is valid. In the block below, we generate a random tree using the rtree
 function from ape. We can confirm validity with the `checkValidPhylo` function.
 If the output is TRUE, the tree can be used for phylobar visualizations. If not,
 the function provides hints on how to adjust the taxonomy table so that
 `taxonomy_to_tree` produces a valid tree.
 
-```{r}
+```{r check-valid}
 tree <- rtree(20)
 checkValidPhylo(tree)
 ```
@@ -56,18 +56,18 @@ at the phylum level. In such cases, validity checks may fail with an error like
 the one below. This occurs because each phylum is treated as a separate tree,
 rather than being connected into a single tree with the Kingdom as the root.
 
-```{r}
+```{r atlas-invalid}
 data(atlas1006, package = "microbiome")
 tree <- taxonomy_to_tree(tax_table(atlas1006))
 checkValidPhylo(tree)
 ```
 
-This problem can be resolved by introducing a new “kingdom” column from which
+This problem can be resolved by introducing a new "kingdom" column from which
 all phyla descend. With this fix, `taxonomy_to_tree` correctly builds edges
 between the first and second columns. Re-running the validity check now produces
 a valid tree object, which is used in the earlier Atlas vignette.
 
-```{r}
+```{r atlas-fixed}
 taxa <- tax_table(atlas1006)
 taxa <- cbind(Kingdom = "Bacteria", taxa)
 taxa <- add_prefix(taxa)
@@ -80,11 +80,11 @@ checkValidPhylo(tree)
 
 Another common issue involves missing taxonomic assignments. phylobar can skip
 missing entries, but only if they are encoded as NA. If missing values are
-stored as character strings (e.g., “unclassified”), they are treated as valid
+stored as character strings (e.g., "unclassified"), they are treated as valid
 categories. Since they often appear at multiple levels of resolution and under
 different parents, this breaks the tree structure.
 
-```{r}
+```{r hfhs-invalid}
 data(HFHSdata, package = "LUPINE")
 taxa <- HFHSdata$filtered_taxonomy
 tree <- taxonomy_to_tree(taxa)
@@ -97,14 +97,14 @@ is pre-processed to replace placeholder strings with NA. Here is the taxonomy
 before any correction. Notice that the NAs are not properly coded -- we see the
 prefix coming from the taxonomic level, but no corresponding name.
 
-```{r}
+```{r hfhs-before}
 head(taxa)
 ```
 
 We address this in the block below, checking for whether the name ended with
 `__` and replacing those with explicit NA value.
 
-```{r}
+```{r hfhs-clean}
 taxa <- taxa |>
     select(-X1, X1) |>
     mutate(across(everything(), ~if_else(str_ends(., "_"), NA, .)))
@@ -115,7 +115,7 @@ head(taxa)
 Once this transformation is made, the table can be used to construct a valid
 tree.
 
-```{r}
+```{r hfhs-fixed}
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
 ```
@@ -129,7 +129,7 @@ names. If uncorrected, `taxonomy_to_tree` interprets these edges as loops, which
 produces an invalid tree. The validity check will fail in this case. To
 see this, let's first extract the taxonomy table.
 
-```{r}
+```{r dietswap-extract}
 data("dietswap", package = "microbiome")
 diet_temp <- subset_samples(dietswap, timepoint == 1)
 diet <- subset_taxa(diet_temp, taxa_sums(diet_temp) > 0)
@@ -138,7 +138,7 @@ taxa <- tax_table(diet)
 
 Note the repeated phylum and family names. This causes the check to fail.
 
-```{r}
+```{r dietswap-invalid}
 head(taxa)
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
@@ -148,11 +148,11 @@ To address this, we can add a small prefix that encodes the taxonomic rank of
 each assignment. The helper function `add_prefix` supports this concatenation.
 At this stage, however, running the validity check still raises an error. As in
 the Atlas example, the issue is the absence of a root node connecting the
-different phyla. Adding a "Kingdom” column resolves this by linking the trees
+different phyla. Adding a "Kingdom" column resolves this by linking the trees
 together.
 
 
-```{r}
+```{r dietswap-fixed}
 taxa <- add_prefix(taxa)
 taxa <- cbind(Kingdom = "k_Bacteria", taxa)
 tree <- taxonomy_to_tree(taxa)
@@ -163,7 +163,7 @@ The issue of duplicated taxonomy names also appears in the Global Patterns
 dataset. For instance, several phylum- and class-level assignments share
 identical names.
 
-```{r}
+```{r globalpatterns-extract}
 data(GlobalPatterns, package = "phyloseq")
 chlamydiae <- subset_taxa(GlobalPatterns, Phylum == "Chlamydiae")
 taxa <- tax_table(chlamydiae)
@@ -172,7 +172,7 @@ head(taxa)
 
 This duplication results in an invalid phylo.
 
-```{r}
+```{r globalpatterns-invalid}
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
 ```
@@ -183,7 +183,7 @@ explicit column in the taxonomy table. Without this, we cannot reach the leaf
 nodes of the tree. The solution is to introduce a new column containing the ASV
 identifiers.
 
-```{r}
+```{r globalpatterns-prepare}
 taxa <- data.frame(taxa)
 taxa <- add_prefix(taxa)
 taxa$ASV <- rownames(taxa)
@@ -195,7 +195,7 @@ an error. In this case, the error can be safely ignored: it occurs when a tree
 contains nodes with more than two descendants. phylobar accommodates such
 multifurcations without issue.
 
-```{r}
+```{r globalpatterns-check}
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
 ```
@@ -205,7 +205,7 @@ phylobar visualization. You can check that this a static version of the same
 tree that we work with in the main Global Patterns vignette.
 
 
-```{r}
+```{r globalpatterns-plot}
 plot(tree)
 ```
 
