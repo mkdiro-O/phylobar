@@ -44,14 +44,14 @@ The function signature and key styling parameters we will explore:
 * `legend_mode`, `legend_x_start`, `legend_spacing`
 * `hclust_order`: optional hierarchical reordering of rows/columns
 
-Note: Internally, `phylobar()` ensures that the tree has node labels and that
+Internally, `phylobar()` ensures that the tree has node labels and that
 the abundance matrix has row/column names. If they’re missing, helper 
 `check_inputs()` creates sensible defaults (e.g., `sample_1`, `sample_2`).
 
 # Color Pallete
 
-If you don’t provide a palette, phylobar uses a default set of six colors. 
-You can supply your own vector of hex colors or R color names.
+If a palette is not provided, phylobar uses a default set of six colors. 
+It is possible to supply own vector of hex colors or R color names.
 
 ```{r palette_example}
 # Custom qualitative palette (as many colors as you want; repeats if needed)
@@ -64,12 +64,12 @@ phylobar(samples, tree, palette = my_palette)
 
 # Widget Size
 
-By default the widget adapts to the container. You can fix its size:
+By default the widget adapts to the container. Fix its size by:
 
 ```{r widget_size}
 phylobar(samples, tree,
     width = 900,
-    height = 700
+    height = 500
 )
 ```
 
@@ -79,7 +79,7 @@ Control sample label font size, spacing, and hover magnification.
 
 ```{r sample_label_styling}
 phylobar(samples, tree,
-    width = 900, height = 700,
+    width = 900, height = 500,
     sample_font_size = 10,
     sample_label_margin = 10, # space between labels and bars
     sample_label_space = 100, # reserved margin for labels
@@ -98,7 +98,7 @@ Change how much horizontal and vertical space the tree occupies:
 ```{r layout_ratio}
 phylobar(
     samples, tree,
-    width = 900, height = 700,
+    width = 900, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     rel_width = 0.2, # narrower tree
@@ -111,14 +111,14 @@ phylobar(
 
 Choose whether painted subtree labels appear in a separate legend
 (`legend_mode = TRUE`, default) or placed inside the tree 
-(`legend_mode = FALSE`). You can also adjust legend x-start 
-and vertical spacing.
+(`legend_mode = FALSE`). `legend_x_start` and `legend_spacing`
+can also be adjusted to control the legen position. 
 
 ```{r legend_below}
 # Legend below the tree (default)
 phylobar(
     samples, tree,
-    width = 900, height = 700,
+    width = 900, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     legend_mode = TRUE,
@@ -131,7 +131,7 @@ phylobar(
 # Put labels inside the tree instead of a separate legend
 phylobar(
     samples, tree,
-    width = 900, height = 700,
+    width = 900, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     legend_mode = FALSE,
@@ -150,7 +150,7 @@ original order:
 # Keep the input order as-is
 phylobar(
     samples, tree,
-    width = 900, height = 700,
+    width = 900, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     hclust_order = FALSE
