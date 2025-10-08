@@ -68,7 +68,7 @@ By default the widget adapts to the container. Fix its size by:
 
 ```{r widget_size}
 phylobar(samples, tree,
-    width = 900,
+    width = 800,
     height = 500
 )
 ```
@@ -79,7 +79,7 @@ Control sample label font size, spacing, and hover magnification.
 
 ```{r sample_label_styling}
 phylobar(samples, tree,
-    width = 900, height = 500,
+    width = 800, height = 500,
     sample_font_size = 10,
     sample_label_margin = 10, # space between labels and bars
     sample_label_space = 100, # reserved margin for labels
@@ -91,6 +91,7 @@ phylobar(samples, tree,
 # Tree-bar Layout Ratio
 
 Change how much horizontal and vertical space the tree occupies:
+
 * `rel_width`: fraction of total width reserved for the tree panel (default 0.4)
 * `rel_height`: fraction of total height for the tree panel (default 0.85)
 * `rel_space`: pixels between the tree and bar panels (default 10)
@@ -98,7 +99,7 @@ Change how much horizontal and vertical space the tree occupies:
 ```{r layout_ratio}
 phylobar(
     samples, tree,
-    width = 900, height = 500,
+    width = 800, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     rel_width = 0.2, # narrower tree
@@ -118,7 +119,7 @@ can also be adjusted to control the legen position.
 # Legend below the tree (default)
 phylobar(
     samples, tree,
-    width = 900, height = 500,
+    width = 800, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     legend_mode = TRUE,
@@ -131,7 +132,7 @@ phylobar(
 # Put labels inside the tree instead of a separate legend
 phylobar(
     samples, tree,
-    width = 900, height = 500,
+    width = 800, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     legend_mode = FALSE,
@@ -150,7 +151,7 @@ original order:
 # Keep the input order as-is
 phylobar(
     samples, tree,
-    width = 900, height = 500,
+    width = 800, height = 500,
     sample_label_space = 100,
     sample_magnify = 1.3,
     hclust_order = FALSE
