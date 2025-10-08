@@ -23,7 +23,7 @@ palettes, layout ratios, legend placement, and more.
 
 We will use a small random dataset:
 
-```{r}
+```{r example_data}
 library(ape)
 library(phylobar)
 
@@ -53,7 +53,7 @@ the abundance matrix has row/column names. If they’re missing, helper
 If you don’t provide a palette, phylobar uses a default set of six colors. 
 You can supply your own vector of hex colors or R color names.
 
-```{r}
+```{r palette_example}
 # Custom qualitative palette (as many colors as you want; repeats if needed)
 my_palette <- c(
     "#4E79A7", "#F28E2B", "#E15759",
@@ -66,7 +66,7 @@ phylobar(samples, tree, palette = my_palette)
 
 By default the widget adapts to the container. You can fix its size:
 
-```{r}
+```{r widget_size}
 phylobar(samples, tree,
     width = 900,
     height = 700
@@ -77,7 +77,7 @@ phylobar(samples, tree,
 
 Control sample label font size, spacing, and hover magnification.
 
-```{r}
+```{r sample_label_styling}
 phylobar(samples, tree,
     width = 900, height = 700,
     sample_font_size = 10,
@@ -95,7 +95,7 @@ Change how much horizontal and vertical space the tree occupies:
 * `rel_height`: fraction of total height for the tree panel (default 0.85)
 * `rel_space`: pixels between the tree and bar panels (default 10)
 
-```{r}
+```{r layout_ratio}
 phylobar(
     samples, tree,
     width = 900, height = 700,
@@ -114,7 +114,7 @@ Choose whether painted subtree labels appear in a separate legend
 (`legend_mode = FALSE`). You can also adjust legend x-start 
 and vertical spacing.
 
-```{r}
+```{r legend_below}
 # Legend below the tree (default)
 phylobar(
     samples, tree,
@@ -127,7 +127,7 @@ phylobar(
 )
 ```
 
-```{r}
+```{r legend_inside}
 # Put labels inside the tree instead of a separate legend
 phylobar(
     samples, tree,
@@ -146,7 +146,7 @@ phylobar(
 clustering, which can make patterns more visible. Turn it off to preserve 
 original order:
 
-```{r}
+```{r hclust_no}
 # Keep the input order as-is
 phylobar(
     samples, tree,
