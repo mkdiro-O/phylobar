@@ -116,3 +116,7 @@ Now we can make a phylobar visualization.
 ```{r}
 phylobar(x[patient_order, ], tree)
 ```
+
+```{r session}
+sessionInfo()
+```
