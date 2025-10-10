@@ -1,0 +1,110 @@
+---
+title: "Cell-type Hierarchy Informs COVID-19 Immunology"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Cell-type Hierarchy Informs COVID-19 Immunology}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr_options, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    warning = FALSE,
+    message = FALSE
+)
+```
+
+```{r}
+library(ape)
+library(dplyr)
+library(phylobar)
+library(readr)
+library(tibble)
+library(tidyr)
+```
+
+```{r read_in_data}
+f <- tempfile()
+cell_counts <- read_csv("~/Downloads/COVID_all_cells_metadata_complete.csv")
+metadata <- read_csv("~/Downloads/final_sample_info.csv")
+```
+
+First let's get cell type compositions.
+
+```{r}
+metadata
+x <- cell_counts |>
+    dplyr::count(patient_id, majority_voting) |>
+    pivot_wider(names_from = majority_voting, values_from = n, values_fill = 0) |>
+    column_to_rownames("patient_id")
+x <- x / rowSums(x)
+```
+
+The block below makes a phylo object.
+
+```{r make_phylo_from_igraph}
+edges_text <- "source,target
+Multipotential hematopoietic stem cell (hemocytoblast),Common myeloid progenitor
+Multipotential hematopoietic stem cell (hemocytoblast),Common lymphoid progenitor
+Common myeloid progenitor,Megakaryocyte
+Megakaryocyte,Platelet
+Common myeloid progenitor,Erythrocyte
+Erythrocyte,RBC
+Common myeloid progenitor,Myeloblast
+Myeloblast,Monocyte
+Monocyte,CD14 Monocyte
+Monocyte,CD16 Monocyte
+Myeloblast,Eosinophil
+Eosinophil,SC & Eosinophil
+Myeloblast,DC
+Myeloblast,pDC
+Common lymphoid progenitor,NK
+Common lymphoid progenitor,Small lymphocyte
+Small lymphocyte,T lymphocyte
+T lymphocyte,CD4 T
+T lymphocyte,CD4m T
+T lymphocyte,CD4n T
+T lymphocyte,CD8m T
+T lymphocyte,CD8eff T
+T lymphocyte,gd T
+Small lymphocyte,B lymphocyte
+B lymphocyte,B
+B lymphocyte,IgA PB
+B lymphocyte,IgG PB"
+
+edge <- read_csv(edges_text)
+tips <- setdiff(edge$target, edge$source)
+
+# preparation for phylo construction
+internal_nodes <- setdiff(unlist(edge), tips)
+node_order <- c(tips, internal_nodes)
+ix <- setNames(seq_along(node_order), node_order)
+
+# create phylo
+tree <- list(
+  edge = matrix(c(ix[edge$source], ix[edge$target]), ncol = 2),
+  Nnode = length(internal_nodes),
+  tip.label = node_order[seq_along(tips)],
+  node.label = node_order[seq(length(tips) + 1, length(ix))]
+)
+class(tree) <- "phylo"
+```
+
+Let's order patients by covid severity.
+
+```{r}
+patient_order <- metadata |>
+    arrange(severity) |>
+    pull(clinical_id) |>
+    unique()
+```
+
+Now we can make a phylobar visualization.
+
+```{r}
+x[patient_order, ]
+
+phylobar(x[patient_order, ], tree)
+```
