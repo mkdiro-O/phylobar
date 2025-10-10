@@ -104,7 +104,5 @@ patient_order <- metadata |>
 Now we can make a phylobar visualization.
 
 ```{r}
-x[patient_order, ]
-
 phylobar(x[patient_order, ], tree)
 ```
