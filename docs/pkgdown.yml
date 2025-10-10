@@ -1,16 +1,17 @@
-pandoc: 3.8.1
+pandoc: 3.1.12.2
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   atlas: atlas.html
   cancer_oral_microbiome: cancer_oral_microbiome.html
+  covid_immunology: covid_immunology.html
   customizing_files: customizing_files.html
   diet_analysis: diet_analysis.html
   exporting: exporting.html
   global_patterns: global_patterns.html
   hfhs: hfhs.html
   taxonomies: taxonomies.html
-last_built: 2025-10-08T20:21Z
+last_built: 2025-10-10T14:13Z
 urls:
   reference: http://mkdiro-o.github.io/phylobar/reference
   article: http://mkdiro-o.github.io/phylobar/articles
