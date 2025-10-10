@@ -92,13 +92,23 @@ tree <- list(
 class(tree) <- "phylo"
 ```
 
-Let's order patients by covid severity.
+Let's order patients by covid severity. Then, within each severity group, use a
+hierarchical clustering leaf order.
 
 ```{r}
-patient_order <- metadata |>
-    arrange(severity) |>
-    pull(clinical_id) |>
-    unique()
+md <- metadata |>
+  distinct(clinical_id, severity) |>
+  mutate(severity = factor(severity, levels = c("mild", "moderate", "severe"))) |>
+  arrange(severity)
+
+patient_order <- md %>%
+  split(.$severity) |>
+  lapply(\(df) {
+    ids <- df$clinical_id
+    m <- x[ids, , drop = FALSE]
+    ids[hclust(dist(m))$order]
+  }) |>
+  unlist(use.names = FALSE)
 ```
 
 Now we can make a phylobar visualization.
