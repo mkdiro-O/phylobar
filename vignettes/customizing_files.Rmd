@@ -48,7 +48,7 @@ Internally, `phylobar()` ensures that the tree has node labels and that
 the abundance matrix has row/column names. If they’re missing, helper 
 `check_inputs()` creates sensible defaults (e.g., `sample_1`, `sample_2`).
 
-# Color Pallete
+# Color Palette
 
 If a palette is not provided, phylobar uses a default set of six colors. 
 It is possible to supply own vector of hex colors or R color names.
