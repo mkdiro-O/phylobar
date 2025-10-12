@@ -28,9 +28,8 @@ HTMLWidgets.widget({
       .x(d => d.x)
       .y(d => d.y);
 
-    // focus on the current widget element
     el.setAttribute("tabindex", "-1");
-    el.focus();
+    el.focus({ preventScroll: true });
 
     return {
       renderValue: function(x) {
@@ -55,9 +54,9 @@ HTMLWidgets.widget({
         stacks = phylobar.stack_data(tree.leaves(), labels);
 
         // search tools
-        phylobar.create_search(el); 
+        phylobar.create_search(el);
         phylobar.populate_search(el, tree);
-        phylobar.search_handler(el, tree, palette, color_sets, feature_map, opts) 
+        phylobar.search_handler(el, tree, palette, color_sets, feature_map, opts)
 
         phylobar.update_tree(el, tree, rscale, link_gen,  palette, color_sets);
         phylobar.update_stack(el, stacks, b_scale, labels, feature_map, palette, color_sets, opts);
@@ -65,7 +64,7 @@ HTMLWidgets.widget({
         phylobar.update_tree_labels(el, color_sets, feature_map, tree.descendants(), opts);
         phylobar.update_sample_labels(el, b_scale, labels, opts);
         phylobar.update_resolution(
-          el, neighborhoods, tree, stacks, labels, palette, color_sets, 
+          el, neighborhoods, tree, stacks, labels, palette, color_sets,
           feature_map, opts, b_scale, rscale, link_gen, width, height
         )
       },
