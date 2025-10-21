@@ -16,6 +16,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+In December 2020, while COVID-19 was still raging across the globe, [Su et al. ( 2020)](https://www.cell.com/cell/fulltext/S0092-8674(20)31444-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867420314446%3Fshowall%3Dtrue) published their pioneering study examining the immune and metabolic landscapes of mild to severe COVID patients. We took the single-cell RNA-seq (scRNA-seq) data from Su et al. (2020) to illustrate how phylobar enables us to visualise immune cell type composition changes along from milder to severer COVID-19.
+
+See the [DIVAS project](https://byronsyun.github.io/DIVAS_COVID19_CaseStudy/) for a more comprehensive analysis of the COVID-19 data. Here we just took the cell type annotations to explore cell type compositions.
+
 ```{r}
 library(ape)
 library(dplyr)
@@ -23,7 +28,10 @@ library(phylobar)
 library(readr)
 library(tibble)
 library(tidyr)
+library(seriation)
 ```
+
+Load the cell and patient metadata.
 
 ```{r read_in_data}
 f <- tempfile()
@@ -31,7 +39,7 @@ cell_counts <- read_csv("~/Downloads/COVID_all_cells_metadata_complete.csv")
 metadata <- read_csv("~/Downloads/final_sample_info.csv")
 ```
 
-First let's get cell type compositions.
+First let's get cell type compositions. 
 
 ```{r}
 metadata
@@ -42,32 +50,31 @@ x <- cell_counts |>
 x <- x / rowSums(x)
 ```
 
-The block below makes a phylo object.
-
+Based on biological knowledge, we manually define a phylo object for the hierarchy of immune cell types.
 ```{r make_phylo_from_igraph}
 edges_text <- "source,target
-Multipotential hematopoietic stem cell (hemocytoblast),Common myeloid progenitor
-Multipotential hematopoietic stem cell (hemocytoblast),Common lymphoid progenitor
+Hematopoietic stem cell,Common myeloid progenitor
+Hematopoietic stem cell,Common lymphoid progenitor
 Common myeloid progenitor,Megakaryocyte
 Megakaryocyte,Platelet
-Common myeloid progenitor,Erythrocyte
-Erythrocyte,RBC
+Common myeloid progenitor,RBC
 Common myeloid progenitor,Myeloblast
 Myeloblast,Monocyte
 Monocyte,CD14 Monocyte
 Monocyte,CD16 Monocyte
-Myeloblast,Eosinophil
-Eosinophil,SC & Eosinophil
+Myeloblast,SC & Eosinophil
 Myeloblast,DC
 Myeloblast,pDC
 Common lymphoid progenitor,NK
 Common lymphoid progenitor,Small lymphocyte
 Small lymphocyte,T lymphocyte
-T lymphocyte,CD4 T
-T lymphocyte,CD4m T
-T lymphocyte,CD4n T
-T lymphocyte,CD8m T
-T lymphocyte,CD8eff T
+T lymphocyte,CD4 T lymphocyte
+T lymphocyte,CD8 T lymphocyte
+CD4 T lymphocyte,CD4 T
+CD4 T lymphocyte,CD4m T
+CD4 T lymphocyte,CD4n T
+CD8 T lymphocyte,CD8m T
+CD8 T lymphocyte,CD8eff T
 T lymphocyte,gd T
 Small lymphocyte,B lymphocyte
 B lymphocyte,B
@@ -92,9 +99,8 @@ tree <- list(
 class(tree) <- "phylo"
 ```
 
-Let's order patients by covid severity. Then, within each severity group, use a
-hierarchical clustering leaf order.
-
+Let's order patients by covid severity (mild, moderate and severe). Then, within each severity group, use a
+hierarchical clustering leaf order to place samples with similar cell type compositions closer.
 ```{r}
 md <- metadata |>
   distinct(clinical_id, severity) |>
@@ -111,11 +117,15 @@ patient_order <- md %>%
   unlist(use.names = FALSE)
 ```
 
-Now we can make a phylobar visualization.
-
+Now we can make a phylobar visualization. We can see that T cells and monocytes made up the majority of cellular populations in patient samples. We can observe an overall increase of monocytes and decrease of NK and T cells, especially CD8 T cells, in moderate and severe COVID patients. These changes were found statistically significant in Su et al. (2020), and where highlighted in their Fig 1.
 ```{r}
 phylobar(x[patient_order, ], tree)
 ```
+
+
+
+
+
 
 ```{r session}
 sessionInfo()
