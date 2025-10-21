@@ -19,7 +19,7 @@ crowbar package, as shown in the “Exporting Views” vignette.
 You can install the development version of phylobar using:
 
 ```r
-remotes::install_packages("mkdir-o/phylobar")
+remotes::install_github("mkdiro-o/phylobar")
 ```
 
 ## Quick Start
