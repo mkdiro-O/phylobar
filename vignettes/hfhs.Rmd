@@ -136,6 +136,7 @@ rownames(y) <- apply(
 )
 ```
 
+
 We now convert to compositions and visualize the longitudinal data for the HFHS diet group.
 
 ```{r visualize_longitudinal}
@@ -153,6 +154,21 @@ Even though the variability between mice is high, we can observe a general decre
 
 ```{r fig3, echo=FALSE, fig.align='center', fig.cap="Phylobar plot of the mouse microbiome for HFHS diet. The plot highlights the relative abundances of S24-7 family that belong to the Bacteroidetes phylum, which is known to decrease over time in response to an HFHS diet."}
 knitr::include_graphics("Figures/fig3.png")
+```
+
+## Alternative Sorting
+
+We can create the same phylobar visualization first sorting by time and then by
+mouse. The variation in abundance within continguous blocks gives a sense of
+mouse-to-mouse variability, while changes in area from the left to the right
+side of the stacked bars gives a sense of the change over time within these HFHS
+diet mice.
+
+```{r longitudinal_reorder}
+time <- as.numeric(sub("-.*", "", rownames(comp)))
+mouse <- factor(sub(".*-", "", rownames(comp)), levels = unique(sub(".*-", "", rownames(comp))))
+comp_sort <- comp[order(time, mouse), ]
+phylobar(comp_sort, tree, hclust_order = FALSE, sample_font_size = 9)
 ```
 
 # Session Info

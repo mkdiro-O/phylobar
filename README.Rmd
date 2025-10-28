@@ -23,7 +23,7 @@ Views" vignette.
 You can install the development version of phylobar using:
 
 ```{r, installation, eval = FALSE}
-remotes::install_packages("mkdir-o/phylobar")
+remotes::install_github("mkdiro-o/phylobar")
 ```
 
 ## Quick Start
