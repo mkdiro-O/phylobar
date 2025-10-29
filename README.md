@@ -1,3 +1,4 @@
+
 # phylobar
 
 phylobar is a visualization package for constructing stacked barplots by
@@ -18,7 +19,7 @@ crowbar package, as shown in the “Exporting Views” vignette.
 
 You can install the development version of phylobar using:
 
-```r
+``` r
 remotes::install_github("mkdiro-o/phylobar")
 ```
 
@@ -26,7 +27,7 @@ remotes::install_github("mkdiro-o/phylobar")
 
 This block applies phylobar to a small random data set:
 
-```r
+``` r
 library(ape)
 library(phylobar)
 
@@ -45,11 +46,9 @@ new color, and press the escape key to freeze the view.
 
 ## Common Tasks
 
-- [Customizing
-  style](https://mkdiro-o.github.io/phylobar/articles/customizing_files.html):
-  Phylobar supports a few styling customizations, like changing the
-  size of the text labels or the color palette. This vignette walks
-  through currently available options.
+- Customizing style: Phylobar supports a few styling customizations,
+  like changing the size of the text labels or the color palette. This
+  vignette walks through currently available options.
 - [Building a tree from a
   taxonomy](https://mkdiro-o.github.io/phylobar/articles/taxonomies.html):
   Rather than interacting with abstract phylogenetic trees it can be
@@ -87,6 +86,6 @@ JavaScript code is available on npm as phylobar-js.
 ## Contact
 
 You can reach us by creating an
-[Issue](<(https://github.com/mkdiro-O/phylobar/issues)>) or emailing
+[Issue]((https://github.com/mkdiro-O/phylobar/issues)) or emailing
 <ksankaran@wisc.edu>. We appreciate your interest and will respond
 promptly.

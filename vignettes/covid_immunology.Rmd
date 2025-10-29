@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 
-In December 2020, while COVID-19 was still raging across the globe, [Su et al. ( 2020)](https://www.cell.com/cell/fulltext/S0092-8674(20)31444-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867420314446%3Fshowall%3Dtrue) published their pioneering study examining the immune and metabolic landscapes of mild to severe COVID patients. 
+In December 2020, while COVID-19 was still raging across the globe, [Su et al. ( 2020)](https://www.cell.com/cell/fulltext/S0092-8674(20)31444-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867420314446%3Fshowall%3Dtrue) published their pioneering study examining the immune and metabolic landscapes of mild to severe COVID patients.
 
 See the [DIVAS project](https://byronsyun.github.io/DIVAS_COVID19_CaseStudy/) for a more comprehensive introduction to their study design and a more in-depth analysis of their multiomic data. Here we just took the immune cell type composition information to illustrate how phylobar enables us to visualise immune cell type composition changes from milder to severer COVID-19.
 
@@ -38,7 +38,7 @@ cell_counts <- read_csv("~/Downloads/COVID_all_cells_metadata_complete.csv")
 metadata <- read_csv("~/Downloads/final_sample_info.csv")
 ```
 
-Calculate cell type compositions. 
+Calculate cell type compositions.
 ```{r}
 metadata
 x <- cell_counts |>
