@@ -13,7 +13,13 @@ normalized counts and a tree structure which can come from either a
 phylogeny or a table of taxonomic assignments. The vignettes show how to
 convert alternative data formats (e.g., phyloseq) into this input
 format. You can export interactive snapshots to SVG using the SVG
-crowbar package, as shown in the “Exporting Views” vignette.
+crowbar package, as shown in the “Exporting Views” vignette. You can
+read more about the package in our preprint:
+
+[Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2025).
+phylobar: an R package for multiresolution compositional barplots in
+omics studies.
+doi:10.1101/2025.11.05.686662](https://doi.org/10.1101/2025.11.05.686662)
 
 ## Installation
 
@@ -36,13 +42,13 @@ samples <- matrix(rpois(100 * 20, 1), 100, 20)
 phylobar(samples, tree)
 ```
 
-![](https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/rtree_recording.gif)
+You can click a node to collapse a subtree, press the control key to add
+a new color, and press the escape key to freeze the view. If you want to
+try some examples right away, we have precompiled
+[articles](https://mkdiro-o.github.io/phylobar/articles). Here’s a
+recording of interactions with the HFHS data.
 
-GitHub doesn’t support interactive blocks in READMEs, so we’ve included
-a recording above. You can interact with other example output in our
-precompiled [articles](https://mkdiro-o.github.io/phylobar/articles).
-Click a node to collapse a subtree, press the control key to introduce a
-new color, and press the escape key to freeze the view.
+![](https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/phylobar.gif)
 
 ## Common Tasks
 
