@@ -34,13 +34,14 @@ library(seriation)
 First load the cell and patient metadata.
 ```{r read_in_data}
 f <- tempfile()
-cell_counts <- read_csv("~/Downloads/COVID_all_cells_metadata_complete.csv")
-metadata <- read_csv("~/Downloads/final_sample_info.csv")
+download.file("https://zenodo.org/records/17477876/files/su-2020.rds?download=1", f)
+all_data <- readRDS(f)
+cell_counts <- all_data$cell_counts
+metadata <- all_data$metadata
 ```
 
 Calculate cell type compositions.
 ```{r}
-metadata
 x <- cell_counts |>
     dplyr::count(patient_id, majority_voting) |>
     pivot_wider(names_from = majority_voting, values_from = n, values_fill = 0) |>

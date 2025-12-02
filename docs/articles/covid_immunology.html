@@ -95,27 +95,16 @@ to severer COVID-19.</p>
 <p>First load the cell and patient metadata.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">cell_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"~/Downloads/COVID_all_cells_metadata_complete.csv"</span><span class="op">)</span></span>
-<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"~/Downloads/final_sample_info.csv"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># cell_counts &lt;- read_csv("~/Downloads/COVID_all_cells_metadata_complete.csv")</span></span>
+<span><span class="co"># metadata &lt;- read_csv("~/Downloads/final_sample_info.csv")</span></span>
+<span><span class="co"># saveRDS(list(cell_counts = cell_counts, metadata = metadata), "su-2020.rds")</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://zenodo.org/records/17477876/files/su-2020.rds?download=1"</span>, <span class="va">f</span><span class="op">)</span></span>
+<span><span class="va">all_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
+<span><span class="va">cell_counts</span> <span class="op">&lt;-</span> <span class="va">all_data</span><span class="op">$</span><span class="va">cell_counts</span></span>
+<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="va">all_data</span><span class="op">$</span><span class="va">metadata</span></span></code></pre></div>
 <p>Calculate cell type compositions.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">metadata</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 114 × 9</span></span></span>
-<span><span class="co">#&gt;    sample_id    clinical_id timepoint   wos severity sex      age ethnicity     </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> COVID_77_T1  INCOV077    T1          1   mild     Female    51 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> COVID_74_T1  INCOV074    T1          1.5 mild     Female    30 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> COVID_122_T1 INCOV122    T1          1.5 mild     Female    53 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> COVID_107_T1 INCOV107    T1          1.5 mild     Male      71 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> COVID_39_T1  INCOV039    T1          1   mild     Female    38 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> COVID_101_T1 INCOV101    T1          1.5 mild     Female    19 Hispanic or L…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> COVID_67_T1  INCOV067    T1          1.5 mild     Female    41 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> COVID_135_T1 INCOV135    T1          1.5 mild     Female    50 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> COVID_134_T1 INCOV134    T1          1.5 mild     Female    28 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> COVID_57_T1  INCOV057    T1          1.5 mild     Female    39 NOT Hispanic …</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 104 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: divas_sample_id &lt;chr&gt;</span></span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">cell_counts</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">cell_counts</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">patient_id</span>, <span class="va">majority_voting</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">majority_voting</span>, values_from <span class="op">=</span> <span class="va">n</span>, values_fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"patient_id"</span><span class="op">)</span></span>
@@ -231,31 +220,31 @@ al., 2024</a>).</p>
 <span><span class="co">#&gt;  [7] fastmap_1.2.0       digest_0.6.37       lifecycle_1.0.4    </span></span>
 <span><span class="co">#&gt; [10] cluster_2.1.8.1     survival_3.8-3      magrittr_2.0.4     </span></span>
 <span><span class="co">#&gt; [13] compiler_4.5.1      rlang_1.1.6         sass_0.4.10        </span></span>
-<span><span class="co">#&gt; [16] tools_4.5.1         utf8_1.2.6          igraph_2.2.0       </span></span>
-<span><span class="co">#&gt; [19] yaml_2.3.10         data.table_1.17.8   knitr_1.50         </span></span>
-<span><span class="co">#&gt; [22] bit_4.6.0           plyr_1.8.9          RColorBrewer_1.1-3 </span></span>
-<span><span class="co">#&gt; [25] ca_0.71.1           registry_0.5-1      withr_3.0.2        </span></span>
-<span><span class="co">#&gt; [28] BiocGenerics_0.55.1 desc_1.4.3          grid_4.5.1         </span></span>
-<span><span class="co">#&gt; [31] stats4_4.5.1        multtest_2.65.0     biomformat_1.37.0  </span></span>
-<span><span class="co">#&gt; [34] Rhdf5lib_1.31.0     ggplot2_4.0.0       scales_1.4.0       </span></span>
-<span><span class="co">#&gt; [37] iterators_1.0.14    MASS_7.3-65         dichromat_2.0-0.1  </span></span>
-<span><span class="co">#&gt; [40] cli_3.6.5           rmarkdown_2.30      vegan_2.7-2        </span></span>
-<span><span class="co">#&gt; [43] crayon_1.5.3        ragg_1.5.0          generics_0.1.4     </span></span>
-<span><span class="co">#&gt; [46] reshape2_1.4.4      tzdb_0.5.0          cachem_1.1.0       </span></span>
-<span><span class="co">#&gt; [49] rhdf5_2.53.5        stringr_1.5.2       splines_4.5.1      </span></span>
-<span><span class="co">#&gt; [52] parallel_4.5.1      BiocManager_1.30.26 XVector_0.49.1     </span></span>
-<span><span class="co">#&gt; [55] vctrs_0.6.5         Matrix_1.7-4        jsonlite_2.0.0     </span></span>
-<span><span class="co">#&gt; [58] bookdown_0.45       IRanges_2.43.5      hms_1.1.3          </span></span>
-<span><span class="co">#&gt; [61] S4Vectors_0.47.4    bit64_4.6.0-1       systemfonts_1.3.1  </span></span>
-<span><span class="co">#&gt; [64] foreach_1.5.2       jquerylib_0.1.4     glue_1.8.0         </span></span>
-<span><span class="co">#&gt; [67] pkgdown_2.1.3       codetools_0.2-20    stringi_1.8.7      </span></span>
-<span><span class="co">#&gt; [70] gtable_0.3.6        quadprog_1.5-8      pillar_1.11.1      </span></span>
-<span><span class="co">#&gt; [73] htmltools_0.5.8.1   Seqinfo_0.99.2      rhdf5filters_1.21.0</span></span>
-<span><span class="co">#&gt; [76] R6_2.6.1            textshaping_1.0.4   vroom_1.6.6        </span></span>
-<span><span class="co">#&gt; [79] evaluate_1.0.5      lattice_0.22-7      Biobase_2.69.1     </span></span>
-<span><span class="co">#&gt; [82] bslib_0.9.0         Rcpp_1.1.0          fastmatch_1.1-6    </span></span>
-<span><span class="co">#&gt; [85] nlme_3.1-168        permute_0.9-8       mgcv_1.9-3         </span></span>
-<span><span class="co">#&gt; [88] xfun_0.53           fs_1.6.6            pkgconfig_2.0.3</span></span></code></pre></div>
+<span><span class="co">#&gt; [16] tools_4.5.1         igraph_2.2.0        yaml_2.3.10        </span></span>
+<span><span class="co">#&gt; [19] data.table_1.17.8   knitr_1.50          bit_4.6.0          </span></span>
+<span><span class="co">#&gt; [22] plyr_1.8.9          RColorBrewer_1.1-3  ca_0.71.1          </span></span>
+<span><span class="co">#&gt; [25] registry_0.5-1      withr_3.0.2         BiocGenerics_0.55.1</span></span>
+<span><span class="co">#&gt; [28] desc_1.4.3          grid_4.5.1          stats4_4.5.1       </span></span>
+<span><span class="co">#&gt; [31] multtest_2.65.0     biomformat_1.37.0   Rhdf5lib_1.31.0    </span></span>
+<span><span class="co">#&gt; [34] ggplot2_4.0.0       scales_1.4.0        iterators_1.0.14   </span></span>
+<span><span class="co">#&gt; [37] MASS_7.3-65         dichromat_2.0-0.1   cli_3.6.5          </span></span>
+<span><span class="co">#&gt; [40] rmarkdown_2.30      vegan_2.7-2         crayon_1.5.3       </span></span>
+<span><span class="co">#&gt; [43] ragg_1.5.0          generics_0.1.4      reshape2_1.4.4     </span></span>
+<span><span class="co">#&gt; [46] tzdb_0.5.0          cachem_1.1.0        rhdf5_2.53.5       </span></span>
+<span><span class="co">#&gt; [49] stringr_1.5.2       splines_4.5.1       parallel_4.5.1     </span></span>
+<span><span class="co">#&gt; [52] BiocManager_1.30.26 XVector_0.49.1      vctrs_0.6.5        </span></span>
+<span><span class="co">#&gt; [55] Matrix_1.7-4        jsonlite_2.0.0      bookdown_0.45      </span></span>
+<span><span class="co">#&gt; [58] IRanges_2.43.5      hms_1.1.3           S4Vectors_0.47.4   </span></span>
+<span><span class="co">#&gt; [61] bit64_4.6.0-1       systemfonts_1.3.1   foreach_1.5.2      </span></span>
+<span><span class="co">#&gt; [64] jquerylib_0.1.4     glue_1.8.0          pkgdown_2.1.3      </span></span>
+<span><span class="co">#&gt; [67] codetools_0.2-20    stringi_1.8.7       gtable_0.3.6       </span></span>
+<span><span class="co">#&gt; [70] quadprog_1.5-8      pillar_1.11.1       htmltools_0.5.8.1  </span></span>
+<span><span class="co">#&gt; [73] Seqinfo_0.99.2      rhdf5filters_1.21.0 R6_2.6.1           </span></span>
+<span><span class="co">#&gt; [76] textshaping_1.0.4   vroom_1.6.6         evaluate_1.0.5     </span></span>
+<span><span class="co">#&gt; [79] lattice_0.22-7      Biobase_2.69.1      bslib_0.9.0        </span></span>
+<span><span class="co">#&gt; [82] Rcpp_1.1.0          fastmatch_1.1-6     nlme_3.1-168       </span></span>
+<span><span class="co">#&gt; [85] permute_0.9-8       mgcv_1.9-3          xfun_0.53          </span></span>
+<span><span class="co">#&gt; [88] fs_1.6.6            pkgconfig_2.0.3</span></span></code></pre></div>
   </main>
 </div>
 

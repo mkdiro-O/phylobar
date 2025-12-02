@@ -63,7 +63,8 @@
 <div class="page-header"><h1 id="phylobar">phylobar<a class="anchor" aria-label="anchor" href="#phylobar"></a>
 </h1></div>
 <p>phylobar is a visualization package for constructing stacked barplots by interactively “painting” an associated tree. This is an alternative to defining a color palette at a fixed taxonomic resolution. It also helps avoid the issue of grouping all rare taxa into a color for “other” — you can selectively highlight specific rare taxa while leaving others at their background color.</p>
-<p>The main function, phylobar, takes two inputs: a table of potentially normalized counts and a tree structure which can come from either a phylogeny or a table of taxonomic assignments. The vignettes show how to convert alternative data formats (e.g., phyloseq) into this input format. You can export interactive snapshots to SVG using the SVG crowbar package, as shown in the “Exporting Views” vignette.</p>
+<p>The main function, phylobar, takes two inputs: a table of potentially normalized counts and a tree structure which can come from either a phylogeny or a table of taxonomic assignments. The vignettes show how to convert alternative data formats (e.g., phyloseq) into this input format. You can export interactive snapshots to SVG using the SVG crowbar package, as shown in the “Exporting Views” vignette. You can read more about the package in our preprint:</p>
+<p><a href="https://doi.org/10.1101/2025.11.05.686662" class="external-link">Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., &amp; Sankaran, K. (2025). phylobar: an R package for multiresolution compositional barplots in omics studies. doi:10.1101/2025.11.05.686662</a></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -82,8 +83,8 @@
 <span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/rtree.html" class="external-link">rtree</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fl">20</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/phylobar.html">phylobar</a></span><span class="op">(</span><span class="va">samples</span>, <span class="va">tree</span><span class="op">)</span></span></code></pre></div>
-<p><img src="https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/rtree_recording.gif"></p>
-<p>GitHub doesn’t support interactive blocks in READMEs, so we’ve included a recording above. You can interact with other example output in our precompiled <a href="https://mkdiro-o.github.io/phylobar/articles" class="external-link">articles</a>. Click a node to collapse a subtree, press the control key to introduce a new color, and press the escape key to freeze the view.</p>
+<p>You can click a node to collapse a subtree, press the control key to add a new color, and press the escape key to freeze the view. If you want to try some examples right away, we have precompiled <a href="https://mkdiro-o.github.io/phylobar/articles" class="external-link">articles</a>. Here’s a recording of interactions with the HFHS data.</p>
+<p><img src="https://raw.githubusercontent.com/krisrs1128/LSLab/main/assets/img/phylobar.gif"></p>
 </div>
 <div class="section level2">
 <h2 id="common-tasks">Common Tasks<a class="anchor" aria-label="anchor" href="#common-tasks"></a>
