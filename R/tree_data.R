@@ -14,7 +14,6 @@
 #' @importFrom ape Ntip
 #' @examples
 #' library(ape)
-#' set.seed(1)
 #' tree <- rtree(5)
 #' x_mat <- matrix(runif(15), ncol = 5)
 #' colnames(x_mat) <- tree$tip.label
@@ -49,7 +48,6 @@ node_totals <- function(tree, x_mat) {
 #' @importFrom purrr map
 #' @examples
 #' library(ape)
-#' set.seed(1)
 #' tree <- rtree(5)
 #' x_mat <- matrix(runif(15), ncol = 5)
 #' colnames(x_mat) <- tree$tip.label
@@ -97,7 +95,6 @@ node_hierarchy <- function(tree, totals, node = NULL) {
 #' @importFrom stats dist hclust
 #' @examples
 #' library(ape)
-#' set.seed(1)
 #' tree <- rtree(5)
 #' tree$node.label <- paste0("node", seq_len(4))
 #' x <- matrix(runif(15), nrow = 3)

@@ -8,8 +8,8 @@ Authors@R:
         person("Saritha", "Kodikara", , "", role = c("aut")),
         person("Jiadong", "Mao", , "chiatungmao@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-3818-1981"))
     )
-Description: The phylobar package supports interactive visualization of microbiome data by allowing a stacked barplot to be constructed using a guiding taxonomic or phylogenetic hierarchy. The package provides a strategy and collapsing and expanding the hierarchy to different levels of resolution and then for interactively "painting" the stacked barplot by placing the mouse over different subtrees. This makes it possible to interactively test different color palettes at different resolution and identify taxonomic groups with interesting variation before settling on a final stacked barplot. One advantage of the approach is that multiple levels of taxonomic resolution can be compared at once within the same view.
-License: CC0
+Description: The phylobar package supports interactive visualization of microbiome data by allowing a stacked barplot to be constructed using a guiding taxonomic or phylogenetic hierarchy. The package provides a strategy for collapsing and expanding the hierarchy to different levels of resolution and then for interactively "painting" the stacked barplot by placing the mouse over different subtrees. This makes it possible to interactively test different color palettes at different resolution and identify taxonomic groups with interesting variation before settling on a final stacked barplot. One advantage of the approach is that multiple levels of taxonomic resolution can be compared at once within the same view.
+License: GPL (>= 3)
 Encoding: UTF-8
 URL: https://github.com/mkdiro-O/phylobar, http://mkdiro-o.github.io/phylobar
 BugReports: https://github.com/mkdiro-O/phylobar/issues
