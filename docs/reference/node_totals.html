@@ -27,7 +27,7 @@ descendant taxa, for each sample."></head><body>
     <li><a class="dropdown-item" href="../articles/exporting.html">Exporting to Vector Graphics Format</a></li>
     <li><a class="dropdown-item" href="../articles/global_patterns.html">Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset</a></li>
     <li><a class="dropdown-item" href="../articles/hfhs.html">The effect of a high-fat high-sugar (HFHS) diet on the mouse microbiome</a></li>
-    <li><a class="dropdown-item" href="../articles/runtime_evaluation.html">Runtime Evaluation</a></li>
+    <li><a class="dropdown-item" href="../articles/runtime_evaluation.html">Comparing Runtime across Sample Sizes and Number of Taxa</a></li>
     <li><a class="dropdown-item" href="../articles/taxonomies.html">Building Trees from Taxonomies</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -81,23 +81,22 @@ summing abundances over all descendant tips.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/emmanuelparadis/ape" class="external-link">ape</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/rtree.html" class="external-link">rtree</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">x_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">x_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">tree</span><span class="op">$</span><span class="va">tip.label</span></span></span>
 <span class="r-in"><span><span class="va">tree</span><span class="op">$</span><span class="va">node.label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">Nnode</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">node_totals</span><span class="op">(</span><span class="va">tree</span>, <span class="va">x_mat</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.405906 1.723866 3.284490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.315717 2.257086 1.864552</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`2`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.414000 1.343831 2.507045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.032234 1.118343 1.128430</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`3`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.0736507 0.8617511 1.9074787</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.2070343 0.8445247 0.5583851</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`4`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1389454 0.6496086 1.2558049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.2834830 1.1387432 0.7361214</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

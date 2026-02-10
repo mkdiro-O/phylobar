@@ -1,10 +1,6 @@
 ---
-title: "Runtime Evaluation"
+title: "Comparing Runtime across Sample Sizes and Number of Taxa"
 output: BiocStyle::html_document
-vignette: >
-  %\VignetteIndexEntry{Runtime Evaluation}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r opts, include = FALSE}

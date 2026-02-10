@@ -40,7 +40,7 @@
     <li><a class="dropdown-item" href="../articles/exporting.html">Exporting to Vector Graphics Format</a></li>
     <li><a class="dropdown-item" href="../articles/global_patterns.html">Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset</a></li>
     <li><a class="dropdown-item" href="../articles/hfhs.html">The effect of a high-fat high-sugar (HFHS) diet on the mouse microbiome</a></li>
-    <li><a class="dropdown-item" href="../articles/runtime_evaluation.html">Runtime Evaluation</a></li>
+    <li><a class="dropdown-item" href="../articles/runtime_evaluation.html">Comparing Runtime across Sample Sizes and Number of Taxa</a></li>
     <li><a class="dropdown-item" href="../articles/taxonomies.html">Building Trees from Taxonomies</a></li>
   </ul>
 </li>
@@ -135,7 +135,7 @@ tree object, which is used in the earlier Atlas vignette.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phyloseq/man/tax_table-methods.html" class="external-link">tax_table</a></span><span class="op">(</span><span class="va">atlas1006</span><span class="op">)</span></span>
 <span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>Kingdom <span class="op">=</span> <span class="st">"Bacteria"</span>, <span class="va">taxa</span><span class="op">)</span></span>
-<span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_prefix.html">add_prefix</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
+<span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu">phylobar</span><span class="fu">::</span><span class="fu"><a href="../reference/add_prefix.html">add_prefix</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxonomy_to_tree.html">taxonomy_to_tree</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/checkValidPhylo.html" class="external-link">checkValidPhylo</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span>
@@ -270,7 +270,7 @@ validity check still raises an error. As in the Atlas example, the issue
 is the absence of a root node connecting the different phyla. Adding a
 “Kingdom” column resolves this by linking the trees together.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_prefix.html">add_prefix</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu">phylobar</span><span class="fu">::</span><span class="fu"><a href="../reference/add_prefix.html">add_prefix</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>Kingdom <span class="op">=</span> <span class="st">"k_Bacteria"</span>, <span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxonomy_to_tree.html">taxonomy_to_tree</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/checkValidPhylo.html" class="external-link">checkValidPhylo</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span>
@@ -319,7 +319,7 @@ solution is to introduce a new column containing the ASV
 identifiers.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
-<span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_prefix.html">add_prefix</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
+<span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="fu">phylobar</span><span class="fu">::</span><span class="fu"><a href="../reference/add_prefix.html">add_prefix</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="va">taxa</span><span class="op">$</span><span class="va">ASV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="co">#&gt;           Kingdom       Phylum        Class          Order              Family</span></span>
