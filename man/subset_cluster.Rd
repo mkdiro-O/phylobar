@@ -14,9 +14,7 @@ subset_cluster(x, k = 100, method = c("hclust", "medoid"))
 \item{method}{Clustering method to use. \code{"hclust"} (the default) uses
 Euclidean distances and hierarchical clustering, selecting an arbitrary
 member from each cluster. \code{"medoid"} uses Bray-Curtis dissimilarity and
-K-medoids (PAM) clustering, selecting the medoid of each cluster. The
-medoid method is more appropriate for compositional data such as microbiome
-abundances, which should be non-negative.}
+K-medoids (PAM) clustering, selecting the medoid of each cluster.}
 }
 \value{
 A matrix containing one representative row from each cluster.

@@ -94,13 +94,15 @@ node_hierarchy <- function(tree, totals, node = NULL) {
 #' @param hclust_order Logical; if TRUE, reorder rows/columns by hierarchical
 #'      clustering.
 #' @return A list with tree_data and labels.
+#' @importFrom stats dist hclust
 #' @examples
 #' library(ape)
 #' set.seed(1)
 #' tree <- rtree(5)
+#' tree$node.label <- paste0("node", seq_len(4))
 #' x <- matrix(runif(15), nrow = 3)
 #' colnames(x) <- tree$tip.label
-#' rownames(x) <- paste0("sample", 1:3)
+#' rownames(x) <- paste0("sample", seq_len(3))
 #' phylobar_data(x, tree)
 #' @export
 phylobar_data <- function(x, tree, hclust_order = TRUE) {

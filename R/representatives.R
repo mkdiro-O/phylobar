@@ -12,6 +12,7 @@
 #'   K-medoids (PAM) clustering, selecting the medoid of each cluster.
 #' @return A matrix containing one representative row from each cluster.
 #' @importFrom cluster pam
+#' @importFrom stats dist hclust cutree as.dist
 #' @export
 #' @examples
 #' mat <- matrix(rnorm(1000), nrow = 100)

@@ -2,18 +2,17 @@
 % Please edit documentation in R/representatives.R
 \name{bray_curtis_dist}
 \alias{bray_curtis_dist}
-\title{Compute Bray-Curtis dissimilarity matrix}
+\title{Bray-Curtis dissimilarity matrix}
 \usage{
 bray_curtis_dist(x)
 }
 \arguments{
-\item{x}{A non-negative numeric matrix with samples as rows.}
+\item{x}{A matrix with samples as rows.}
 }
 \value{
 A \code{dist} object of pairwise Bray-Curtis dissimilarities.
 }
 \description{
-Computes pairwise Bray-Curtis dissimilarity between rows of a non-negative
-matrix. Defined as \eqn{\sum |x_i - y_i| / (\sum x_i + \sum y_i)}.
+Pairwise Bray-Curtis dissimilarity between matrix rows.
+\eqn{\sum |x_i - y_i| / (\sum x_i + \sum y_i)}.
 }
-\keyword{internal}

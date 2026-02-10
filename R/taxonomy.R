@@ -6,6 +6,7 @@
 #' @param edgelist A two-column matrix where each row represents a
 #' parent-descendant relationship.
 #' @return An object of class 'phylo' representing the tree structure.
+#' @importFrom stats setNames
 #' @examples
 #' # Example edge list: parent -> child
 #' edgelist <- matrix(
