@@ -11,24 +11,37 @@ Authors@R:
 Description: The phylobar package supports interactive visualization of microbiome data by allowing a stacked barplot to be constructed using a guiding taxonomic or phylogenetic hierarchy. The package provides a strategy and collapsing and expanding the hierarchy to different levels of resolution and then for interactively "painting" the stacked barplot by placing the mouse over different subtrees. This makes it possible to interactively test different color palettes at different resolution and identify taxonomic groups with interesting variation before settling on a final stacked barplot. One advantage of the approach is that multiple levels of taxonomic resolution can be compared at once within the same view.
 License: CC0
 Encoding: UTF-8
-URL: https://github.com/mkdiro-O/phylobar,http://mkdiro-o.github.io/phylobar
+URL: https://github.com/mkdiro-O/phylobar, http://mkdiro-o.github.io/phylobar
 BugReports: https://github.com/mkdiro-O/phylobar/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests:
+    BiocStyle,
+    DESeq2,
+    dplyr,
+    ggplot2,
     knitr,
-    rmarkdown,
+    LUPINE,
+    MicrobiomeStat,
+    miaViz,
     microbiome,
-    testthat (>= 3.0.0)
+    phyloseq,
+    readr,
+    rmarkdown,
+    scater,
+    seriation,
+    stringr,
+    testthat (>= 3.0.0),
+    tibble,
+    tidyr
 VignetteBuilder: knitr
 Imports:
-    cluster
-Depends:
-    R (>= 4.5.0),
-    phyloseq,
-    htmlwidgets,
     ape,
-    purrr,
-    phangorn
+    cluster,
+    htmlwidgets,
+    phangorn,
+    purrr
+Depends:
+    R (>= 4.5.0)
 biocViews: Software, Microbiome, Phylogenetics, Visualization
 Config/testthat/edition: 3
