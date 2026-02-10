@@ -126,8 +126,9 @@ phylobar(x, tree, hclust_order = results$hclust_order[i])
 ```
 
 In this regime, we recommend using the `subset_cluster` function to select
-representative samples to include in the stacked bar plot. As long as we reduce
-$N$, we can keep $P = 1000$ and still have smooth interaction.
+representative samples to include in the stacked bar plot. Alternatively,
+separate phylobar views can be made for different sample subsets. As long as we
+reduce $N$, we can keep $P = 1000$ and still have smooth interaction.
 
 ```{r smaller_n_version}
 x_sub <- subset_cluster(x, k = 100)
@@ -142,9 +143,12 @@ setting. When the data are large, it may be worth using a custom, more scalable
 seriation algorithm to sort the rows of `x` in advance, and then set
 `hclust_order = FALSE`.
 
-1. The real scalability limit is in the underlying visual encoding.
-
-The bottleneck isn't so much computational as human. On
+1. While the `phylobar` function executes quickly, rendering and visual
+interpretation both suffer when $N$ is large. When $N$ and $P$ are large, the
+initial view will show $N \times P$ rectangles in the stacked barplot. Rendering
+all rectangles as SVG elements in the browser can be slow, and stacked bar plots
+with too many bars are illegible. We recommend either finding representative
+samples or breaking the exploration into separate subsets of samples.
 
 # Session Info
 

@@ -76,8 +76,8 @@ phylobar(x, tree, sample_show_all = FALSE, rel_width = 0.2)
 ```
 
 Because the full dataset is complex, we can simplify the visualization by
-subsampling representative samples. This preserves the main conclusions
-while reducing visual clutter.
+subsampling representative samples. This preserves the main conclusions while
+reducing visual clutter.
 
 ```{r phylobar-subset}
 x_sub <- subset_cluster(x)
@@ -86,6 +86,21 @@ x_sub <- x_sub[, colSums(x_sub) > 0]
 leaves_to_keep <- intersect(tree$tip.label, colnames(x_sub))
 filtered_tree <- drop.tip(tree, setdiff(tree$tip.label, leaves_to_keep))
 phylobar(x_sub, filtered_tree)
+```
+
+By default, the `subset_cluster()` function subsets to samples that are close to
+a cut hierarchical clustering tree's centroids.  Alternatively, setting `method
+= "medoid"` will choose representatives using $K$-medoids according to
+Bray-Curtis distance. The result is shown below, though our interpretation will
+focus on the hierarchical clustering version.
+
+```{r bray-curtis-result}
+x_sub_bc <- subset_cluster(x, method = "medoid")
+x_sub_bc <- x_sub[, colSums(x_sub) > 0]
+
+leaves_to_keep <- intersect(tree$tip.label, colnames(x_sub_bc))
+filtered_tree <- drop.tip(tree, setdiff(tree$tip.label, leaves_to_keep))
+phylobar(x_sub_bc, filtered_tree)
 ```
 
 # Interpretation

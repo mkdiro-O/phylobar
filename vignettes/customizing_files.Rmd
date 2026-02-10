@@ -1,5 +1,5 @@
 ---
-title: "Customizing Style in Phylobar"
+title: "Customizing Style in phylobar"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Customizing Style in phylobar}
@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 
 # Overview
 
-Phylobar draws a phylogenetic tree alongside a stacked bar chart. 
-This vignette shows how to customize visual style: text sizes, color 
+Phylobar draws a phylogenetic tree alongside a stacked bar chart.
+This vignette shows how to customize visual style: text sizes, color
 palettes, layout ratios, legend placement, and more.
 
 We will use a small random dataset:
@@ -45,12 +45,12 @@ The function signature and key styling parameters we will explore:
 * `hclust_order`: optional hierarchical reordering of rows/columns
 
 Internally, `phylobar()` ensures that the tree has node labels and that
-the abundance matrix has row/column names. If they’re missing, helper 
+the abundance matrix has row/column names. If they’re missing, helper
 `check_inputs()` creates sensible defaults (e.g., `sample_1`, `sample_2`).
 
 # Color Palette
 
-If a palette is not provided, phylobar uses a default set of six colors. 
+If a palette is not provided, phylobar uses a default set of six colors.
 It is possible to supply own vector of hex colors or R color names.
 
 ```{r palette_example}
@@ -108,12 +108,12 @@ phylobar(
 )
 ```
 
-# Legend Placement 
+# Legend Placement
 
 Choose whether painted subtree labels appear in a separate legend
-(`legend_mode = TRUE`, default) or placed inside the tree 
+(`legend_mode = TRUE`, default) or placed inside the tree
 (`legend_mode = FALSE`). `legend_x_start` and `legend_spacing`
-can also be adjusted to control the legen position. 
+can also be adjusted to control the legen position.
 
 ```{r legend_below}
 # Legend below the tree (default)
@@ -143,8 +143,8 @@ phylobar(
 
 # Optional Hierarchical Reordering
 
-`hclust_order = TRUE` (default) reorders samples/features by hierarchical 
-clustering, which can make patterns more visible. Turn it off to preserve 
+`hclust_order = TRUE` (default) reorders samples/features by hierarchical
+clustering, which can make patterns more visible. Turn it off to preserve
 original order:
 
 ```{r hclust_no}
