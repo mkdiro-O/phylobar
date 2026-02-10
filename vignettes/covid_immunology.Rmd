@@ -21,7 +21,7 @@ In December 2020, while COVID-19 was still raging across the globe, [Su et al. (
 
 See the [DIVAS project](https://byronsyun.github.io/DIVAS_COVID19_CaseStudy/) for a more comprehensive introduction to their study design and a more in-depth analysis of their multiomic data. Here we just took the immune cell type composition information to illustrate how phylobar enables us to visualise immune cell type composition changes from milder to severer COVID-19.
 
-```{r}
+```{r libraries}
 library(ape)
 library(dplyr)
 library(phylobar)
@@ -33,18 +33,25 @@ library(seriation)
 
 First load the cell and patient metadata.
 ```{r read_in_data}
+url <- "https://zenodo.org/records/17477876/files/su-2020.rds?download=1"
 f <- tempfile()
-download.file("https://zenodo.org/records/17477876/files/su-2020.rds?download=1", f)
+tryCatch(
+    download.file(url, f),
+    error = \(e) {
+        message("Unable to download data: ", conditionMessage(e))
+        knitr::knit_exit()
+    }
+)
 all_data <- readRDS(f)
 cell_counts <- all_data$cell_counts
 metadata <- all_data$metadata
 ```
 
 Calculate cell type compositions.
-```{r}
+```{r compositions}
 x <- cell_counts |>
     dplyr::count(patient_id, majority_voting) |>
-    pivot_wider(names_from = majority_voting, values_from = n, values_fill = 0) |>
+    pivot_wider(majority_voting, n, values_fill = 0) |>
     column_to_rownames("patient_id")
 x <- x / rowSums(x)
 ```
@@ -90,42 +97,40 @@ ix <- setNames(seq_along(node_order), node_order)
 
 # create phylo
 tree <- list(
-  edge = matrix(c(ix[edge$source], ix[edge$target]), ncol = 2),
-  Nnode = length(internal_nodes),
-  tip.label = node_order[seq_along(tips)],
-  node.label = node_order[seq(length(tips) + 1, length(ix))]
+    edge = matrix(c(ix[edge$source], ix[edge$target]), ncol = 2),
+    Nnode = length(internal_nodes),
+    tip.label = node_order[seq_along(tips)],
+    node.label = node_order[seq(length(tips) + 1, length(ix))]
 )
 class(tree) <- "phylo"
 ```
 
 Let's order patients by COVID severity (mild, moderate and severe). Then, within each severity group, use a
 hierarchical clustering leaf order to place samples with similar cell type compositions closer.
-```{r}
+```{r patient-order}
 md <- metadata |>
-  distinct(clinical_id, severity) |>
-  mutate(severity = factor(severity, levels = c("mild", "moderate", "severe"))) |>
-  arrange(severity)
+    distinct(clinical_id, severity) |>
+    mutate(severity = factor(
+        severity, levels = c("mild", "moderate", "severe")
+    )) |>
+    arrange(severity)
 
 patient_order <- md %>%
-  split(.$severity) |>
-  lapply(\(df) {
-    ids <- df$clinical_id
-    m <- x[ids, , drop = FALSE]
-    ids[hclust(dist(m))$order]
-  }) |>
-  unlist(use.names = FALSE)
+    split(.$severity) |>
+    lapply(\(df) {
+        ids <- df$clinical_id
+        m <- x[ids, , drop = FALSE]
+        ids[hclust(dist(m))$order]
+    }) |>
+    unlist(use.names = FALSE)
 ```
 
 Now we can make a phylobar visualization. We can see that T cells and monocytes made up the majority of cellular populations in patient samples. We can observe an overall increase of monocytes and decrease of NK and T cells, especially CD8 T cells, in moderate and severe COVID patients. These changes were found statistically significant in Su et al. (2020), and where highlighted in their Fig 1.
 
 Another feature that was not characterised in Su et al. (2020) was the presence of gd (γδ, i.e. gamma delta) T cells in milder COVID patients exclusively. This echos some more recent findings suggesting that gd T cells may play an important role in the immune response to the pathogenic SARS-Cov-2 virus ([Massow et al., 2021](https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2021.741218/full); [Terzoli et al., 2024](https://www.nature.com/articles/s41541-024-00853-9)).
-```{r}
+```{r phylobar-plot}
 phylobar(x[patient_order, ], tree)
 ```
-
-
-
-
 
 ```{r session}
 sessionInfo()

@@ -1,6 +1,6 @@
 ---
 title: "Tipping Points in the Atlas 1006 Dataset"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Tipping Points in the Atlas 1006 Dataset}
   %\VignetteEngine{knitr::rmarkdown}

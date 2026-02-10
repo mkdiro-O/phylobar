@@ -1,6 +1,6 @@
 ---
 title: "Customizing Style in phylobar"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Customizing Style in phylobar}
   %\VignetteEngine{knitr::rmarkdown}

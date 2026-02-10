@@ -1,6 +1,6 @@
 ---
 title: "Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset}
   %\VignetteEngine{knitr::rmarkdown}
