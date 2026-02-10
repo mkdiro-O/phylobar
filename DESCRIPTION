@@ -21,6 +21,8 @@ Suggests:
     microbiome,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
+Imports:
+    cluster
 Depends:
     R (>= 4.5.0),
     phyloseq,
