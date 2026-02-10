@@ -51,7 +51,11 @@ Calculate cell type compositions.
 ```{r compositions}
 x <- cell_counts |>
     dplyr::count(patient_id, majority_voting) |>
-    pivot_wider(majority_voting, n, values_fill = 0) |>
+    pivot_wider(
+        names_from = majority_voting,
+        values_from = n,
+        values_fill = 0
+    ) |>
     column_to_rownames("patient_id")
 x <- x / rowSums(x)
 ```

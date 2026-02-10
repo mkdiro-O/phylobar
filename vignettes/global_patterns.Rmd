@@ -23,6 +23,7 @@ TreeSummarizedExperiment objects. We'll work with the same dataset
 ## Setup
 
 ```{r setup}
+library(ape)
 library(phylobar)
 library(phyloseq)
 library(miaViz)
