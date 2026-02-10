@@ -52,9 +52,10 @@ recording of interactions with the HFHS data.
 
 ## Common Tasks
 
-- Customizing style: Phylobar supports a few styling customizations,
-  like changing the size of the text labels or the color palette. This
-  vignette walks through currently available options.
+- [Customizing style](https://mkdiro-o.github.io/phylobar/articles/customizing_files.html):
+  Phylobar supports a few styling customizations, like changing the size of
+  the text labels or the color palette. This vignette walks through currently
+  available options.
 - [Building a tree from a
   taxonomy](https://mkdiro-o.github.io/phylobar/articles/taxonomies.html):
   Rather than interacting with abstract phylogenetic trees it can be
