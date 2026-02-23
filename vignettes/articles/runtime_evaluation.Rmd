@@ -1,0 +1,153 @@
+---
+title: "Comparing Runtime across Sample Sizes and Number of Taxa"
+output: BiocStyle::html_document
+---
+
+```{r opts, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+
+# Introduction
+
+This vignette studies how phylobar's runtime scales with the number of samples
+(N) and taxa (P). We simulate random data across a grid of (N, P) values and
+time each call with `system.time()`. We also compare runtime with and without
+ordering samples with hierarchical clustering (the `hclust_order` argument).
+
+```{r libraries, message = FALSE}
+library(ape)
+library(ggplot2)
+library(phylobar)
+theme_set(theme_classic())
+set.seed(20260209)
+```
+
+# Setup
+
+We simulate one large dataset at the maximum grid dimensions and subset it for
+each (N, P) combination. This avoids repeated simulation and naming boilerplate
+inside the timing loops.
+
+```{r grid}
+n_eval <- c(50, 100, 250, 500, 1000, 2000)
+p_eval <- c(50, 100, 250, 500, 1000)
+n_reps <- 10
+
+grid <- expand.grid(
+    N = n_eval,
+    P = p_eval,
+    hclust_order = c(TRUE, FALSE),
+    rep = seq_len(n_reps)
+)
+```
+
+```{r simulate}
+tree_full <- rtree(max(p_eval))
+x_full <- matrix(
+    rpois(max(n_eval) * max(p_eval), lambda = 5),
+    nrow = max(n_eval), ncol = max(p_eval)
+)
+colnames(x_full) <- tree_full$tip.label
+rownames(x_full) <- paste0("s", seq_len(max(n_eval)))
+
+trees <- list()
+for (p in p_eval) {
+    tips <- tree_full$tip.label[seq_len(p)]
+    trees[[as.character(p)]] <- drop.tip(
+        tree_full, setdiff(tree_full$tip.label, tips)
+    )
+}
+```
+
+# Timing
+
+For each (N, P, hclust_order) combination we subset the pre-simulated data and
+time `phylobar()`. By default `phylobar` sorts samples using hierarchical
+clustering, which can be costly when the number of samples is large. It is also
+often unnecessary when there is already a natural sample ordering (e.g., over
+time). Setting `hclust_order = FALSE` keeps samples in their input order.
+
+```{r timing}
+results <- grid
+results$elapsed <- NA
+
+for (i in seq_len(nrow(results))) {
+    tree <- trees[[as.character(results$P[i])]]
+    x <- x_full[seq_len(results$N[i]), tree$tip.label]
+
+    tm <- system.time(
+        phylobar(x, tree, hclust_order = results$hclust_order[i])
+    )
+    results$elapsed[i] <- tm["elapsed"]
+}
+```
+
+# Results
+
+```{r plot, fig.width = 8, fig.height = 5}
+results$P <- factor(results$P)
+results$hclust_label <- ifelse(
+    results$hclust_order,
+    "hclust_order = TRUE",
+    "hclust_order = FALSE"
+)
+
+ggplot(results, aes(N, elapsed, color = P)) +
+    geom_point() +
+    scale_color_brewer(palette = "Set2") +
+    facet_wrap(~ hclust_label) +
+    theme(panel.border = element_rect(fill = NA, linewidth = 0.9)) +
+    labs(
+        x = "Number of Samples (N)",
+        y = "Elapsed Time (seconds)",
+        color = "Taxa (P)"
+    )
+```
+
+# Visualization
+
+Here is an example of the phylobar visualization made with $N = 2000$ samples
+and $P = 1000$ taxa. While `phylobar` generates the plot SVG elements in a few
+seconds, the output is both difficult both for the browser to render
+interactively and for us to visually interperet. We've disabled this plot in
+this documentation because it consumes quite a lot of browser memory drawing all
+the bars in the barplot.
+
+```{r interactive_plot, eval = FALSE}
+# very slow rendering, not recommended
+phylobar(x, tree, hclust_order = results$hclust_order[i])
+```
+
+In this regime, we recommend using the `subset_cluster` function to select
+representative samples to include in the stacked bar plot. Alternatively,
+separate phylobar views can be made for different sample subsets. As long as we
+reduce $N$, we can keep $P = 1000$ and still have smooth interaction.
+
+```{r smaller_n_version}
+x_sub <- subset_cluster(x, k = 100)
+x_sub <- x_sub[, colSums(x_sub) > 0]
+phylobar(x_sub, tree, hclust_order = results$hclust_order[i])
+```
+
+# Takeaways
+
+1. Bypassing the hierarchical clustering step helps in the large $N$ and $P$
+setting. When the data are large, it may be worth using a custom, more scalable
+seriation algorithm to sort the rows of `x` in advance, and then set
+`hclust_order = FALSE`.
+
+1. While the `phylobar` function executes quickly, rendering and visual
+interpretation both suffer when $N$ is large. When $N$ and $P$ are large, the
+initial view will show $N \times P$ rectangles in the stacked barplot. Rendering
+all rectangles as SVG elements in the browser can be slow, and stacked bar plots
+with too many bars are illegible. We recommend either finding representative
+samples or breaking the exploration into separate subsets of samples.
+
+# Session Info
+
+```{r session}
+sessionInfo()
+```

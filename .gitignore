@@ -1,0 +1,8 @@
+*.rds
+*DS_Store*
+*.RData*
+*cache*
+vignettes/*html
+inst/doc
+*.Rbuildignore
+README.html

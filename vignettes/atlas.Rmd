@@ -1,0 +1,136 @@
+---
+title: "Tipping Points in the Atlas 1006 Dataset"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Tipping Points in the Atlas 1006 Dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    message = FALSE
+)
+```
+
+The Human Intestinal Tract (HITChip) Atlas dataset is a widely used reference
+for studying variation in the gut microbiome across diverse individuals.
+The dataset is available in the microbiome package as atlas1006, and
+includes microbial abundances along with metadata such as extraction method,
+subject information, and taxonomic annotations.
+
+In this vignette, we demonstrate how to use phylobar to create
+phylogeny-aware visualizations of the atlas data. We will walk through tree
+construction, highlight potential pitfalls in taxonomic labeling, and generate
+visualizations that summarize variation across samples.
+
+```{r libraries}
+library(ape)
+library(phylobar)
+library(microbiome)
+```
+
+# Setup
+We begin by loading the mouse diet study data, which is stored remotely and
+can be loaded into R as a phyloseq object.
+
+```{r download-data}
+data(atlas1006)
+pseq3 <- atlas1006 |>
+    subset_samples(DNA_extraction_method == "r") |>
+    transform(transform = "compositional")
+```
+
+Next, we load the atlas1006 dataset. For simplicity, we focus on samples
+with the r DNA extraction method and transform abundances into compositional
+form (so each sample sums to 1).
+
+```{r naive-tree}
+tree <- taxonomy_to_tree(tax_table(pseq3))
+checkValidPhylo(tree)
+```
+
+A naive attempt to build a taxonomy-based tree can fail, because duplicate
+names across different levels of the taxonomy may result in loops. To
+address this, we add level-specific prefixes (e.g., p_ for phylum,
+f_ for family), ensuring that ancestor and descendant nodes have unique labels.
+
+```{r valid-tree}
+taxa <- tax_table(pseq3)
+taxa <- cbind(Kingdom = "Bacteria", taxa)
+taxa <- phylobar::add_prefix(taxa)
+
+tree <- taxonomy_to_tree(taxa)
+checkValidPhylo(tree)
+```
+
+With a valid tree and abundance matrix, we can generate a phylobar plot.
+Here, samples are arranged along the x-axis, with stacked bars representing
+taxonomic abundances, aligned with the corresponding branches of the tree.
+
+```{r phylobar-full}
+x <- t(otu_table(pseq3))
+phylobar(x, tree, sample_show_all = FALSE, rel_width = 0.2)
+```
+
+Because the full dataset is complex, we can simplify the visualization by
+subsampling representative samples. This preserves the main conclusions while
+reducing visual clutter.
+
+```{r phylobar-subset}
+x_sub <- subset_cluster(x)
+x_sub <- x_sub[, colSums(x_sub) > 0]
+
+leaves_to_keep <- intersect(tree$tip.label, colnames(x_sub))
+filtered_tree <- drop.tip(tree, setdiff(tree$tip.label, leaves_to_keep))
+phylobar(x_sub, filtered_tree)
+```
+
+By default, the `subset_cluster()` function subsets to samples that are close to
+a cut hierarchical clustering tree's centroids.  Alternatively, setting `method
+= "medoid"` will choose representatives using $K$-medoids according to
+Bray-Curtis distance. The result is shown below, though our interpretation will
+focus on the hierarchical clustering version.
+
+```{r bray-curtis-result}
+x_sub_bc <- subset_cluster(x, method = "medoid")
+x_sub_bc <- x_sub[, colSums(x_sub) > 0]
+
+leaves_to_keep <- intersect(tree$tip.label, colnames(x_sub_bc))
+filtered_tree <- drop.tip(tree, setdiff(tree$tip.label, leaves_to_keep))
+phylobar(x_sub_bc, filtered_tree)
+```
+
+# Interpretation
+
+There are many interesting patterns in the atlas dataset revealing
+distinct patterns in the human intestinal. For example, Enterobacter
+aerogenes appears across a broad range of samples, but generally at
+low relative abundance. Only one sample shows notable representation,
+creating a narrow band in the stacked barplot. This patchy distribution
+is a characteristic of opportunistic or conditionally rare taxa, which
+may be present in many individuals but rarely dominate the community
+structure. Such patterns have been previously been described as examples
+of bimodal or "tipping element" behavior, where a taxon is abundant
+in some hosts but nearly absent in others.
+(https://pmc.ncbi.nlm.nih.gov/articles/PMC4102116/pdf/ncomms5344.pdf)
+
+![](https://i.imgur.com/uj1avu1.png)
+
+Next, this screenshot highlights the dominance of Firmicutes (yellow)
+and Bacteroidetes (purple) in the human gut microbiome. While these
+two phyla are prevalent across nearly all samples, their relative
+proportions vary widely. Some samples are Firmicutes-dominant,
+while others are Bacteroidetes-dominant. This variability reflects
+the complex interplay of host genetics, diet, and environmental factors
+that shape the gut microbiome.
+
+![](https://i.imgur.com/qUZoXZh.png)
+
+# Session Info
+
+```{r session}
+sessionInfo()
+```

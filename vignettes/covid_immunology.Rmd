@@ -1,0 +1,160 @@
+---
+title: "Cell-type Hierarchy Informs COVID-19 Immunology"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Cell-type Hierarchy Informs COVID-19 Immunology}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr_options, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    warning = FALSE,
+    message = FALSE
+)
+```
+
+
+In December 2020, while COVID-19 was still raging across the globe, [Su et al. (
+2020)](https://doi.org/10.1016/j.cell.2020.10.037) published their pioneering
+study examining the immune and metabolic landscapes of mild to severe COVID
+patients.
+
+See the [DIVAS project](https://byronsyun.github.io/DIVAS_COVID19_CaseStudy/)
+for a more comprehensive introduction to their study design and a more in-depth
+analysis of their multiomic data. Here we just took the immune cell type
+composition information to illustrate how phylobar enables us to visualise
+immune cell type composition changes from milder to severer COVID-19.
+
+```{r libraries}
+library(ape)
+library(dplyr)
+library(phylobar)
+library(readr)
+library(tibble)
+library(tidyr)
+library(seriation)
+```
+
+First load the cell and patient metadata.
+```{r read_in_data}
+url <- "https://zenodo.org/records/17477876/files/su-2020.rds?download=1"
+f <- tempfile()
+tryCatch(
+    download.file(url, f),
+    error = \(e) {
+        message("Unable to download data: ", conditionMessage(e))
+        knitr::knit_exit()
+    }
+)
+all_data <- readRDS(f)
+cell_counts <- all_data$cell_counts
+metadata <- all_data$metadata
+```
+
+Calculate cell type compositions.
+```{r compositions}
+x <- cell_counts |>
+    dplyr::count(patient_id, majority_voting) |>
+    pivot_wider(
+        names_from = majority_voting,
+        values_from = n,
+        values_fill = 0
+    ) |>
+    column_to_rownames("patient_id")
+x <- x / rowSums(x)
+```
+
+Based on biological knowledge, we manually define a phylo object for the
+hierarchy of immune cell types.
+```{r make_phylo_from_igraph}
+edges_text <- "source,target
+Hematopoietic stem cell,Common myeloid progenitor
+Hematopoietic stem cell,Common lymphoid progenitor
+Common myeloid progenitor,Megakaryocyte
+Megakaryocyte,Platelet
+Common myeloid progenitor,RBC
+Common myeloid progenitor,Myeloblast
+Myeloblast,Monocyte
+Monocyte,CD14 Monocyte
+Monocyte,CD16 Monocyte
+Myeloblast,SC & Eosinophil
+Myeloblast,DC
+Myeloblast,pDC
+Common lymphoid progenitor,NK
+Common lymphoid progenitor,Small lymphocyte
+Small lymphocyte,T lymphocyte
+T lymphocyte,CD4 T lymphocyte
+T lymphocyte,CD8 T lymphocyte
+CD4 T lymphocyte,CD4 T
+CD4 T lymphocyte,CD4m T
+CD4 T lymphocyte,CD4n T
+CD8 T lymphocyte,CD8m T
+CD8 T lymphocyte,CD8eff T
+T lymphocyte,gd T
+Small lymphocyte,B lymphocyte
+B lymphocyte,B
+B lymphocyte,IgA PB
+B lymphocyte,IgG PB"
+
+edge <- read_csv(edges_text)
+tips <- setdiff(edge$target, edge$source)
+
+# preparation for phylo construction
+internal_nodes <- setdiff(unlist(edge), tips)
+node_order <- c(tips, internal_nodes)
+ix <- setNames(seq_along(node_order), node_order)
+
+# create phylo
+tree <- list(
+    edge = matrix(c(ix[edge$source], ix[edge$target]), ncol = 2),
+    Nnode = length(internal_nodes),
+    tip.label = node_order[seq_along(tips)],
+    node.label = node_order[seq(length(tips) + 1, length(ix))]
+)
+class(tree) <- "phylo"
+```
+
+Let's order patients by COVID severity (mild, moderate and severe). Then, within
+each severity group, use a hierarchical clustering leaf order to place samples
+with similar cell type compositions closer.
+```{r patient-order}
+md <- metadata |>
+    distinct(clinical_id, severity) |>
+    mutate(severity = factor(
+        severity, levels = c("mild", "moderate", "severe")
+    )) |>
+    arrange(severity)
+
+patient_order <- md %>%
+    split(.$severity) |>
+    lapply(\(df) {
+        ids <- df$clinical_id
+        m <- x[ids, , drop = FALSE]
+        ids[hclust(dist(m))$order]
+    }) |>
+    unlist(use.names = FALSE)
+```
+
+Now we can make a phylobar visualization. We can see that T cells and monocytes
+made up the majority of cellular populations in patient samples. We can observe
+an overall increase of monocytes and decrease of NK and T cells, especially CD8
+T cells, in moderate and severe COVID patients. These changes were found
+statistically significant in Su et al. (2020), and where highlighted in their
+Fig 1.
+
+Another feature that was not characterised in Su et al. (2020) was the presence
+of gd (γδ, i.e. gamma delta) T cells in milder COVID patients exclusively. This
+echos some more recent findings suggesting that gd T cells may play an important
+role in the immune response to the pathogenic SARS-Cov-2 virus ([Massow et al.,
+2021](https://doi.org/10.3389/fimmu.2021.741218);
+[Terzoli et al., 2024](https://www.nature.com/articles/s41541-024-00853-9)).
+```{r phylobar-plot}
+phylobar(x[patient_order, ], tree)
+```
+
+```{r session}
+sessionInfo()
+```

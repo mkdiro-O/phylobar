@@ -1,0 +1,18 @@
+bibentry(
+    bibtype = "Article",
+    title = paste(
+        "phylobar: an R package for multiresolution",
+        "compositional barplots in omics studies"
+    ),
+    author = c(
+        person("Megan", "Kuo"),
+        person("Kim-Anh", "L\u00ea Cao"),
+        person("Saritha", "Kodikara"),
+        person("Jiadong", "Mao"),
+        person("Kris", "Sankaran")
+    ),
+    year = 2025,
+    journal = "bioRxiv",
+    doi = "10.1101/2025.11.05.686662",
+    url = "https://doi.org/10.1101/2025.11.05.686662"
+)

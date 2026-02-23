@@ -1,0 +1,144 @@
+---
+title: "Getting Started"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Getting Started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    message = FALSE
+)
+```
+
+# Overview
+
+phylobar is a visualization package for constructing stacked barplots by
+interactively "painting" an associated tree. This is an alternative to defining
+a color palette at a fixed taxonomic resolution. It also helps avoid the issue
+of grouping all rare taxa into a color for "other" — you can selectively
+highlight specific rare taxa while leaving others at their background color.
+
+The main function, `phylobar()`, takes two inputs: a table of (potentially
+normalized) counts and a tree structure which can come from either a phylogeny
+or a table of taxonomic assignments. You can read more about the package in our
+preprint:
+
+> Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2025).
+> phylobar: an R package for multiresolution compositional barplots in omics
+> studies. doi:10.1101/2025.11.05.686662
+
+# Installation
+
+You can install the development version of phylobar from GitHub:
+
+```{r installation, eval = FALSE}
+remotes::install_github("mkdiro-o/phylobar")
+```
+
+# Quick Start
+
+The block below applies phylobar to a small random dataset. Click a node to
+collapse a subtree, press the Control key to add a new color, and press the
+Escape key to freeze the view.
+
+```{r quickstart, eval = FALSE}
+library(ape)
+library(phylobar)
+
+tree <- rtree(20)
+samples <- matrix(rpois(100 * 20, 1), 100, 20)
+phylobar(samples, tree)
+```
+
+# Vignettes
+
+The vignettes below walk through common workflows and fully developed case
+studies. They are grouped into **workflow** vignettes (how to prepare, style,
+and export phylobar plots) and **case-study** vignettes (biological analyses
+that illustrate phylobar in practice).
+
+## Workflow Vignettes
+
+### [Building Trees from Taxonomies](taxonomies.html)
+
+Rather than interacting with abstract phylogenetic trees, it can be helpful to
+choose stacked bar colors using taxonomic assignments. This vignette gives a
+comprehensive guide to converting taxonomy tables into valid `phylo` objects via
+`taxonomy_to_tree()`. It covers three common pitfalls — missing root nodes,
+missing assignments encoded as strings instead of `NA`, and duplicated names
+across taxonomic levels — and shows how to resolve each with `add_prefix()` and
+`checkValidPhylo()`.
+
+### [Customizing Style](customizing_files.html)
+
+Phylobar supports several styling options, including custom color palettes,
+widget dimensions, sample label font and margin settings, tree-bar layout ratios
+(`rel_width`, `rel_height`, `rel_space`), legend placement, and hierarchical
+reordering with `hclust_order`. This vignette walks through all currently
+available parameters.
+
+### [Exporting Views](exporting.html)
+
+While interactivity is useful for exploration, we often need to export a specific
+static view to discuss with collaborators. This vignette shows how to export
+phylobar visualizations to SVG using the SVG Crowbar bookmarklet, edit the
+resulting layered SVG in Inkscape, and export to PNG — preserving image quality
+for publication.
+
+### [Runtime Evaluation](runtime_evaluation.html)
+
+This vignette benchmarks `phylobar()` across a grid of sample counts and taxa
+counts, with and without hierarchical clustering. It shows that disabling
+`hclust_order` improves performance at large sample sizes, and recommends using
+`subset_cluster()` to keep the number of samples browser-friendly.
+
+## Case-Study Vignettes
+
+### [HFHS Diet and the Mouse Microbiome](hfhs.html)
+
+Analyzes 16S rRNA data from 47 mice on either normal or high-fat, high-sugar
+(HFHS) diets across four timepoints. The vignette reproduces known findings of
+decreased Bacteroidetes and increased Firmicutes under HFHS and adds a
+longitudinal view tracking individual mice over time.
+
+### [Atlas 1006 — Tipping Points in the Human Gut](atlas.html)
+
+Demonstrates phylobar on the HITChip Atlas 1006 human gut microbiome dataset,
+highlighting "tipping element" taxa and the Firmicutes/Bacteroidetes balance. It
+also shows how `subset_cluster()` can reduce visual clutter by selecting
+representative samples.
+
+### [Diet Analysis with DESeq2 Normalization](diet_analysis.html)
+
+Examines how diet shapes gut microbiome composition using the `dietswap` dataset.
+It applies DESeq2 normalization via MicrobiomeStat, builds a taxonomy tree, and
+visualizes the resulting abundances with phylobar.
+
+### [Global Patterns — phyloseq and TreeSummarizedExperiment](global_patterns.html)
+
+Shows how to create phylobar plots from both `phyloseq` and
+`TreeSummarizedExperiment` input objects using the Global Patterns dataset,
+demonstrating that both container formats work interchangeably.
+
+### [COVID-19 Immunology — Beyond Microbiome Data](covid_immunology.html)
+
+Applies phylobar to immune cell-type compositions from COVID-19 patient data,
+using a manually defined cell-type hierarchy in place of a microbial taxonomy.
+This vignette illustrates phylobar's applicability beyond microbiome studies.
+
+# Function Reference
+
+The full function reference is available at
+[https://mkdiro-o.github.io/phylobar/reference/](https://mkdiro-o.github.io/phylobar/reference/index.html).
+
+# Contact
+
+You can reach us by creating an
+[Issue](https://github.com/mkdiro-O/phylobar/issues) or emailing
+[ksankaran@wisc.edu](mailto:ksankaran@wisc.edu). We appreciate your interest and
+will respond promptly.

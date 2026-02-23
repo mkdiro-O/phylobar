@@ -1,0 +1,11 @@
+dependencies:
+  - name: d3
+    version: 7.8.5
+    src: htmlwidgets
+    script: d3.v7.min.js
+    stylesheet: d3.css
+  - name: phylobar
+    version: 0.0.1
+    src: htmlwidgets
+    script: phylobar-R.min.js
+    stylesheet: phylobar.css
