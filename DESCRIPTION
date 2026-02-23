@@ -23,6 +23,7 @@ Suggests:
     knitr,
     LUPINE,
     MicrobiomeStat,
+    mia,
     miaViz,
     microbiome,
     phyloseq,

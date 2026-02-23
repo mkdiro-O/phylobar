@@ -22,7 +22,6 @@ Prepare tree data for phylobar visualization
 }
 \examples{
 library(ape)
-set.seed(1)
 tree <- rtree(5)
 tree$node.label <- paste0("node", seq_len(4))
 x <- matrix(runif(15), nrow = 3)

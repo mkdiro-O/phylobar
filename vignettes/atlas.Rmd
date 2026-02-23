@@ -60,7 +60,7 @@ f_ for family), ensuring that ancestor and descendant nodes have unique labels.
 ```{r valid-tree}
 taxa <- tax_table(pseq3)
 taxa <- cbind(Kingdom = "Bacteria", taxa)
-taxa <- add_prefix(taxa)
+taxa <- phylobar::add_prefix(taxa)
 
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)

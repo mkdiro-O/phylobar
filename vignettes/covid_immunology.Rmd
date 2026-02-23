@@ -17,9 +17,16 @@ knitr::opts_chunk$set(
 ```
 
 
-In December 2020, while COVID-19 was still raging across the globe, [Su et al. ( 2020)](https://www.cell.com/cell/fulltext/S0092-8674(20)31444-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867420314446%3Fshowall%3Dtrue) published their pioneering study examining the immune and metabolic landscapes of mild to severe COVID patients.
+In December 2020, while COVID-19 was still raging across the globe, [Su et al. (
+2020)](https://doi.org/10.1016/j.cell.2020.10.037) published their pioneering
+study examining the immune and metabolic landscapes of mild to severe COVID
+patients.
 
-See the [DIVAS project](https://byronsyun.github.io/DIVAS_COVID19_CaseStudy/) for a more comprehensive introduction to their study design and a more in-depth analysis of their multiomic data. Here we just took the immune cell type composition information to illustrate how phylobar enables us to visualise immune cell type composition changes from milder to severer COVID-19.
+See the [DIVAS project](https://byronsyun.github.io/DIVAS_COVID19_CaseStudy/)
+for a more comprehensive introduction to their study design and a more in-depth
+analysis of their multiomic data. Here we just took the immune cell type
+composition information to illustrate how phylobar enables us to visualise
+immune cell type composition changes from milder to severer COVID-19.
 
 ```{r libraries}
 library(ape)
@@ -60,7 +67,8 @@ x <- cell_counts |>
 x <- x / rowSums(x)
 ```
 
-Based on biological knowledge, we manually define a phylo object for the hierarchy of immune cell types.
+Based on biological knowledge, we manually define a phylo object for the
+hierarchy of immune cell types.
 ```{r make_phylo_from_igraph}
 edges_text <- "source,target
 Hematopoietic stem cell,Common myeloid progenitor
@@ -109,8 +117,9 @@ tree <- list(
 class(tree) <- "phylo"
 ```
 
-Let's order patients by COVID severity (mild, moderate and severe). Then, within each severity group, use a
-hierarchical clustering leaf order to place samples with similar cell type compositions closer.
+Let's order patients by COVID severity (mild, moderate and severe). Then, within
+each severity group, use a hierarchical clustering leaf order to place samples
+with similar cell type compositions closer.
 ```{r patient-order}
 md <- metadata |>
     distinct(clinical_id, severity) |>
@@ -129,9 +138,19 @@ patient_order <- md %>%
     unlist(use.names = FALSE)
 ```
 
-Now we can make a phylobar visualization. We can see that T cells and monocytes made up the majority of cellular populations in patient samples. We can observe an overall increase of monocytes and decrease of NK and T cells, especially CD8 T cells, in moderate and severe COVID patients. These changes were found statistically significant in Su et al. (2020), and where highlighted in their Fig 1.
+Now we can make a phylobar visualization. We can see that T cells and monocytes
+made up the majority of cellular populations in patient samples. We can observe
+an overall increase of monocytes and decrease of NK and T cells, especially CD8
+T cells, in moderate and severe COVID patients. These changes were found
+statistically significant in Su et al. (2020), and where highlighted in their
+Fig 1.
 
-Another feature that was not characterised in Su et al. (2020) was the presence of gd (γδ, i.e. gamma delta) T cells in milder COVID patients exclusively. This echos some more recent findings suggesting that gd T cells may play an important role in the immune response to the pathogenic SARS-Cov-2 virus ([Massow et al., 2021](https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2021.741218/full); [Terzoli et al., 2024](https://www.nature.com/articles/s41541-024-00853-9)).
+Another feature that was not characterised in Su et al. (2020) was the presence
+of gd (γδ, i.e. gamma delta) T cells in milder COVID patients exclusively. This
+echos some more recent findings suggesting that gd T cells may play an important
+role in the immune response to the pathogenic SARS-Cov-2 virus ([Massow et al.,
+2021](https://doi.org/10.3389/fimmu.2021.741218);
+[Terzoli et al., 2024](https://www.nature.com/articles/s41541-024-00853-9)).
 ```{r phylobar-plot}
 phylobar(x[patient_order, ], tree)
 ```

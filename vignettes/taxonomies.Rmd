@@ -71,7 +71,7 @@ a valid tree object, which is used in the earlier Atlas vignette.
 ```{r atlas-fixed}
 taxa <- tax_table(atlas1006)
 taxa <- cbind(Kingdom = "Bacteria", taxa)
-taxa <- add_prefix(taxa)
+taxa <- phylobar::add_prefix(taxa)
 
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
@@ -154,7 +154,7 @@ together.
 
 
 ```{r dietswap-fixed}
-taxa <- add_prefix(taxa)
+taxa <- phylobar::add_prefix(taxa)
 taxa <- cbind(Kingdom = "k_Bacteria", taxa)
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
@@ -186,7 +186,7 @@ identifiers.
 
 ```{r globalpatterns-prepare}
 taxa <- data.frame(taxa)
-taxa <- add_prefix(taxa)
+taxa <- phylobar::add_prefix(taxa)
 taxa$ASV <- rownames(taxa)
 head(taxa)
 ```
@@ -204,7 +204,6 @@ checkValidPhylo(tree)
 To verify, we can simply plot the phylo object directly before creating a
 phylobar visualization. You can check that this a static version of the same
 tree that we work with in the main Global Patterns vignette.
-
 
 ```{r globalpatterns-plot}
 plot(tree)
