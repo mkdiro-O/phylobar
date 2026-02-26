@@ -40,16 +40,7 @@ library(seriation)
 
 First load the cell and patient metadata.
 ```{r read_in_data}
-url <- "https://zenodo.org/records/17477876/files/su-2020.rds?download=1"
-f <- tempfile()
-tryCatch(
-    download.file(url, f),
-    error = \(e) {
-        message("Unable to download data: ", conditionMessage(e))
-        knitr::knit_exit()
-    }
-)
-all_data <- readRDS(f)
+all_data <- read_url_rds("https://zenodo.org/records/17477876/files/su-2020.rds?download=1")
 cell_counts <- all_data$cell_counts
 metadata <- all_data$metadata
 ```

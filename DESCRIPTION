@@ -20,8 +20,6 @@ Suggests:
     DESeq2,
     dplyr,
     ggplot2,
-    knitr,
-    LUPINE,
     MicrobiomeStat,
     mia,
     miaViz,
@@ -40,6 +38,7 @@ Imports:
     ape,
     cluster,
     htmlwidgets,
+    knitr,
     phangorn,
     purrr
 Depends:

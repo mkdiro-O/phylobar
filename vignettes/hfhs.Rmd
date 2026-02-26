@@ -25,8 +25,8 @@ normal diet, and fecal samples were collected on days 0, 1, 4, and 7. Illumina
 MiSeq was used to generate 16S rRNA sequencing data, which were subsequently
 processed with QIIME 1.9.0. In this vignette, we use the preprocessed dataset
 from Kodikara et al. (2025). The dataset can be accessed through the GitHub
-repository of the `LUPINE` R package using the command
-`devtools::install_github("SarithaKodikara/LUPINE")`.
+repository of the [`LUPINE` R
+package](https://github.com/SarithaKodikara/LUPINE)
 
 Here, we demonstrate how to apply the phylobar package to create phylogeny-aware
 visualizations of the HFHS diet study data. Specifically, we walk through tree
@@ -48,7 +48,6 @@ exploratory analysis and helps decide which levels warrant downstream testing.
 The following code block loads the packages required for this analysis.
 ```{r setup}
 library(phylobar)   # phylogeny-aware bar plots
-library(LUPINE)     # HFHS example dataset
 library(dplyr)      # data wrangling
 library(ape)        # phylogenetic tree manipulation
 library(stringr)    # string operations
@@ -60,7 +59,7 @@ fed either a normal diet or an HFHS diet, along with the corresponding taxonomic
 annotations.
 
 ```{r data}
-data(HFHSdata)
+HFHSdata <- read_url_rds("https://zenodo.org/records/18791960/files/HFHS-data.rds?download=1")
 normal <- HFHSdata$OTUdata_Normal
 hfhs <- HFHSdata$OTUdata_HFHS
 taxa <- HFHSdata$filtered_taxonomy
