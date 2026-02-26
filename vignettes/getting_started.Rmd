@@ -142,3 +142,7 @@ You can reach us by creating an
 [Issue](https://github.com/mkdiro-O/phylobar/issues) or emailing
 [ksankaran@wisc.edu](mailto:ksankaran@wisc.edu). We appreciate your interest and
 will respond promptly.
+
+```{r session-info}
+sessionInfo()
+```
