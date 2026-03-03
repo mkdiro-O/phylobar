@@ -33,8 +33,9 @@ library(microbiome)
 ```
 
 # Setup
-We begin by loading the mouse diet study data, which is stored remotely and
-can be loaded into R as a phyloseq object.
+We begin by loading the atlas data, which is available through the microbiome
+package as a [phyloseq](https://bioconductor.org/packages/phyloseq/) object (a
+Bioconductor container for microbiome data).
 
 ```{r download-data}
 data(atlas1006)

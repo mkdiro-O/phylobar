@@ -17,7 +17,9 @@ knitr::opts_chunk$set(
 ```
 
 Taxonomy provides useful context for interpreting microbiome data, and taxonomy
-tables are often provided as output from microbiome sequencing pipelines.
+tables are often provided as output from microbiome sequencing pipelines or
+extracted from Bioconductor containers such as
+[phyloseq](https://bioconductor.org/packages/phyloseq/).
 However, phylobar requires a phylo object as input. This is a more formal
 representation of a tree than a table of taxonomy assignments.  To support the
 conversion, the package includes a helper function to convert such assignments
