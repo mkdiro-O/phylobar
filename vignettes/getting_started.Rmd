@@ -25,8 +25,16 @@ highlight specific rare taxa while leaving others at their background color.
 
 The main function, `phylobar()`, takes two inputs: a table of (potentially
 normalized) counts and a tree structure which can come from either a phylogeny
-or a table of taxonomic assignments. You can read more about the package in our
-preprint:
+or a table of taxonomic assignments. phylobar is designed for submission to
+[Bioconductor](https://bioconductor.org/) and is compatible with popular
+Bioconductor containers such as
+[TreeSummarizedExperiment](https://bioconductor.org/packages/TreeSummarizedExperiment/)
+and [phyloseq](https://bioconductor.org/packages/phyloseq/), so the
+visualization works seamlessly with a wide range of existing datasets. Several
+vignettes — including [Global Patterns](global_patterns.html),
+[Diet Analysis](diet_analysis.html), [Taxonomies](taxonomies.html), and
+[Atlas](atlas.html) — demonstrate working with data from these containers. You
+can read more about the package in our preprint:
 
 > Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2025).
 > phylobar: an R package for multiresolution compositional barplots in omics
