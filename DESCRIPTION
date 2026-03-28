@@ -1,6 +1,6 @@
 Package: phylobar
 Title: Interactive construction of stacked barplots using hierarchies
-Version: 0.99.0
+Version: 0.99.1
 Authors@R:
     c(
         person("Kris", "Sankaran", , "ksankaran@wisc.edu", role = c("aut", "cre", "fnd"), comment = c(ORCID = "0000-0002-9415-1971")),
