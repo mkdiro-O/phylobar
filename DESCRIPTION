@@ -20,7 +20,6 @@ Suggests:
     DESeq2,
     dplyr,
     ggplot2,
-    MicrobiomeStat,
     mia,
     miaViz,
     microbiome,
