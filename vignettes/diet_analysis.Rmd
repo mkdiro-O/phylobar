@@ -33,7 +33,6 @@ a focus on clades where dietary effects are most pronounced.
 library(phylobar)
 library(phyloseq)
 library(DESeq2)
-library(MicrobiomeStat)
 ```
 
 # Setup
@@ -46,12 +45,11 @@ diet_temp <- subset_samples(dietswap, timepoint == 1)
 diet <- subset_taxa(diet_temp, taxa_sums(diet_temp) > 0)
 ```
 
-To prepare the data for visualization, we first convert the phyloseq object
-into a MicrobiomeStat object using `mStat_convert_phyloseq_to_data_obj()`.
-This enables us to apply DESeq2 normalization, which corrects for sequencing
-depth differences across samples. We then transpose the normalized feature
-matrix so that rows correspond to taxa and columns to samples, as expected by
-`phylobar()`.
+To prepare the data for visualization, we first normalize the phyloseq count
+matrix using `deseq_normalize()`, which corrects for sequencing depth
+differences across samples using the DESeq size-factor method. We then
+transpose the normalized feature matrix so that rows correspond to taxa and
+columns to samples, as expected by `phylobar()`.
 
 Unlike relative-abundance normalization, DESeq2 does not constrain sample totals
 to equal one. This distinction highlights the flexibility of our functions,
@@ -60,9 +58,8 @@ After normalization, we transpose the feature matrix so that rows correspond to
 taxa and columns to samples, as required by `phylobar()`.
 
 ```{r preprocess}
-diet_mstat <- mStat_convert_phyloseq_to_data_obj(diet)
-diet_mstat <- mStat_normalize_data(diet_mstat, "DESeq")
-x <- t(diet_mstat$data.obj.norm$feature.tab)
+otu <- as(otu_table(diet), "matrix")
+x <- t(deseq_normalize(otu))
 ```
 
 Next, we construct a taxonomy-based tree from the available annotations. To
