@@ -7,6 +7,7 @@
 #' @return An R object from the RDS file.
 #' @importFrom knitr knit_exit
 #' @export
+#' @importFrom utils download.file
 #' @examples
 #' dat <- read_url_rds("https://zenodo.org/records/17477876/files/su-2020.rds?download=1")
 read_url_rds <- function(url) {
