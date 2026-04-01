@@ -1,0 +1,13 @@
+template:
+  bootstrap: 5
+  bslib:
+    bg: "#fefefe"
+    fg: "#5a6c7d"
+    primary: "#8fa4b3"
+    secondary: "#d4c5b9"
+    success: "#a8c68f"
+    info: "#9bb5d1"
+    warning: "#f4d4a7"
+    danger: "#e8a4a4"
+    "body-color": "#2c3e50"
+url: http://mkdiro-o.github.io/phylobar
