@@ -13,7 +13,7 @@
 read_url_rds <- function(url) {
     f <- tempfile()
     tryCatch(
-        download.file(url, f),
+        download.file(url, f, mode = "wb"),
         error = \(e) {
             message("Unable to download data: ", conditionMessage(e))
             knit_exit()
