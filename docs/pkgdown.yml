@@ -1,0 +1,15 @@
+pandoc: 3.8.3
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  atlas: atlas.html
+  covid_immunology: covid_immunology.html
+  customizing_files: customizing_files.html
+  diet_analysis: diet_analysis.html
+  exporting: exporting.html
+  getting_started: getting_started.html
+  global_patterns: global_patterns.html
+  hfhs: hfhs.html
+  articles/runtime_evaluation: runtime_evaluation.html
+  taxonomies: taxonomies.html
+last_built: 2026-04-07T16:34Z
