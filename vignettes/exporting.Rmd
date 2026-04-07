@@ -2,7 +2,7 @@
 title: "Exporting to Vector Graphics Format"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Exporting to Vector Graphics Format}
+  %\VignetteIndexEntry{4. Exporting to Vector Graphics Format}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

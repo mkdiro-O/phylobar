@@ -2,7 +2,7 @@
 title: "Differences in the Community Composition due to Diet"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Differences in the Community Composition due to Diet}
+  %\VignetteIndexEntry{7. Differences in the Community Composition due to Diet}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

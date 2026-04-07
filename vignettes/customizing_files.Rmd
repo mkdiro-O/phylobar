@@ -2,7 +2,7 @@
 title: "Customizing Style in phylobar"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Customizing Style in phylobar}
+  %\VignetteIndexEntry{3. Customizing Style in phylobar}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

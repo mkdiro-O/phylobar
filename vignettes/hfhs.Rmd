@@ -2,7 +2,7 @@
 title: "The effect of a high-fat high-sugar (HFHS) diet on the mouse microbiome"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{hfhs}
+  %\VignetteIndexEntry{8. The Effect of a High-Fat High-Sugar (HFHS) Diet on the Mouse Microbiome}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

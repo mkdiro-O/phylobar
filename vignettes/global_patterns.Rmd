@@ -2,7 +2,7 @@
 title: "Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset}
+  %\VignetteIndexEntry{5. Working with phyloseq and TreeSummarizedExperiment versions of the Global Patterns Dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

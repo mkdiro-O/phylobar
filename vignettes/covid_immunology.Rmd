@@ -2,7 +2,7 @@
 title: "Cell-type Hierarchy Informs COVID-19 Immunology"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Cell-type Hierarchy Informs COVID-19 Immunology}
+  %\VignetteIndexEntry{9. Cell-type Hierarchy Informs COVID-19 Immunology}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
