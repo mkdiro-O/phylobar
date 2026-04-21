@@ -16,6 +16,7 @@ check_inputs <- function(x, tree) {
         tree$node.label <- paste0("node", seq_len(tree$Nnode))
     }
     list(x = x, tree = tree)
+    # check that tree is actually a file and x is actually a matrix 
 }
 
 #' Tree + Stacked Bars

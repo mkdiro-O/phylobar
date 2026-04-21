@@ -59,7 +59,7 @@ fed either a normal diet or an HFHS diet, along with the corresponding taxonomic
 annotations.
 
 ```{r data}
-HFHSdata <- read_url_rds("https://zenodo.org/records/18791960/files/HFHS-data.rds?download=1")
+HFHSdata <- read_zenodo_rds("10.5281/zenodo.18791960", "HFHS-data.rds")
 normal <- HFHSdata$OTUdata_Normal
 hfhs <- HFHSdata$OTUdata_HFHS
 taxa <- HFHSdata$filtered_taxonomy

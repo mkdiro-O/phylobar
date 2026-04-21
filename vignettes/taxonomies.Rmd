@@ -88,7 +88,7 @@ categories. Since they often appear at multiple levels of resolution and under
 different parents, this breaks the tree structure.
 
 ```{r hfhs-invalid}
-HFHSdata <- read_url_rds("https://zenodo.org/records/18791960/files/HFHS-data.rds?download=1")
+HFHSdata <- read_zenodo_rds("10.5281/zenodo.18791960", "HFHS-data.rds")
 taxa <- HFHSdata$filtered_taxonomy
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)

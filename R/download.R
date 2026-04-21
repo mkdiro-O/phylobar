@@ -1,23 +1,24 @@
-#' Read an RDS file from URL
+#' Read an RDS file from Zenodo
 #'
-#' Downloads an online RDS file into a tempfile and reads it. If the download
-#' fails, a message is emitted and the vignette exits.
+#' Downloads an RDS file from a Zenodo record using \code{zen4R::download_zenodo}
+#' and reads it. If the download fails, a message is emitted and the vignette
+#' exits.
 #'
-#' @param url The URL to download.
+#' @param doi The DOI of the Zenodo record (e.g., "10.5281/zenodo.17477876").
+#' @param file The name of the RDS file within the record.
 #' @return An R object from the RDS file.
 #' @importFrom knitr knit_exit
 #' @export
-#' @importFrom utils download.file
 #' @examples
-#' dat <- read_url_rds("https://zenodo.org/records/17477876/files/su-2020.rds?download=1")
-read_url_rds <- function(url) {
-    f <- tempfile()
+#' dat <- read_zenodo_rds("10.5281/zenodo.17477876", "su-2020.rds")
+read_zenodo_rds <- function(doi, file) {
     tryCatch(
-        download.file(url, f, mode = "wb"),
+        zen4R::download_zenodo(doi = doi, path = tempdir(),
+                               files = file, quiet = TRUE),
         error = \(e) {
             message("Unable to download data: ", conditionMessage(e))
             knit_exit()
         }
     )
-    readRDS(f)
+    readRDS(file.path(tempdir(), file))
 }
