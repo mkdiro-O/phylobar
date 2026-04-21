@@ -6,6 +6,12 @@
 #' input.
 #' @noRd
 check_inputs <- function(x, tree) {
+    if (!inherits(tree, "phylo")) {
+        stop("'tree' must be an object of class 'phylo'.")
+    }
+    if (!is.matrix(x)) {
+        stop("'x' must be a matrix.")
+    }
     if (is.null(rownames(x))) {
         rownames(x) <- paste0("sample_", seq_len(nrow(x)))
     }
