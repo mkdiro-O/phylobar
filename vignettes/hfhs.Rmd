@@ -51,6 +51,7 @@ library(phylobar)   # phylogeny-aware bar plots
 library(dplyr)      # data wrangling
 library(ape)        # phylogenetic tree manipulation
 library(stringr)    # string operations
+library(zen4R)      # download from zenodo link
 ```
 
 Next, we load the HFHS dataset, which is stored in the LUPINE package as
@@ -59,7 +60,7 @@ fed either a normal diet or an HFHS diet, along with the corresponding taxonomic
 annotations.
 
 ```{r data}
-HFHSdata <- read_zenodo_rds("10.5281/zenodo.18791960", "HFHS-data.rds")
+HFHSdata <- download_zenodo("10.5281/zenodo.18791960", tempdir())
 normal <- HFHSdata$OTUdata_Normal
 hfhs <- HFHSdata$OTUdata_HFHS
 taxa <- HFHSdata$filtered_taxonomy
