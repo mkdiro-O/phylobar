@@ -16,10 +16,7 @@ format. You can export interactive snapshots to SVG using the SVG
 crowbar package, as shown in the “Exporting Views” vignette. You can
 read more about the package in our preprint:
 
-[Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2025).
-phylobar: an R package for multiresolution compositional barplots in
-omics studies.
-doi:10.1101/2025.11.05.686662](https://doi.org/10.1101/2025.11.05.686662)
+[Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2026). Phylobar: an R package for multiresolution compositional barplots in omics studies. Bioinformatics (Oxford, England), (btag151). doi:10.1093/bioinformatics/btag151](https://doi.org/10.1093/bioinformatics/btag151)
 
 ## Installation
 
