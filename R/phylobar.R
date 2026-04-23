@@ -9,8 +9,8 @@ check_inputs <- function(x, tree) {
     if (!inherits(tree, "phylo")) {
         stop("'tree' must be an object of class 'phylo'.")
     }
-    if (!is.matrix(x)) {
-        stop("'x' must be a matrix.")
+    if (!is.matrix(x) && !is.data.frame(x)) {
+        stop("'x' must be a matrix or data.frame.")
     }
     if (is.null(rownames(x))) {
         rownames(x) <- paste0("sample_", seq_len(nrow(x)))

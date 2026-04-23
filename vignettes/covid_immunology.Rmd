@@ -36,11 +36,13 @@ library(readr)
 library(tibble)
 library(tidyr)
 library(seriation)
+library(zen4R)
 ```
 
 First load the cell and patient metadata.
 ```{r read_in_data}
-all_data <- read_zenodo_rds("10.5281/zenodo.17477876", "su-2020.rds")
+download_zenodo("10.5281/zenodo.17477876", tempdir())
+all_data <- readRDS(file.path(tempdir(), "/su-2020.rds"))
 cell_counts <- all_data$cell_counts
 metadata <- all_data$metadata
 ```
