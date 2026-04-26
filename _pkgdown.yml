@@ -16,11 +16,18 @@ articles:
 - title: ~
   contents:
   - getting_started
+- title: "Workflow"
+  contents:
   - taxonomies
   - customizing_files
   - exporting
+- title: "Case Studies"
+  contents:
   - global_patterns
   - atlas
   - diet_analysis
   - hfhs
   - covid_immunology
+- title: "Benchmarks"
+  contents:
+  - articles/runtime_evaluation
