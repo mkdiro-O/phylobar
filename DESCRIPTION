@@ -1,6 +1,6 @@
 Package: phylobar
 Title: Interactive construction of stacked barplots using hierarchies
-Version: 0.99.2
+Version: 0.99.10
 Authors@R:
     c(
         person("Kris", "Sankaran", , "ksankaran@wisc.edu", role = c("aut", "cre", "fnd"), comment = c(ORCID = "0000-0002-9415-1971")),
@@ -31,7 +31,8 @@ Suggests:
     stringr,
     testthat (>= 3.0.0),
     tibble,
-    tidyr
+    tidyr,
+    zen4R
 VignetteBuilder: knitr
 Imports:
     ape,

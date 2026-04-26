@@ -16,14 +16,20 @@ format. You can export interactive snapshots to SVG using the SVG
 crowbar package, as shown in the “Exporting Views” vignette. You can
 read more about the package in our preprint:
 
-[Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2025).
-phylobar: an R package for multiresolution compositional barplots in
-omics studies.
-doi:10.1101/2025.11.05.686662](https://doi.org/10.1101/2025.11.05.686662)
+[Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2026). Phylobar: an R package for multiresolution compositional barplots in omics studies. Bioinformatics (Oxford, England), (btag151). doi:10.1093/bioinformatics/btag151](https://doi.org/10.1093/bioinformatics/btag151)
 
 ## Installation
 
-You can install the development version of phylobar using:
+You can install phylobar from Bioconductor using:
+
+``` r
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("phylobar")
+```
+
+Alternatively, you can install the development version from GitHub:
 
 ``` r
 remotes::install_github("mkdiro-o/phylobar")
@@ -52,10 +58,11 @@ recording of interactions with the HFHS data.
 
 ## Common Tasks
 
-- [Customizing style](https://mkdiro-o.github.io/phylobar/articles/customizing_files.html):
-  Phylobar supports a few styling customizations, like changing the size of
-  the text labels or the color palette. This vignette walks through currently
-  available options.
+- [Customizing
+  style](https://mkdiro-o.github.io/phylobar/articles/customizing_files.html):
+  Phylobar supports a few styling customizations, like changing the size
+  of the text labels or the color palette. This vignette walks through
+  currently available options.
 - [Building a tree from a
   taxonomy](https://mkdiro-o.github.io/phylobar/articles/taxonomies.html):
   Rather than interacting with abstract phylogenetic trees it can be

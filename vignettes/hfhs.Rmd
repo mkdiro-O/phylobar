@@ -2,7 +2,7 @@
 title: "The effect of a high-fat high-sugar (HFHS) diet on the mouse microbiome"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{hfhs}
+  %\VignetteIndexEntry{8. The Effect of a High-Fat High-Sugar (HFHS) Diet on the Mouse Microbiome}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -51,6 +51,7 @@ library(phylobar)   # phylogeny-aware bar plots
 library(dplyr)      # data wrangling
 library(ape)        # phylogenetic tree manipulation
 library(stringr)    # string operations
+library(zen4R)      # download from zenodo link
 ```
 
 Next, we load the HFHS dataset, which is stored in the LUPINE package as
@@ -59,7 +60,8 @@ fed either a normal diet or an HFHS diet, along with the corresponding taxonomic
 annotations.
 
 ```{r data}
-HFHSdata <- read_url_rds("https://zenodo.org/records/18791960/files/HFHS-data.rds?download=1")
+download_zenodo("10.5281/zenodo.18791960", tempdir())
+HFHSdata <- readRDS(str_c(tempdir(), "/HFHS-data.rds"))
 normal <- HFHSdata$OTUdata_Normal
 hfhs <- HFHSdata$OTUdata_HFHS
 taxa <- HFHSdata$filtered_taxonomy

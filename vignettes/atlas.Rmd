@@ -2,7 +2,7 @@
 title: "Tipping Points in the Atlas 1006 Dataset"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Tipping Points in the Atlas 1006 Dataset}
+  %\VignetteIndexEntry{6. Tipping Points in the Atlas 1006 Dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

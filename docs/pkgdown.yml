@@ -12,7 +12,11 @@ articles:
   hfhs: hfhs.html
   articles/runtime_evaluation: runtime_evaluation.html
   taxonomies: taxonomies.html
+<<<<<<< HEAD
 last_built: 2026-04-01T10:37Z
 urls:
   reference: http://mkdiro-o.github.io/phylobar/reference
   article: http://mkdiro-o.github.io/phylobar/articles
+=======
+last_built: 2026-04-07T16:34Z
+>>>>>>> devel

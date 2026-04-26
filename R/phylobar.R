@@ -6,6 +6,12 @@
 #' input.
 #' @noRd
 check_inputs <- function(x, tree) {
+    if (!inherits(tree, "phylo")) {
+        stop("'tree' must be an object of class 'phylo'.")
+    }
+    if (!is.matrix(x) && !is.data.frame(x)) {
+        stop("'x' must be a matrix or data.frame.")
+    }
     if (is.null(rownames(x))) {
         rownames(x) <- paste0("sample_", seq_len(nrow(x)))
     }
@@ -16,6 +22,7 @@ check_inputs <- function(x, tree) {
         tree$node.label <- paste0("node", seq_len(tree$Nnode))
     }
     list(x = x, tree = tree)
+    # check that tree is actually a file and x is actually a matrix 
 }
 
 #' Tree + Stacked Bars

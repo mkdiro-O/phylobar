@@ -2,7 +2,7 @@
 title: "Building Trees from Taxonomies"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Building Trees from Taxonomies}
+  %\VignetteIndexEntry{2. Building Trees from Taxonomies}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -88,7 +88,8 @@ categories. Since they often appear at multiple levels of resolution and under
 different parents, this breaks the tree structure.
 
 ```{r hfhs-invalid}
-HFHSdata <- read_url_rds("https://zenodo.org/records/18791960/files/HFHS-data.rds?download=1")
+download_zenodo("10.5281/zenodo.18791960", tempdir())
+HFHSdata <- readRDS(str_c(tempdir(), "/HFHS-data.rds"))
 taxa <- HFHSdata$filtered_taxonomy
 tree <- taxonomy_to_tree(taxa)
 checkValidPhylo(tree)
