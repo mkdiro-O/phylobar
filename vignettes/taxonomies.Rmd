@@ -35,6 +35,7 @@ library(dplyr)
 library(phylobar)
 library(phyloseq)
 library(stringr)
+library(zen4R)
 ```
 
 # Checking that that the induced tree is correct
