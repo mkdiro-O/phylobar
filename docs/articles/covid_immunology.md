@@ -22,13 +22,22 @@ library(readr)
 library(tibble)
 library(tidyr)
 library(seriation)
+library(zen4R)
 ```
 
 First load the cell and patient metadata.
 
 ``` r
 
-all_data <- read_url_rds("https://zenodo.org/records/17477876/files/su-2020.rds?download=1")
+download_zenodo("10.5281/zenodo.17477876", tempdir())
+#> [zen4R][INFO] ZenodoRecord - Download in sequential mode
+#> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '17477876' (doi: '10.5281/zenodo.17477876') - total size: 12.8 MiB
+#> [zen4R][INFO] Downloading file 'su-2020.rds' - size: 12.8 MiB
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmp2vtm8P'.
+#> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
+#> [zen4R][INFO] File 'su-2020.rds': integrity verified (md5sum: d35b5955552582e34ee8d722e96d70f5)
+#> [zen4R][INFO] ZenodoRecord - End of download
+all_data <- readRDS(file.path(tempdir(), "/su-2020.rds"))
 cell_counts <- all_data$cell_counts
 metadata <- all_data$metadata
 ```
@@ -157,36 +166,39 @@ sessionInfo()
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 #> 
-#> time zone: Europe/Lisbon
+#> time zone: America/Chicago
 #> tzcode source: internal
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] seriation_1.5.8  tidyr_1.3.2      tibble_3.3.1     readr_2.2.0     
-#> [5] phylobar_0.99.2  dplyr_1.2.0      ape_5.8-1        BiocStyle_2.38.0
+#> [1] zen4R_0.10.5     seriation_1.5.8  tidyr_1.3.2      tibble_3.3.1    
+#> [5] readr_2.2.0      phylobar_0.99.10 dplyr_1.2.0      ape_5.8-1       
+#> [9] BiocStyle_2.38.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] sass_0.4.10         generics_0.1.4      lattice_0.22-9     
-#>  [4] hms_1.1.4           digest_0.6.39       magrittr_2.0.4     
-#>  [7] evaluate_1.0.5      grid_4.5.2          iterators_1.0.14   
-#> [10] bookdown_0.46       fastmap_1.2.0       foreach_1.5.2      
-#> [13] jsonlite_2.0.0      Matrix_1.7-5        BiocManager_1.30.27
-#> [16] purrr_1.2.1         codetools_0.2-20    textshaping_1.0.5  
-#> [19] jquerylib_0.1.4     registry_0.5-1      cli_3.6.5          
-#> [22] crayon_1.5.3        rlang_1.1.7         bit64_4.6.0-1      
-#> [25] withr_3.0.2         cachem_1.1.0        yaml_2.3.12        
-#> [28] otel_0.2.0          tools_4.5.2         parallel_4.5.2     
-#> [31] tzdb_0.5.0          fastmatch_1.1-8     ca_0.71.1          
-#> [34] TSP_1.2.7           vctrs_0.7.2         R6_2.6.1           
-#> [37] lifecycle_1.0.5     bit_4.6.0           fs_2.0.1           
-#> [40] htmlwidgets_1.6.4   vroom_1.7.0         ragg_1.5.2         
-#> [43] cluster_2.1.8.2     pkgconfig_2.0.3     desc_1.4.3         
-#> [46] pkgdown_2.2.0       pillar_1.11.1       bslib_0.10.0       
-#> [49] glue_1.8.0          phangorn_2.12.1     Rcpp_1.1.1         
-#> [52] systemfonts_1.3.2   xfun_0.57           tidyselect_1.2.1   
-#> [55] knitr_1.51          htmltools_0.5.9     nlme_3.1-168       
-#> [58] igraph_2.2.2        rmarkdown_2.31      compiler_4.5.2     
-#> [61] quadprog_1.5-8
+#>  [1] fastmatch_1.1-8     xfun_0.57           bslib_0.10.0       
+#>  [4] htmlwidgets_1.6.4   lattice_0.22-9      tzdb_0.5.0         
+#>  [7] quadprog_1.5-8      vctrs_0.7.3         tools_4.5.2        
+#> [10] generics_0.1.4      curl_7.0.0          parallel_4.5.2     
+#> [13] ca_0.71.1           cluster_2.1.8.2     pkgconfig_2.0.3    
+#> [16] Matrix_1.7-5        desc_1.4.3          lifecycle_1.0.5    
+#> [19] compiler_4.5.2      textshaping_1.0.5   keyring_1.4.1      
+#> [22] codetools_0.2-20    htmltools_0.5.9     sass_0.4.10        
+#> [25] yaml_2.3.12         crayon_1.5.3        pillar_1.11.1      
+#> [28] pkgdown_2.2.0       jquerylib_0.1.4     cachem_1.1.0       
+#> [31] iterators_1.0.14    TSP_1.2.7           foreach_1.5.2      
+#> [34] nlme_3.1-168        phangorn_2.12.1     tidyselect_1.2.1   
+#> [37] digest_0.6.39       purrr_1.2.2         bookdown_0.46      
+#> [40] fastmap_1.2.0       grid_4.5.2          cli_3.6.6          
+#> [43] magrittr_2.0.5      XML_3.99-0.23       utf8_1.2.6         
+#> [46] withr_3.0.2         bit64_4.6.0-1       registry_0.5-1     
+#> [49] rmarkdown_2.31      httr_1.4.8          bit_4.6.0          
+#> [52] igraph_2.3.0        otel_0.2.0          ragg_1.5.2         
+#> [55] hms_1.1.4           evaluate_1.0.5      knitr_1.51         
+#> [58] rlang_1.2.0         Rcpp_1.1.1-1.1      glue_1.8.1         
+#> [61] BiocManager_1.30.27 xml2_1.5.2          vroom_1.7.0        
+#> [64] jsonlite_2.0.0      R6_2.6.1            plyr_1.8.9         
+#> [67] systemfonts_1.3.2   fs_2.1.0
 ```

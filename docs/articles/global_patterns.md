@@ -149,7 +149,7 @@ sessionInfo()
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 #> 
-#> time zone: Europe/Lisbon
+#> time zone: America/Chicago
 #> tzcode source: internal
 #> 
 #> attached base packages:
@@ -168,7 +168,7 @@ sessionInfo()
 #> [17] generics_0.1.4                  MatrixGenerics_1.22.0          
 #> [19] matrixStats_1.5.0               ggraph_2.2.2                   
 #> [21] ggplot2_4.0.2                   phyloseq_1.54.2                
-#> [23] phylobar_0.99.2                 ape_5.8-1                      
+#> [23] phylobar_0.99.10                ape_5.8-1                      
 #> [25] BiocStyle_2.38.0               
 #> 
 #> loaded via a namespace (and not attached):
@@ -177,13 +177,13 @@ sessionInfo()
 #>   [5] polyclip_1.10-7             DirichletMultinomial_1.52.0
 #>   [7] lifecycle_1.0.5             lattice_0.22-9             
 #>   [9] MASS_7.3-65                 SnowballC_0.7.1            
-#>  [11] magrittr_2.0.4              sass_0.4.10                
+#>  [11] magrittr_2.0.5              sass_0.4.10                
 #>  [13] rmarkdown_2.31              jquerylib_0.1.4            
 #>  [15] yaml_2.3.12                 otel_0.2.0                 
 #>  [17] DBI_1.3.0                   RColorBrewer_1.1-3         
 #>  [19] ade4_1.7-24                 multcomp_1.4-30            
 #>  [21] abind_1.4-8                 quadprog_1.5-8             
-#>  [23] purrr_1.2.1                 fillpattern_1.0.3          
+#>  [23] purrr_1.2.2                 fillpattern_1.0.3          
 #>  [25] yulab.utils_0.2.4           TH.data_1.1-5              
 #>  [27] tweenr_2.0.3                rappdirs_0.3.4             
 #>  [29] sandwich_3.1-1              gdtools_0.5.0              
@@ -204,7 +204,7 @@ sessionInfo()
 #>  [59] systemfonts_1.3.2           foreach_1.5.2              
 #>  [61] tools_4.5.2                 ggnewscale_0.5.2           
 #>  [63] treeio_1.34.0               ragg_1.5.2                 
-#>  [65] Rcpp_1.1.1                  glue_1.8.0                 
+#>  [65] Rcpp_1.1.1-1.1              glue_1.8.1                 
 #>  [67] gridExtra_2.3               SparseArray_1.10.9         
 #>  [69] BiocBaseUtils_1.12.0        xfun_0.57                  
 #>  [71] mgcv_1.9-4                  dplyr_1.2.0                
@@ -229,22 +229,22 @@ sessionInfo()
 #> [109] rhdf5_2.54.1                stringr_1.6.0              
 #> [111] parallel_4.5.2              vipor_0.4.7                
 #> [113] desc_1.4.3                  pillar_1.11.1              
-#> [115] grid_4.5.2                  vctrs_0.7.2                
+#> [115] grid_4.5.2                  vctrs_0.7.3                
 #> [117] slam_0.1-55                 BiocSingular_1.26.1        
 #> [119] beachmat_2.26.0             xtable_1.8-8               
 #> [121] cluster_2.1.8.2             beeswarm_0.4.0             
 #> [123] evaluate_1.0.5              readr_2.2.0                
-#> [125] mvtnorm_1.3-6               cli_3.6.5                  
-#> [127] compiler_4.5.2              rlang_1.1.7                
+#> [125] mvtnorm_1.3-6               cli_3.6.6                  
+#> [127] compiler_4.5.2              rlang_1.2.0                
 #> [129] crayon_1.5.3                tidytext_0.4.3             
-#> [131] plyr_1.8.9                  fs_2.0.1                   
+#> [131] plyr_1.8.9                  fs_2.1.0                   
 #> [133] ggbeeswarm_0.7.3            ggiraph_0.9.6              
 #> [135] stringi_1.8.7               viridisLite_0.4.3          
 #> [137] BiocParallel_1.44.0         lazyeval_0.2.2             
 #> [139] fontquiver_0.2.1            Matrix_1.7-5               
 #> [141] hms_1.1.4                   patchwork_1.3.2            
 #> [143] sparseMatrixStats_1.22.0    Rhdf5lib_1.32.0            
-#> [145] gridtext_0.1.6              igraph_2.2.2               
+#> [145] gridtext_0.1.6              igraph_2.3.0               
 #> [147] memoise_2.0.1               bslib_0.10.0               
 #> [149] ggtree_4.0.5                phangorn_2.12.1            
 #> [151] fastmatch_1.1-8             readxl_1.4.5

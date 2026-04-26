@@ -168,34 +168,34 @@ sessionInfo()
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 #> 
-#> time zone: Europe/Lisbon
+#> time zone: America/Chicago
 #> tzcode source: internal
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] phylobar_0.99.2  ggplot2_4.0.2    ape_5.8-1        BiocStyle_2.38.0
+#> [1] phylobar_0.99.10 ggplot2_4.0.2    ape_5.8-1        BiocStyle_2.38.0
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] sass_0.4.10         generics_0.1.4      lattice_0.22-9     
-#>  [4] digest_0.6.39       magrittr_2.0.4      evaluate_1.0.5     
+#>  [4] digest_0.6.39       magrittr_2.0.5      evaluate_1.0.5     
 #>  [7] grid_4.5.2          RColorBrewer_1.1-3  bookdown_0.46      
 #> [10] fastmap_1.2.0       jsonlite_2.0.0      Matrix_1.7-5       
-#> [13] BiocManager_1.30.27 purrr_1.2.1         scales_1.4.0       
+#> [13] BiocManager_1.30.27 purrr_1.2.2         scales_1.4.0       
 #> [16] codetools_0.2-20    textshaping_1.0.5   jquerylib_0.1.4    
-#> [19] cli_3.6.5           rlang_1.1.7         withr_3.0.2        
+#> [19] cli_3.6.6           rlang_1.2.0         withr_3.0.2        
 #> [22] cachem_1.1.0        yaml_2.3.12         otel_0.2.0         
 #> [25] tools_4.5.2         parallel_4.5.2      dplyr_1.2.0        
-#> [28] fastmatch_1.1-8     vctrs_0.7.2         R6_2.6.1           
-#> [31] lifecycle_1.0.5     fs_2.0.1            htmlwidgets_1.6.4  
+#> [28] fastmatch_1.1-8     vctrs_0.7.3         R6_2.6.1           
+#> [31] lifecycle_1.0.5     fs_2.1.0            htmlwidgets_1.6.4  
 #> [34] ragg_1.5.2          cluster_2.1.8.2     pkgconfig_2.0.3    
 #> [37] desc_1.4.3          pkgdown_2.2.0       bslib_0.10.0       
-#> [40] pillar_1.11.1       gtable_0.3.6        glue_1.8.0         
-#> [43] phangorn_2.12.1     Rcpp_1.1.1          systemfonts_1.3.2  
+#> [40] pillar_1.11.1       gtable_0.3.6        glue_1.8.1         
+#> [43] phangorn_2.12.1     Rcpp_1.1.1-1.1      systemfonts_1.3.2  
 #> [46] xfun_0.57           tibble_3.3.1        tidyselect_1.2.1   
 #> [49] knitr_1.51          dichromat_2.0-0.1   farver_2.1.2       
-#> [52] igraph_2.2.2        htmltools_0.5.9     nlme_3.1-168       
+#> [52] igraph_2.3.0        htmltools_0.5.9     nlme_3.1-168       
 #> [55] labeling_0.4.3      rmarkdown_2.31      compiler_4.5.2     
 #> [58] quadprog_1.5-8      S7_0.2.1
 ```

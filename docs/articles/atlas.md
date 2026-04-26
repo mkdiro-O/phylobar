@@ -154,45 +154,45 @@ sessionInfo()
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 #> 
-#> time zone: Europe/Lisbon
+#> time zone: America/Chicago
 #> tzcode source: internal
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] microbiome_1.32.0 ggplot2_4.0.2     phyloseq_1.54.2   phylobar_0.99.2  
+#> [1] microbiome_1.32.0 ggplot2_4.0.2     phyloseq_1.54.2   phylobar_0.99.10 
 #> [5] ape_5.8-1         BiocStyle_2.38.0 
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] ade4_1.7-24         tidyselect_1.2.1    dplyr_1.2.0        
 #>  [4] farver_2.1.2        Biostrings_2.78.0   S7_0.2.1           
 #>  [7] fastmap_1.2.0       digest_0.6.39       lifecycle_1.0.5    
-#> [10] cluster_2.1.8.2     survival_3.8-6      magrittr_2.0.4     
-#> [13] compiler_4.5.2      rlang_1.1.7         sass_0.4.10        
-#> [16] tools_4.5.2         igraph_2.2.2        yaml_2.3.12        
+#> [10] cluster_2.1.8.2     survival_3.8-6      magrittr_2.0.5     
+#> [13] compiler_4.5.2      rlang_1.2.0         sass_0.4.10        
+#> [16] tools_4.5.2         igraph_2.3.0        yaml_2.3.12        
 #> [19] data.table_1.18.2.1 knitr_1.51          phangorn_2.12.1    
 #> [22] htmlwidgets_1.6.4   plyr_1.8.9          RColorBrewer_1.1-3 
-#> [25] Rtsne_0.17          withr_3.0.2         purrr_1.2.1        
+#> [25] Rtsne_0.17          withr_3.0.2         purrr_1.2.2        
 #> [28] BiocGenerics_0.56.0 desc_1.4.3          grid_4.5.2         
 #> [31] stats4_4.5.2        multtest_2.66.0     biomformat_1.38.3  
 #> [34] Rhdf5lib_1.32.0     scales_1.4.0        iterators_1.0.14   
-#> [37] MASS_7.3-65         dichromat_2.0-0.1   cli_3.6.5          
+#> [37] MASS_7.3-65         dichromat_2.0-0.1   cli_3.6.6          
 #> [40] rmarkdown_2.31      vegan_2.7-3         crayon_1.5.3       
 #> [43] ragg_1.5.2          generics_0.1.4      otel_0.2.0         
 #> [46] reshape2_1.4.5      cachem_1.1.0        rhdf5_2.54.1       
 #> [49] stringr_1.6.0       splines_4.5.2       parallel_4.5.2     
-#> [52] BiocManager_1.30.27 XVector_0.50.0      vctrs_0.7.2        
+#> [52] BiocManager_1.30.27 XVector_0.50.0      vctrs_0.7.3        
 #> [55] Matrix_1.7-5        jsonlite_2.0.0      bookdown_0.46      
 #> [58] IRanges_2.44.0      S4Vectors_0.48.0    systemfonts_1.3.2  
 #> [61] foreach_1.5.2       tidyr_1.3.2         jquerylib_0.1.4    
-#> [64] glue_1.8.0          pkgdown_2.2.0       codetools_0.2-20   
+#> [64] glue_1.8.1          pkgdown_2.2.0       codetools_0.2-20   
 #> [67] stringi_1.8.7       gtable_0.3.6        quadprog_1.5-8     
 #> [70] tibble_3.3.1        pillar_1.11.1       rhdf5filters_1.22.0
 #> [73] htmltools_0.5.9     Seqinfo_1.0.0       R6_2.6.1           
 #> [76] textshaping_1.0.5   evaluate_1.0.5      lattice_0.22-9     
-#> [79] Biobase_2.70.0      bslib_0.10.0        Rcpp_1.1.1         
+#> [79] Biobase_2.70.0      bslib_0.10.0        Rcpp_1.1.1-1.1     
 #> [82] fastmatch_1.1-8     nlme_3.1-168        permute_0.9-10     
-#> [85] mgcv_1.9-4          xfun_0.57           fs_2.0.1           
+#> [85] mgcv_1.9-4          xfun_0.57           fs_2.1.0           
 #> [88] pkgconfig_2.0.3
 ```

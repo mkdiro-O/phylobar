@@ -39,6 +39,7 @@ library(phylobar)   # phylogeny-aware bar plots
 library(dplyr)      # data wrangling
 library(ape)        # phylogenetic tree manipulation
 library(stringr)    # string operations
+library(zen4R)      # download from zenodo link
 ```
 
 Next, we load the HFHS dataset, which is stored in the LUPINE package as
@@ -48,7 +49,15 @@ corresponding taxonomic annotations.
 
 ``` r
 
-HFHSdata <- read_url_rds("https://zenodo.org/records/18791960/files/HFHS-data.rds?download=1")
+download_zenodo("10.5281/zenodo.18791960", tempdir())
+#> [zen4R][INFO] ZenodoRecord - Download in sequential mode
+#> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '18791960' (doi: '10.5281/zenodo.18791960') - total size: 76.2 KiB
+#> [zen4R][INFO] Downloading file 'HFHS-data.rds' - size: 76.2 KiB
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmp6Bybs9'.
+#> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
+#> [zen4R][INFO] File 'HFHS-data.rds': integrity verified (md5sum: 3266a55a3d0e01db0f0c99c7cb7a8e06)
+#> [zen4R][INFO] ZenodoRecord - End of download
+HFHSdata <- readRDS(str_c(tempdir(), "/HFHS-data.rds"))
 normal <- HFHSdata$OTUdata_Normal
 hfhs <- HFHSdata$OTUdata_HFHS
 taxa <- HFHSdata$filtered_taxonomy
@@ -261,33 +270,35 @@ sessionInfo()
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 #> 
-#> time zone: Europe/Lisbon
+#> time zone: America/Chicago
 #> tzcode source: internal
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] stringr_1.6.0    ape_5.8-1        dplyr_1.2.0      phylobar_0.99.2 
-#> [5] BiocStyle_2.38.0
+#> [1] zen4R_0.10.5     stringr_1.6.0    ape_5.8-1        dplyr_1.2.0     
+#> [5] phylobar_0.99.10 BiocStyle_2.38.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] sass_0.4.10         generics_0.1.4      stringi_1.8.7      
-#>  [4] lattice_0.22-9      digest_0.6.39       magrittr_2.0.4     
-#>  [7] evaluate_1.0.5      grid_4.5.2          bookdown_0.46      
-#> [10] fastmap_1.2.0       jsonlite_2.0.0      Matrix_1.7-5       
-#> [13] BiocManager_1.30.27 purrr_1.2.1         codetools_0.2-20   
-#> [16] textshaping_1.0.5   jquerylib_0.1.4     cli_3.6.5          
-#> [19] rlang_1.1.7         withr_3.0.2         cachem_1.1.0       
-#> [22] yaml_2.3.12         otel_0.2.0          tools_4.5.2        
-#> [25] parallel_4.5.2      fastmatch_1.1-8     png_0.1-9          
-#> [28] vctrs_0.7.2         R6_2.6.1            lifecycle_1.0.5    
-#> [31] fs_2.0.1            htmlwidgets_1.6.4   ragg_1.5.2         
-#> [34] cluster_2.1.8.2     pkgconfig_2.0.3     desc_1.4.3         
-#> [37] pkgdown_2.2.0       bslib_0.10.0        pillar_1.11.1      
-#> [40] glue_1.8.0          phangorn_2.12.1     Rcpp_1.1.1         
-#> [43] systemfonts_1.3.2   xfun_0.57           tibble_3.3.1       
-#> [46] tidyselect_1.2.1    knitr_1.51          htmltools_0.5.9    
-#> [49] nlme_3.1-168        igraph_2.2.2        rmarkdown_2.31     
-#> [52] compiler_4.5.2      quadprog_1.5-8
+#>  [1] utf8_1.2.6          sass_0.4.10         generics_0.1.4     
+#>  [4] xml2_1.5.2          stringi_1.8.7       lattice_0.22-9     
+#>  [7] digest_0.6.39       magrittr_2.0.5      evaluate_1.0.5     
+#> [10] grid_4.5.2          bookdown_0.46       fastmap_1.2.0      
+#> [13] plyr_1.8.9          jsonlite_2.0.0      Matrix_1.7-5       
+#> [16] BiocManager_1.30.27 httr_1.4.8          purrr_1.2.2        
+#> [19] XML_3.99-0.23       codetools_0.2-20    textshaping_1.0.5  
+#> [22] jquerylib_0.1.4     cli_3.6.6           rlang_1.2.0        
+#> [25] withr_3.0.2         cachem_1.1.0        yaml_2.3.12        
+#> [28] otel_0.2.0          tools_4.5.2         parallel_4.5.2     
+#> [31] fastmatch_1.1-8     curl_7.0.0          png_0.1-9          
+#> [34] vctrs_0.7.3         R6_2.6.1            lifecycle_1.0.5    
+#> [37] fs_2.1.0            htmlwidgets_1.6.4   ragg_1.5.2         
+#> [40] cluster_2.1.8.2     pkgconfig_2.0.3     desc_1.4.3         
+#> [43] pkgdown_2.2.0       bslib_0.10.0        pillar_1.11.1      
+#> [46] glue_1.8.1          phangorn_2.12.1     Rcpp_1.1.1-1.1     
+#> [49] systemfonts_1.3.2   xfun_0.57           tibble_3.3.1       
+#> [52] tidyselect_1.2.1    keyring_1.4.1       knitr_1.51         
+#> [55] htmltools_0.5.9     nlme_3.1-168        igraph_2.3.0       
+#> [58] rmarkdown_2.31      compiler_4.5.2      quadprog_1.5-8
 ```

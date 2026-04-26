@@ -61,7 +61,7 @@ HTMLWidgets.widget({
         phylobar.update_tree(el, tree, rscale, link_gen,  palette, color_sets);
         phylobar.update_stack(el, stacks, b_scale, labels, feature_map, palette, color_sets, opts);
         phylobar.update_event_listeners(el, tree, neighborhoods, feature_map, palette, color_sets, true, opts);
-        phylobar.update_tree_labels(el, color_sets, feature_map, tree.descendants(), opts);
+        phylobar.update_tree_labels(el, color_sets, feature_map, tree.descendants(), palette, opts);
         phylobar.update_sample_labels(el, b_scale, labels, opts);
         phylobar.update_resolution(
           el, neighborhoods, tree, stacks, labels, palette, color_sets,

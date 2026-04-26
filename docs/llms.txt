@@ -15,14 +15,24 @@ format. You can export interactive snapshots to SVG using the SVG
 crowbar package, as shown in the “Exporting Views” vignette. You can
 read more about the package in our preprint:
 
-[Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2025).
-phylobar: an R package for multiresolution compositional barplots in
-omics studies.
-doi:10.1101/2025.11.05.686662](https://doi.org/10.1101/2025.11.05.686662)
+[Kuo, M., Lê Cao, K.-A., Kodikara, S., Mao, J., & Sankaran, K. (2026).
+Phylobar: an R package for multiresolution compositional barplots in
+omics studies. Bioinformatics (Oxford, England), (btag151).
+doi:10.1093/bioinformatics/btag151](https://doi.org/10.1093/bioinformatics/btag151)
 
 ## Installation
 
-You can install the development version of phylobar using:
+You can install phylobar from Bioconductor using:
+
+``` r
+
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("phylobar")
+```
+
+Alternatively, you can install the development version from GitHub:
 
 ``` r
 
@@ -118,8 +128,6 @@ promptly.
   : Tree + Stacked Bars
 - [`phylobar_data()`](http://mkdiro-o.github.io/phylobar/reference/phylobar_data.md)
   : Prepare tree data for phylobar visualization
-- [`read_url_rds()`](http://mkdiro-o.github.io/phylobar/reference/read_url_rds.md)
-  : Read an RDS file from URL
 - [`subset_cluster()`](http://mkdiro-o.github.io/phylobar/reference/subset_cluster.md)
   : Subsample rows of a matrix using clustering
 - [`taxonomy_to_tree()`](http://mkdiro-o.github.io/phylobar/reference/taxonomy_to_tree.md)
@@ -127,26 +135,6 @@ promptly.
 
 # Articles
 
-### All vignettes
+Developed by Kris Sankaran, Megan Kuo, Saritha Kodikara, Jiadong Mao.
 
-- [Tipping Points in the Atlas 1006
-  Dataset](http://mkdiro-o.github.io/phylobar/articles/atlas.md):
-- [Cell-type Hierarchy Informs COVID-19
-  Immunology](http://mkdiro-o.github.io/phylobar/articles/covid_immunology.md):
-- [Customizing Style in
-  phylobar](http://mkdiro-o.github.io/phylobar/articles/customizing_files.md):
-- [Differences in the Community Composition due to
-  Diet](http://mkdiro-o.github.io/phylobar/articles/diet_analysis.md):
-- [Exporting to Vector Graphics
-  Format](http://mkdiro-o.github.io/phylobar/articles/exporting.md):
-- [Getting
-  Started](http://mkdiro-o.github.io/phylobar/articles/getting_started.md):
-- [Working with phyloseq and TreeSummarizedExperiment versions of the
-  Global Patterns
-  Dataset](http://mkdiro-o.github.io/phylobar/articles/global_patterns.md):
-- [The effect of a high-fat high-sugar (HFHS) diet on the mouse
-  microbiome](http://mkdiro-o.github.io/phylobar/articles/hfhs.md):
-- [Comparing Runtime across Sample Sizes and Number of
-  Taxa](http://mkdiro-o.github.io/phylobar/articles/runtime_evaluation.md):
-- [Building Trees from
-  Taxonomies](http://mkdiro-o.github.io/phylobar/articles/taxonomies.md):
+Site built with [pkgdown](https://pkgdown.r-lib.org/) 2.2.0.

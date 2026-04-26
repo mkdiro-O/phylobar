@@ -18,8 +18,6 @@
   : Tree + Stacked Bars
 - [`phylobar_data()`](http://mkdiro-o.github.io/phylobar/reference/phylobar_data.md)
   : Prepare tree data for phylobar visualization
-- [`read_url_rds()`](http://mkdiro-o.github.io/phylobar/reference/read_url_rds.md)
-  : Read an RDS file from URL
 - [`subset_cluster()`](http://mkdiro-o.github.io/phylobar/reference/subset_cluster.md)
   : Subsample rows of a matrix using clustering
 - [`taxonomy_to_tree()`](http://mkdiro-o.github.io/phylobar/reference/taxonomy_to_tree.md)

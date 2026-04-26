@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">phylobar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.10</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,8 @@ used to address them.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mkdiro-O/phylobar" class="external-link">phylobar</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://dx.plos.org/10.1371/journal.pone.0061217" class="external-link">phyloseq</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/eblondel/zen4R" class="external-link">zen4R</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="checking-that-that-the-induced-tree-is-correct">Checking that that the induced tree is correct<a class="anchor" aria-label="anchor" href="#checking-that-that-the-induced-tree-is-correct"></a>
 </h2>
@@ -157,7 +158,15 @@ treated as valid categories. Since they often appear at multiple levels
 of resolution and under different parents, this breaks the tree
 structure.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">HFHSdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_url_rds.html">read_url_rds</a></span><span class="op">(</span><span class="st">"https://zenodo.org/records/18791960/files/HFHS-data.rds?download=1"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/zen4R/man/download_zenodo.html" class="external-link">download_zenodo</a></span><span class="op">(</span><span class="st">"10.5281/zenodo.18791960"</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [zen4R][INFO] ZenodoRecord - Download in sequential mode</span></span>
+<span><span class="co">#&gt; [zen4R][INFO] ZenodoRecord - Will download 1 file from record '18791960' (doi: '10.5281/zenodo.18791960') - total size: 76.2 KiB</span></span>
+<span><span class="co">#&gt; [zen4R][INFO] Downloading file 'HFHS-data.rds' - size: 76.2 KiB</span></span>
+<span><span class="co">#&gt; [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpObR6Hk'.</span></span>
+<span><span class="co">#&gt; [zen4R][INFO] ZenodoRecord - Verifying file integrity...</span></span>
+<span><span class="co">#&gt; [zen4R][INFO] File 'HFHS-data.rds': integrity verified (md5sum: 3266a55a3d0e01db0f0c99c7cb7a8e06)</span></span>
+<span><span class="co">#&gt; [zen4R][INFO] ZenodoRecord - End of download</span></span>
+<span><span class="va">HFHSdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/HFHS-data.rds"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">taxa</span> <span class="op">&lt;-</span> <span class="va">HFHSdata</span><span class="op">$</span><span class="va">filtered_taxonomy</span></span>
 <span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxonomy_to_tree.html">taxonomy_to_tree</a></span><span class="op">(</span><span class="va">taxa</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/checkValidPhylo.html" class="external-link">checkValidPhylo</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span>
@@ -371,46 +380,48 @@ vignette.</p>
 <span><span class="co">#&gt; locale:</span></span>
 <span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; time zone: Europe/Lisbon</span></span>
+<span><span class="co">#&gt; time zone: America/Chicago</span></span>
 <span><span class="co">#&gt; tzcode source: internal</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attached base packages:</span></span>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] stringr_1.6.0    phyloseq_1.54.2  phylobar_0.99.2  dplyr_1.2.0     </span></span>
-<span><span class="co">#&gt; [5] ape_5.8-1        BiocStyle_2.38.0</span></span>
+<span><span class="co">#&gt; [1] zen4R_0.10.5     stringr_1.6.0    phyloseq_1.54.2  phylobar_0.99.10</span></span>
+<span><span class="co">#&gt; [5] dplyr_1.2.0      ape_5.8-1        BiocStyle_2.38.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] ade4_1.7-24         tidyselect_1.2.1    farver_2.1.2       </span></span>
 <span><span class="co">#&gt;  [4] Biostrings_2.78.0   S7_0.2.1            fastmap_1.2.0      </span></span>
-<span><span class="co">#&gt;  [7] digest_0.6.39       lifecycle_1.0.5     cluster_2.1.8.2    </span></span>
-<span><span class="co">#&gt; [10] survival_3.8-6      magrittr_2.0.4      compiler_4.5.2     </span></span>
-<span><span class="co">#&gt; [13] rlang_1.1.7         sass_0.4.10         tools_4.5.2        </span></span>
-<span><span class="co">#&gt; [16] igraph_2.2.2        yaml_2.3.12         data.table_1.18.2.1</span></span>
-<span><span class="co">#&gt; [19] knitr_1.51          phangorn_2.12.1     htmlwidgets_1.6.4  </span></span>
-<span><span class="co">#&gt; [22] plyr_1.8.9          RColorBrewer_1.1-3  withr_3.0.2        </span></span>
-<span><span class="co">#&gt; [25] purrr_1.2.1         BiocGenerics_0.56.0 desc_1.4.3         </span></span>
-<span><span class="co">#&gt; [28] grid_4.5.2          stats4_4.5.2        multtest_2.66.0    </span></span>
-<span><span class="co">#&gt; [31] biomformat_1.38.3   Rhdf5lib_1.32.0     ggplot2_4.0.2      </span></span>
-<span><span class="co">#&gt; [34] scales_1.4.0        iterators_1.0.14    MASS_7.3-65        </span></span>
-<span><span class="co">#&gt; [37] dichromat_2.0-0.1   cli_3.6.5           rmarkdown_2.31     </span></span>
-<span><span class="co">#&gt; [40] vegan_2.7-3         crayon_1.5.3        ragg_1.5.2         </span></span>
-<span><span class="co">#&gt; [43] generics_0.1.4      otel_0.2.0          reshape2_1.4.5     </span></span>
-<span><span class="co">#&gt; [46] cachem_1.1.0        rhdf5_2.54.1        splines_4.5.2      </span></span>
-<span><span class="co">#&gt; [49] parallel_4.5.2      BiocManager_1.30.27 XVector_0.50.0     </span></span>
-<span><span class="co">#&gt; [52] vctrs_0.7.2         Matrix_1.7-5        jsonlite_2.0.0     </span></span>
-<span><span class="co">#&gt; [55] bookdown_0.46       IRanges_2.44.0      S4Vectors_0.48.0   </span></span>
-<span><span class="co">#&gt; [58] systemfonts_1.3.2   foreach_1.5.2       jquerylib_0.1.4    </span></span>
-<span><span class="co">#&gt; [61] glue_1.8.0          pkgdown_2.2.0       codetools_0.2-20   </span></span>
-<span><span class="co">#&gt; [64] stringi_1.8.7       gtable_0.3.6        quadprog_1.5-8     </span></span>
-<span><span class="co">#&gt; [67] tibble_3.3.1        pillar_1.11.1       htmltools_0.5.9    </span></span>
-<span><span class="co">#&gt; [70] Seqinfo_1.0.0       rhdf5filters_1.22.0 R6_2.6.1           </span></span>
-<span><span class="co">#&gt; [73] textshaping_1.0.5   evaluate_1.0.5      lattice_0.22-9     </span></span>
-<span><span class="co">#&gt; [76] Biobase_2.70.0      bslib_0.10.0        Rcpp_1.1.1         </span></span>
-<span><span class="co">#&gt; [79] fastmatch_1.1-8     nlme_3.1-168        permute_0.9-10     </span></span>
-<span><span class="co">#&gt; [82] mgcv_1.9-4          xfun_0.57           fs_2.0.1           </span></span>
-<span><span class="co">#&gt; [85] pkgconfig_2.0.3</span></span></code></pre></div>
+<span><span class="co">#&gt;  [7] XML_3.99-0.23       digest_0.6.39       lifecycle_1.0.5    </span></span>
+<span><span class="co">#&gt; [10] cluster_2.1.8.2     survival_3.8-6      magrittr_2.0.5     </span></span>
+<span><span class="co">#&gt; [13] compiler_4.5.2      rlang_1.2.0         sass_0.4.10        </span></span>
+<span><span class="co">#&gt; [16] tools_4.5.2         utf8_1.2.6          igraph_2.3.0       </span></span>
+<span><span class="co">#&gt; [19] yaml_2.3.12         data.table_1.18.2.1 knitr_1.51         </span></span>
+<span><span class="co">#&gt; [22] phangorn_2.12.1     htmlwidgets_1.6.4   curl_7.0.0         </span></span>
+<span><span class="co">#&gt; [25] xml2_1.5.2          plyr_1.8.9          RColorBrewer_1.1-3 </span></span>
+<span><span class="co">#&gt; [28] withr_3.0.2         purrr_1.2.2         BiocGenerics_0.56.0</span></span>
+<span><span class="co">#&gt; [31] desc_1.4.3          grid_4.5.2          stats4_4.5.2       </span></span>
+<span><span class="co">#&gt; [34] multtest_2.66.0     biomformat_1.38.3   Rhdf5lib_1.32.0    </span></span>
+<span><span class="co">#&gt; [37] ggplot2_4.0.2       scales_1.4.0        iterators_1.0.14   </span></span>
+<span><span class="co">#&gt; [40] MASS_7.3-65         dichromat_2.0-0.1   cli_3.6.6          </span></span>
+<span><span class="co">#&gt; [43] rmarkdown_2.31      vegan_2.7-3         crayon_1.5.3       </span></span>
+<span><span class="co">#&gt; [46] ragg_1.5.2          generics_0.1.4      otel_0.2.0         </span></span>
+<span><span class="co">#&gt; [49] httr_1.4.8          reshape2_1.4.5      cachem_1.1.0       </span></span>
+<span><span class="co">#&gt; [52] rhdf5_2.54.1        splines_4.5.2       parallel_4.5.2     </span></span>
+<span><span class="co">#&gt; [55] BiocManager_1.30.27 XVector_0.50.0      vctrs_0.7.3        </span></span>
+<span><span class="co">#&gt; [58] Matrix_1.7-5        jsonlite_2.0.0      bookdown_0.46      </span></span>
+<span><span class="co">#&gt; [61] IRanges_2.44.0      S4Vectors_0.48.0    systemfonts_1.3.2  </span></span>
+<span><span class="co">#&gt; [64] foreach_1.5.2       jquerylib_0.1.4     keyring_1.4.1      </span></span>
+<span><span class="co">#&gt; [67] glue_1.8.1          pkgdown_2.2.0       codetools_0.2-20   </span></span>
+<span><span class="co">#&gt; [70] stringi_1.8.7       gtable_0.3.6        quadprog_1.5-8     </span></span>
+<span><span class="co">#&gt; [73] tibble_3.3.1        pillar_1.11.1       htmltools_0.5.9    </span></span>
+<span><span class="co">#&gt; [76] Seqinfo_1.0.0       rhdf5filters_1.22.0 R6_2.6.1           </span></span>
+<span><span class="co">#&gt; [79] textshaping_1.0.5   evaluate_1.0.5      lattice_0.22-9     </span></span>
+<span><span class="co">#&gt; [82] Biobase_2.70.0      bslib_0.10.0        Rcpp_1.1.1-1.1     </span></span>
+<span><span class="co">#&gt; [85] fastmatch_1.1-8     nlme_3.1-168        permute_0.9-10     </span></span>
+<span><span class="co">#&gt; [88] mgcv_1.9-4          xfun_0.57           fs_2.1.0           </span></span>
+<span><span class="co">#&gt; [91] pkgconfig_2.0.3</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
