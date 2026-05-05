@@ -168,7 +168,7 @@ sessionInfo()
 #> [17] generics_0.1.4                  MatrixGenerics_1.24.0          
 #> [19] matrixStats_1.5.0               ggraph_2.2.2                   
 #> [21] ggplot2_4.0.3                   phyloseq_1.56.0                
-#> [23] phylobar_0.99.11                ape_5.8-1                      
+#> [23] phylobar_0.99.12                ape_5.8-1                      
 #> [25] BiocStyle_2.40.0               
 #> 
 #> loaded via a namespace (and not attached):

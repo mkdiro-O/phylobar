@@ -53,7 +53,7 @@ download_zenodo("10.5281/zenodo.18791960", tempdir())
 #> [zen4R][INFO] ZenodoRecord - Download in sequential mode
 #> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '18791960' (doi: '10.5281/zenodo.18791960') - total size: 76.2 KiB
 #> [zen4R][INFO] Downloading file 'HFHS-data.rds' - size: 76.2 KiB
-#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpYd3Aey'.
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmpy1jRY8'.
 #> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
 #> [zen4R][INFO] File 'HFHS-data.rds': integrity verified (md5sum: 3266a55a3d0e01db0f0c99c7cb7a8e06)
 #> [zen4R][INFO] ZenodoRecord - End of download
@@ -278,7 +278,7 @@ sessionInfo()
 #> 
 #> other attached packages:
 #> [1] zen4R_0.10.5     stringr_1.6.0    ape_5.8-1        dplyr_1.2.1     
-#> [5] phylobar_0.99.11 BiocStyle_2.40.0
+#> [5] phylobar_0.99.12 BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] utf8_1.2.6          sass_0.4.10         generics_0.1.4     

@@ -161,7 +161,7 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] microbiome_1.34.0 ggplot2_4.0.3     phyloseq_1.56.0   phylobar_0.99.11 
+#> [1] microbiome_1.34.0 ggplot2_4.0.3     phyloseq_1.56.0   phylobar_0.99.12 
 #> [5] ape_5.8-1         BiocStyle_2.40.0 
 #> 
 #> loaded via a namespace (and not attached):
