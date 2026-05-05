@@ -1,6 +1,6 @@
 Package: phylobar
 Title: Interactive construction of stacked barplots using hierarchies
-Version: 0.99.10
+Version: 0.99.11
 Authors@R:
     c(
         person("Kris", "Sankaran", , "ksankaran@wisc.edu", role = c("aut", "cre", "fnd"), comment = c(ORCID = "0000-0002-9415-1971")),
@@ -14,7 +14,6 @@ Encoding: UTF-8
 URL: https://github.com/mkdiro-O/phylobar, http://mkdiro-o.github.io/phylobar
 BugReports: https://github.com/mkdiro-O/phylobar/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Suggests:
     BiocStyle,
     DESeq2,
@@ -42,6 +41,7 @@ Imports:
     phangorn,
     purrr
 Depends:
-    R (>= 4.5.0)
+    R (>= 4.6.0)
 biocViews: Software, Microbiome, Phylogenetics, Visualization
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0
