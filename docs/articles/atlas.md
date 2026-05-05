@@ -143,13 +143,13 @@ the gut microbiome.
 ``` r
 
 sessionInfo()
-#> R version 4.5.2 (2025-10-31)
-#> Platform: aarch64-apple-darwin20
+#> R version 4.6.0 (2026-04-24)
+#> Platform: aarch64-apple-darwin23
 #> Running under: macOS Sequoia 15.7.4
 #> 
 #> Matrix products: default
-#> BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
 #> 
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -161,38 +161,54 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] microbiome_1.32.0 ggplot2_4.0.2     phyloseq_1.54.2   phylobar_0.99.10 
-#> [5] ape_5.8-1         BiocStyle_2.38.0 
+#> [1] microbiome_1.34.0 ggplot2_4.0.3     phyloseq_1.56.0   phylobar_0.99.10 
+#> [5] ape_5.8-1         BiocStyle_2.40.0 
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] ade4_1.7-24         tidyselect_1.2.1    dplyr_1.2.0        
-#>  [4] farver_2.1.2        Biostrings_2.78.0   S7_0.2.1           
-#>  [7] fastmap_1.2.0       digest_0.6.39       lifecycle_1.0.5    
-#> [10] cluster_2.1.8.2     survival_3.8-6      magrittr_2.0.5     
-#> [13] compiler_4.5.2      rlang_1.2.0         sass_0.4.10        
-#> [16] tools_4.5.2         igraph_2.3.0        yaml_2.3.12        
-#> [19] data.table_1.18.2.1 knitr_1.51          phangorn_2.12.1    
-#> [22] htmlwidgets_1.6.4   plyr_1.8.9          RColorBrewer_1.1-3 
-#> [25] Rtsne_0.17          withr_3.0.2         purrr_1.2.2        
-#> [28] BiocGenerics_0.56.0 desc_1.4.3          grid_4.5.2         
-#> [31] stats4_4.5.2        multtest_2.66.0     biomformat_1.38.3  
-#> [34] Rhdf5lib_1.32.0     scales_1.4.0        iterators_1.0.14   
-#> [37] MASS_7.3-65         dichromat_2.0-0.1   cli_3.6.6          
-#> [40] rmarkdown_2.31      vegan_2.7-3         crayon_1.5.3       
-#> [43] ragg_1.5.2          generics_0.1.4      otel_0.2.0         
-#> [46] reshape2_1.4.5      cachem_1.1.0        rhdf5_2.54.1       
-#> [49] stringr_1.6.0       splines_4.5.2       parallel_4.5.2     
-#> [52] BiocManager_1.30.27 XVector_0.50.0      vctrs_0.7.3        
-#> [55] Matrix_1.7-5        jsonlite_2.0.0      bookdown_0.46      
-#> [58] IRanges_2.44.0      S4Vectors_0.48.0    systemfonts_1.3.2  
-#> [61] foreach_1.5.2       tidyr_1.3.2         jquerylib_0.1.4    
-#> [64] glue_1.8.1          pkgdown_2.2.0       codetools_0.2-20   
-#> [67] stringi_1.8.7       gtable_0.3.6        quadprog_1.5-8     
-#> [70] tibble_3.3.1        pillar_1.11.1       rhdf5filters_1.22.0
-#> [73] htmltools_0.5.9     Seqinfo_1.0.0       R6_2.6.1           
-#> [76] textshaping_1.0.5   evaluate_1.0.5      lattice_0.22-9     
-#> [79] Biobase_2.70.0      bslib_0.10.0        Rcpp_1.1.1-1.1     
-#> [82] fastmatch_1.1-8     nlme_3.1-168        permute_0.9-10     
-#> [85] mgcv_1.9-4          xfun_0.57           fs_2.1.0           
-#> [88] pkgconfig_2.0.3
+#>  [1] ade4_1.7-24                 tidyselect_1.2.1           
+#>  [3] dplyr_1.2.1                 farver_2.1.2               
+#>  [5] Biostrings_2.80.0           S7_0.2.2                   
+#>  [7] fastmap_1.2.0               digest_0.6.39              
+#>  [9] lifecycle_1.0.5             cluster_2.1.8.2            
+#> [11] survival_3.8-6              magrittr_2.0.5             
+#> [13] compiler_4.6.0              rlang_1.2.0                
+#> [15] sass_0.4.10                 tools_4.6.0                
+#> [17] igraph_2.3.1                yaml_2.3.12                
+#> [19] data.table_1.18.2.1         knitr_1.51                 
+#> [21] phangorn_2.12.1             S4Arrays_1.12.0            
+#> [23] htmlwidgets_1.6.4           DelayedArray_0.38.1        
+#> [25] plyr_1.8.9                  RColorBrewer_1.1-3         
+#> [27] abind_1.4-8                 Rtsne_0.17                 
+#> [29] withr_3.0.2                 purrr_1.2.2                
+#> [31] BiocGenerics_0.58.0         desc_1.4.3                 
+#> [33] grid_4.6.0                  stats4_4.6.0               
+#> [35] multtest_2.68.0             biomformat_1.40.0          
+#> [37] scales_1.4.0                iterators_1.0.14           
+#> [39] MASS_7.3-65                 SummarizedExperiment_1.42.0
+#> [41] cli_3.6.6                   vegan_2.7-3                
+#> [43] rmarkdown_2.31              crayon_1.5.3               
+#> [45] ragg_1.5.2                  generics_0.1.4             
+#> [47] otel_0.2.0                  reshape2_1.4.5             
+#> [49] cachem_1.1.0                stringr_1.6.0              
+#> [51] splines_4.6.0               parallel_4.6.0             
+#> [53] BiocManager_1.30.27         XVector_0.52.0             
+#> [55] matrixStats_1.5.0           vctrs_0.7.3                
+#> [57] Matrix_1.7-5                jsonlite_2.0.0             
+#> [59] bookdown_0.46               IRanges_2.46.0             
+#> [61] S4Vectors_0.50.0            systemfonts_1.3.2          
+#> [63] foreach_1.5.2               tidyr_1.3.2                
+#> [65] jquerylib_0.1.4             glue_1.8.1                 
+#> [67] pkgdown_2.2.0               codetools_0.2-20           
+#> [69] stringi_1.8.7               gtable_0.3.6               
+#> [71] GenomicRanges_1.64.0        quadprog_1.5-8             
+#> [73] tibble_3.3.1                pillar_1.11.1              
+#> [75] htmltools_0.5.9             Seqinfo_1.2.0              
+#> [77] R6_2.6.1                    textshaping_1.0.5          
+#> [79] evaluate_1.0.5              lattice_0.22-9             
+#> [81] Biobase_2.72.0              bslib_0.10.0               
+#> [83] Rcpp_1.1.1-1.1              fastmatch_1.1-8            
+#> [85] permute_0.9-10              SparseArray_1.12.2         
+#> [87] nlme_3.1-169                mgcv_1.9-4                 
+#> [89] xfun_0.57                   fs_2.1.0                   
+#> [91] MatrixGenerics_1.24.0       pkgconfig_2.0.3
 ```

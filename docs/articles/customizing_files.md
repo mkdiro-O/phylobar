@@ -160,13 +160,13 @@ phylobar(
 ``` r
 
 sessionInfo()
-#> R version 4.5.2 (2025-10-31)
-#> Platform: aarch64-apple-darwin20
+#> R version 4.6.0 (2026-04-24)
+#> Platform: aarch64-apple-darwin23
 #> Running under: macOS Sequoia 15.7.4
 #> 
 #> Matrix products: default
-#> BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
 #> 
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -178,23 +178,23 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] phylobar_0.99.10 ape_5.8-1        BiocStyle_2.38.0
+#> [1] phylobar_0.99.10 ape_5.8-1        BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.5.2     
-#>  [4] BiocManager_1.30.27 Rcpp_1.1.1-1.1      parallel_4.5.2     
+#>  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.6.0     
+#>  [4] BiocManager_1.30.27 Rcpp_1.1.1-1.1      parallel_4.6.0     
 #>  [7] cluster_2.1.8.2     jquerylib_0.1.4     systemfonts_1.3.2  
 #> [10] textshaping_1.0.5   yaml_2.3.12         fastmap_1.2.0      
 #> [13] lattice_0.22-9      R6_2.6.1            generics_0.1.4     
-#> [16] igraph_2.3.0        knitr_1.51          htmlwidgets_1.6.4  
+#> [16] igraph_2.3.1        knitr_1.51          htmlwidgets_1.6.4  
 #> [19] bookdown_0.46       desc_1.4.3          bslib_0.10.0       
 #> [22] rlang_1.2.0         fastmatch_1.1-8     cachem_1.1.0       
 #> [25] xfun_0.57           quadprog_1.5-8      fs_2.1.0           
 #> [28] sass_0.4.10         otel_0.2.0          cli_3.6.6          
 #> [31] pkgdown_2.2.0       magrittr_2.0.5      phangorn_2.12.1    
-#> [34] digest_0.6.39       grid_4.5.2          lifecycle_1.0.5    
-#> [37] nlme_3.1-168        vctrs_0.7.3         evaluate_1.0.5     
+#> [34] digest_0.6.39       grid_4.6.0          lifecycle_1.0.5    
+#> [37] nlme_3.1-169        vctrs_0.7.3         evaluate_1.0.5     
 #> [40] codetools_0.2-20    ragg_1.5.2          purrr_1.2.2        
-#> [43] rmarkdown_2.31      tools_4.5.2         pkgconfig_2.0.3    
+#> [43] rmarkdown_2.31      tools_4.6.0         pkgconfig_2.0.3    
 #> [46] htmltools_0.5.9
 ```

@@ -33,7 +33,7 @@ download_zenodo("10.5281/zenodo.17477876", tempdir())
 #> [zen4R][INFO] ZenodoRecord - Download in sequential mode
 #> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '17477876' (doi: '10.5281/zenodo.17477876') - total size: 12.8 MiB
 #> [zen4R][INFO] Downloading file 'su-2020.rds' - size: 12.8 MiB
-#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpMo36iN'.
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmpb8lfGV'.
 #> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
 #> [zen4R][INFO] File 'su-2020.rds': integrity verified (md5sum: d35b5955552582e34ee8d722e96d70f5)
 #> [zen4R][INFO] ZenodoRecord - End of download
@@ -155,13 +155,13 @@ phylobar(x[patient_order, ], tree)
 ``` r
 
 sessionInfo()
-#> R version 4.5.2 (2025-10-31)
-#> Platform: aarch64-apple-darwin20
+#> R version 4.6.0 (2026-04-24)
+#> Platform: aarch64-apple-darwin23
 #> Running under: macOS Sequoia 15.7.4
 #> 
 #> Matrix products: default
-#> BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
 #> 
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -174,31 +174,31 @@ sessionInfo()
 #> 
 #> other attached packages:
 #> [1] zen4R_0.10.5     seriation_1.5.8  tidyr_1.3.2      tibble_3.3.1    
-#> [5] readr_2.2.0      phylobar_0.99.10 dplyr_1.2.0      ape_5.8-1       
-#> [9] BiocStyle_2.38.0
+#> [5] readr_2.2.0      phylobar_0.99.10 dplyr_1.2.1      ape_5.8-1       
+#> [9] BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] fastmatch_1.1-8     xfun_0.57           bslib_0.10.0       
 #>  [4] htmlwidgets_1.6.4   lattice_0.22-9      tzdb_0.5.0         
-#>  [7] quadprog_1.5-8      vctrs_0.7.3         tools_4.5.2        
-#> [10] generics_0.1.4      curl_7.0.0          parallel_4.5.2     
+#>  [7] quadprog_1.5-8      vctrs_0.7.3         tools_4.6.0        
+#> [10] generics_0.1.4      curl_7.1.0          parallel_4.6.0     
 #> [13] ca_0.71.1           cluster_2.1.8.2     pkgconfig_2.0.3    
 #> [16] Matrix_1.7-5        desc_1.4.3          lifecycle_1.0.5    
-#> [19] compiler_4.5.2      textshaping_1.0.5   keyring_1.4.1      
+#> [19] compiler_4.6.0      textshaping_1.0.5   keyring_1.4.1      
 #> [22] codetools_0.2-20    htmltools_0.5.9     sass_0.4.10        
 #> [25] yaml_2.3.12         crayon_1.5.3        pillar_1.11.1      
 #> [28] pkgdown_2.2.0       jquerylib_0.1.4     cachem_1.1.0       
 #> [31] iterators_1.0.14    TSP_1.2.7           foreach_1.5.2      
-#> [34] nlme_3.1-168        phangorn_2.12.1     tidyselect_1.2.1   
+#> [34] nlme_3.1-169        phangorn_2.12.1     tidyselect_1.2.1   
 #> [37] digest_0.6.39       purrr_1.2.2         bookdown_0.46      
-#> [40] fastmap_1.2.0       grid_4.5.2          cli_3.6.6          
+#> [40] fastmap_1.2.0       grid_4.6.0          cli_3.6.6          
 #> [43] magrittr_2.0.5      XML_3.99-0.23       utf8_1.2.6         
-#> [46] withr_3.0.2         bit64_4.6.0-1       registry_0.5-1     
+#> [46] withr_3.0.2         bit64_4.8.0         registry_0.5-1     
 #> [49] rmarkdown_2.31      httr_1.4.8          bit_4.6.0          
-#> [52] igraph_2.3.0        otel_0.2.0          ragg_1.5.2         
+#> [52] igraph_2.3.1        otel_0.2.0          ragg_1.5.2         
 #> [55] hms_1.1.4           evaluate_1.0.5      knitr_1.51         
 #> [58] rlang_1.2.0         Rcpp_1.1.1-1.1      glue_1.8.1         
-#> [61] BiocManager_1.30.27 xml2_1.5.2          vroom_1.7.0        
+#> [61] BiocManager_1.30.27 xml2_1.5.2          vroom_1.7.1        
 #> [64] jsonlite_2.0.0      R6_2.6.1            plyr_1.8.9         
 #> [67] systemfonts_1.3.2   fs_2.1.0
 ```

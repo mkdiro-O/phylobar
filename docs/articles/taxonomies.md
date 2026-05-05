@@ -101,7 +101,7 @@ download_zenodo("10.5281/zenodo.18791960", tempdir())
 #> [zen4R][INFO] ZenodoRecord - Download in sequential mode
 #> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '18791960' (doi: '10.5281/zenodo.18791960') - total size: 76.2 KiB
 #> [zen4R][INFO] Downloading file 'HFHS-data.rds' - size: 76.2 KiB
-#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmpg5fLsp'.
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpQgBukw'.
 #> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
 #> [zen4R][INFO] File 'HFHS-data.rds': integrity verified (md5sum: 3266a55a3d0e01db0f0c99c7cb7a8e06)
 #> [zen4R][INFO] ZenodoRecord - End of download
@@ -350,13 +350,13 @@ plot(tree)
 ``` r
 
 sessionInfo()
-#> R version 4.5.2 (2025-10-31)
-#> Platform: aarch64-apple-darwin20
+#> R version 4.6.0 (2026-04-24)
+#> Platform: aarch64-apple-darwin23
 #> Running under: macOS Sequoia 15.7.4
 #> 
 #> Matrix products: default
-#> BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
 #> 
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -368,39 +368,56 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] zen4R_0.10.5     stringr_1.6.0    phyloseq_1.54.2  phylobar_0.99.10
-#> [5] dplyr_1.2.0      ape_5.8-1        BiocStyle_2.38.0
+#> [1] zen4R_0.10.5     stringr_1.6.0    phyloseq_1.56.0  phylobar_0.99.10
+#> [5] dplyr_1.2.1      ape_5.8-1        BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] ade4_1.7-24         tidyselect_1.2.1    farver_2.1.2       
-#>  [4] Biostrings_2.78.0   S7_0.2.1            fastmap_1.2.0      
-#>  [7] XML_3.99-0.23       digest_0.6.39       lifecycle_1.0.5    
-#> [10] cluster_2.1.8.2     survival_3.8-6      magrittr_2.0.5     
-#> [13] compiler_4.5.2      rlang_1.2.0         sass_0.4.10        
-#> [16] tools_4.5.2         utf8_1.2.6          igraph_2.3.0       
-#> [19] yaml_2.3.12         data.table_1.18.2.1 knitr_1.51         
-#> [22] phangorn_2.12.1     htmlwidgets_1.6.4   curl_7.0.0         
-#> [25] xml2_1.5.2          plyr_1.8.9          RColorBrewer_1.1-3 
-#> [28] withr_3.0.2         purrr_1.2.2         BiocGenerics_0.56.0
-#> [31] desc_1.4.3          grid_4.5.2          stats4_4.5.2       
-#> [34] multtest_2.66.0     biomformat_1.38.3   Rhdf5lib_1.32.0    
-#> [37] ggplot2_4.0.2       scales_1.4.0        iterators_1.0.14   
-#> [40] MASS_7.3-65         dichromat_2.0-0.1   cli_3.6.6          
-#> [43] rmarkdown_2.31      vegan_2.7-3         crayon_1.5.3       
-#> [46] ragg_1.5.2          generics_0.1.4      otel_0.2.0         
-#> [49] httr_1.4.8          reshape2_1.4.5      cachem_1.1.0       
-#> [52] rhdf5_2.54.1        splines_4.5.2       parallel_4.5.2     
-#> [55] BiocManager_1.30.27 XVector_0.50.0      vctrs_0.7.3        
-#> [58] Matrix_1.7-5        jsonlite_2.0.0      bookdown_0.46      
-#> [61] IRanges_2.44.0      S4Vectors_0.48.0    systemfonts_1.3.2  
-#> [64] foreach_1.5.2       jquerylib_0.1.4     keyring_1.4.1      
-#> [67] glue_1.8.1          pkgdown_2.2.0       codetools_0.2-20   
-#> [70] stringi_1.8.7       gtable_0.3.6        quadprog_1.5-8     
-#> [73] tibble_3.3.1        pillar_1.11.1       htmltools_0.5.9    
-#> [76] Seqinfo_1.0.0       rhdf5filters_1.22.0 R6_2.6.1           
-#> [79] textshaping_1.0.5   evaluate_1.0.5      lattice_0.22-9     
-#> [82] Biobase_2.70.0      bslib_0.10.0        Rcpp_1.1.1-1.1     
-#> [85] fastmatch_1.1-8     nlme_3.1-168        permute_0.9-10     
-#> [88] mgcv_1.9-4          xfun_0.57           fs_2.1.0           
-#> [91] pkgconfig_2.0.3
+#>  [1] ade4_1.7-24                 tidyselect_1.2.1           
+#>  [3] farver_2.1.2                Biostrings_2.80.0          
+#>  [5] S7_0.2.2                    fastmap_1.2.0              
+#>  [7] XML_3.99-0.23               digest_0.6.39              
+#>  [9] lifecycle_1.0.5             cluster_2.1.8.2            
+#> [11] survival_3.8-6              magrittr_2.0.5             
+#> [13] compiler_4.6.0              rlang_1.2.0                
+#> [15] sass_0.4.10                 tools_4.6.0                
+#> [17] utf8_1.2.6                  igraph_2.3.1               
+#> [19] yaml_2.3.12                 data.table_1.18.2.1        
+#> [21] knitr_1.51                  phangorn_2.12.1            
+#> [23] S4Arrays_1.12.0             htmlwidgets_1.6.4          
+#> [25] curl_7.1.0                  DelayedArray_0.38.1        
+#> [27] xml2_1.5.2                  plyr_1.8.9                 
+#> [29] RColorBrewer_1.1-3          abind_1.4-8                
+#> [31] withr_3.0.2                 purrr_1.2.2                
+#> [33] BiocGenerics_0.58.0         desc_1.4.3                 
+#> [35] grid_4.6.0                  stats4_4.6.0               
+#> [37] multtest_2.68.0             biomformat_1.40.0          
+#> [39] ggplot2_4.0.3               scales_1.4.0               
+#> [41] iterators_1.0.14            MASS_7.3-65                
+#> [43] SummarizedExperiment_1.42.0 cli_3.6.6                  
+#> [45] vegan_2.7-3                 rmarkdown_2.31             
+#> [47] crayon_1.5.3                ragg_1.5.2                 
+#> [49] generics_0.1.4              otel_0.2.0                 
+#> [51] httr_1.4.8                  reshape2_1.4.5             
+#> [53] cachem_1.1.0                splines_4.6.0              
+#> [55] parallel_4.6.0              BiocManager_1.30.27        
+#> [57] XVector_0.52.0              matrixStats_1.5.0          
+#> [59] vctrs_0.7.3                 Matrix_1.7-5               
+#> [61] jsonlite_2.0.0              bookdown_0.46              
+#> [63] IRanges_2.46.0              S4Vectors_0.50.0           
+#> [65] systemfonts_1.3.2           foreach_1.5.2              
+#> [67] jquerylib_0.1.4             keyring_1.4.1              
+#> [69] glue_1.8.1                  pkgdown_2.2.0              
+#> [71] codetools_0.2-20            stringi_1.8.7              
+#> [73] gtable_0.3.6                GenomicRanges_1.64.0       
+#> [75] quadprog_1.5-8              tibble_3.3.1               
+#> [77] pillar_1.11.1               htmltools_0.5.9            
+#> [79] Seqinfo_1.2.0               R6_2.6.1                   
+#> [81] textshaping_1.0.5           evaluate_1.0.5             
+#> [83] lattice_0.22-9              Biobase_2.72.0             
+#> [85] bslib_0.10.0                Rcpp_1.1.1-1.1             
+#> [87] fastmatch_1.1-8             permute_0.9-10             
+#> [89] SparseArray_1.12.2          nlme_3.1-169               
+#> [91] mgcv_1.9-4                  xfun_0.57                  
+#> [93] fs_2.1.0                    MatrixGenerics_1.24.0      
+#> [95] pkgconfig_2.0.3
 ```

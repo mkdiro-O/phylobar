@@ -19,7 +19,7 @@ Source:
 Kuo M, Lê Cao K, Kodikara S, Mao J, Sankaran K (2025). “phylobar: an R
 package for multiresolution compositional barplots in omics studies.”
 *bioRxiv*.
-[doi:10.1101/2025.11.05.686662](https://doi.org/10.1101/2025.11.05.686662),
+[doi:10.1101/2025.11.05.686662](https://doi.org/10.1101/2025.11.05.686662).
 <https://doi.org/10.1101/2025.11.05.686662>.
 
     @Article{,
