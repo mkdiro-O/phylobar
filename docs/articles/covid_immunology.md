@@ -33,7 +33,7 @@ download_zenodo("10.5281/zenodo.17477876", tempdir())
 #> [zen4R][INFO] ZenodoRecord - Download in sequential mode
 #> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '17477876' (doi: '10.5281/zenodo.17477876') - total size: 12.8 MiB
 #> [zen4R][INFO] Downloading file 'su-2020.rds' - size: 12.8 MiB
-#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmpb8lfGV'.
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpXZMniw'.
 #> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
 #> [zen4R][INFO] File 'su-2020.rds': integrity verified (md5sum: d35b5955552582e34ee8d722e96d70f5)
 #> [zen4R][INFO] ZenodoRecord - End of download
@@ -174,7 +174,7 @@ sessionInfo()
 #> 
 #> other attached packages:
 #> [1] zen4R_0.10.5     seriation_1.5.8  tidyr_1.3.2      tibble_3.3.1    
-#> [5] readr_2.2.0      phylobar_0.99.10 dplyr_1.2.1      ape_5.8-1       
+#> [5] readr_2.2.0      phylobar_0.99.11 dplyr_1.2.1      ape_5.8-1       
 #> [9] BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):

@@ -134,7 +134,7 @@ sessionInfo()
 #>  [7] Seqinfo_1.2.0               IRanges_2.46.0             
 #>  [9] S4Vectors_0.50.0            BiocGenerics_0.58.0        
 #> [11] generics_0.1.4              phyloseq_1.56.0            
-#> [13] phylobar_0.99.10            BiocStyle_2.40.0           
+#> [13] phylobar_0.99.11            BiocStyle_2.40.0           
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] ade4_1.7-24         tidyselect_1.2.1    dplyr_1.2.1        
