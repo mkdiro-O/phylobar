@@ -167,25 +167,25 @@ sessionInfo()
 #> loaded via a namespace (and not attached):
 #>  [1] ade4_1.7-24                 tidyselect_1.2.1           
 #>  [3] dplyr_1.2.1                 farver_2.1.2               
-#>  [5] Biostrings_2.80.0           S7_0.2.2                   
+#>  [5] Biostrings_2.80.1           S7_0.2.2                   
 #>  [7] fastmap_1.2.0               digest_0.6.39              
 #>  [9] lifecycle_1.0.5             cluster_2.1.8.2            
 #> [11] survival_3.8-6              magrittr_2.0.5             
 #> [13] compiler_4.6.0              rlang_1.2.0                
 #> [15] sass_0.4.10                 tools_4.6.0                
-#> [17] igraph_2.3.1                yaml_2.3.12                
-#> [19] data.table_1.18.2.1         knitr_1.51                 
+#> [17] igraph_2.3.2                yaml_2.3.12                
+#> [19] data.table_1.18.4           knitr_1.51                 
 #> [21] phangorn_2.12.1             S4Arrays_1.12.0            
-#> [23] htmlwidgets_1.6.4           DelayedArray_0.38.1        
+#> [23] htmlwidgets_1.6.4           DelayedArray_0.38.2        
 #> [25] plyr_1.8.9                  RColorBrewer_1.1-3         
 #> [27] abind_1.4-8                 Rtsne_0.17                 
 #> [29] withr_3.0.2                 purrr_1.2.2                
-#> [31] BiocGenerics_0.58.0         desc_1.4.3                 
+#> [31] BiocGenerics_0.58.1         desc_1.4.3                 
 #> [33] grid_4.6.0                  stats4_4.6.0               
 #> [35] multtest_2.68.0             biomformat_1.40.0          
 #> [37] scales_1.4.0                iterators_1.0.14           
 #> [39] MASS_7.3-65                 SummarizedExperiment_1.42.0
-#> [41] cli_3.6.6                   vegan_2.7-3                
+#> [41] cli_3.6.6                   vegan_2.7-5                
 #> [43] rmarkdown_2.31              crayon_1.5.3               
 #> [45] ragg_1.5.2                  generics_0.1.4             
 #> [47] otel_0.2.0                  reshape2_1.4.5             
@@ -195,7 +195,7 @@ sessionInfo()
 #> [55] matrixStats_1.5.0           vctrs_0.7.3                
 #> [57] Matrix_1.7-5                jsonlite_2.0.0             
 #> [59] bookdown_0.46               IRanges_2.46.0             
-#> [61] S4Vectors_0.50.0            systemfonts_1.3.2          
+#> [61] S4Vectors_0.50.1            systemfonts_1.3.2          
 #> [63] foreach_1.5.2               tidyr_1.3.2                
 #> [65] jquerylib_0.1.4             glue_1.8.1                 
 #> [67] pkgdown_2.2.0               codetools_0.2-20           
@@ -205,10 +205,10 @@ sessionInfo()
 #> [75] htmltools_0.5.9             Seqinfo_1.2.0              
 #> [77] R6_2.6.1                    textshaping_1.0.5          
 #> [79] evaluate_1.0.5              lattice_0.22-9             
-#> [81] Biobase_2.72.0              bslib_0.10.0               
+#> [81] Biobase_2.72.0              bslib_0.11.0               
 #> [83] Rcpp_1.1.1-1.1              fastmatch_1.1-8            
 #> [85] permute_0.9-10              SparseArray_1.12.2         
 #> [87] nlme_3.1-169                mgcv_1.9-4                 
-#> [89] xfun_0.57                   fs_2.1.0                   
+#> [89] xfun_0.58                   fs_2.1.0                   
 #> [91] MatrixGenerics_1.24.0       pkgconfig_2.0.3
 ```

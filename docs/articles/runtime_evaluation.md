@@ -190,12 +190,12 @@ sessionInfo()
 #> [28] fastmatch_1.1-8     vctrs_0.7.3         R6_2.6.1           
 #> [31] lifecycle_1.0.5     fs_2.1.0            htmlwidgets_1.6.4  
 #> [34] ragg_1.5.2          cluster_2.1.8.2     pkgconfig_2.0.3    
-#> [37] desc_1.4.3          pkgdown_2.2.0       bslib_0.10.0       
+#> [37] desc_1.4.3          pkgdown_2.2.0       bslib_0.11.0       
 #> [40] pillar_1.11.1       gtable_0.3.6        glue_1.8.1         
 #> [43] phangorn_2.12.1     Rcpp_1.1.1-1.1      systemfonts_1.3.2  
-#> [46] xfun_0.57           tibble_3.3.1        tidyselect_1.2.1   
+#> [46] xfun_0.58           tibble_3.3.1        tidyselect_1.2.1   
 #> [49] knitr_1.51          farver_2.1.2        htmltools_0.5.9    
-#> [52] nlme_3.1-169        igraph_2.3.1        labeling_0.4.3     
+#> [52] nlme_3.1-169        igraph_2.3.2        labeling_0.4.3     
 #> [55] rmarkdown_2.31      compiler_4.6.0      quadprog_1.5-8     
 #> [58] S7_0.2.2
 ```

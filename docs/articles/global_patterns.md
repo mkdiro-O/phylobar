@@ -157,14 +157,14 @@ sessionInfo()
 #> [8] base     
 #> 
 #> other attached packages:
-#>  [1] scater_1.40.0                   scuttle_1.22.0                 
+#>  [1] scater_1.40.1                   scuttle_1.22.0                 
 #>  [3] miaViz_1.20.0                   mia_1.20.0                     
-#>  [5] TreeSummarizedExperiment_2.20.0 Biostrings_2.80.0              
+#>  [5] TreeSummarizedExperiment_2.20.0 Biostrings_2.80.1              
 #>  [7] XVector_0.52.0                  SingleCellExperiment_1.34.0    
 #>  [9] MultiAssayExperiment_1.38.0     SummarizedExperiment_1.42.0    
 #> [11] Biobase_2.72.0                  GenomicRanges_1.64.0           
 #> [13] Seqinfo_1.2.0                   IRanges_2.46.0                 
-#> [15] S4Vectors_0.50.0                BiocGenerics_0.58.0            
+#> [15] S4Vectors_0.50.1                BiocGenerics_0.58.1            
 #> [17] generics_0.1.4                  MatrixGenerics_1.24.0          
 #> [19] matrixStats_1.5.0               ggraph_2.2.2                   
 #> [21] ggplot2_4.0.3                   phyloseq_1.56.0                
@@ -182,10 +182,10 @@ sessionInfo()
 #>  [15] S4Arrays_1.12.0             BiocNeighbors_2.6.0        
 #>  [17] janeaustenr_1.0.0           gridGraphics_0.5-1         
 #>  [19] SparseArray_1.12.2          sass_0.4.10                
-#>  [21] bslib_0.10.0                tokenizers_0.3.0           
+#>  [21] bslib_0.11.0                tokenizers_0.3.0           
 #>  [23] htmlwidgets_1.6.4           desc_1.4.3                 
 #>  [25] plyr_1.8.9                  DECIPHER_3.8.0             
-#>  [27] cachem_1.1.0                igraph_2.3.1               
+#>  [27] cachem_1.1.0                igraph_2.3.2               
 #>  [29] lifecycle_1.0.5             iterators_1.0.14           
 #>  [31] pkgconfig_2.0.3             rsvd_1.0.5                 
 #>  [33] Matrix_1.7-5                R6_2.6.1                   
@@ -193,7 +193,7 @@ sessionInfo()
 #>  [37] aplot_0.2.9                 digest_0.6.39              
 #>  [39] ggnewscale_0.5.2            patchwork_1.3.2            
 #>  [41] irlba_2.3.7                 SnowballC_0.7.1            
-#>  [43] textshaping_1.0.5           vegan_2.7-3                
+#>  [43] textshaping_1.0.5           vegan_2.7-5                
 #>  [45] beachmat_2.28.0             polyclip_1.10-7            
 #>  [47] abind_1.4-8                 mgcv_1.9-4                 
 #>  [49] compiler_4.6.0              fontquiver_0.2.1           
@@ -201,7 +201,7 @@ sessionInfo()
 #>  [53] BiocParallel_1.46.0         viridis_0.6.5              
 #>  [55] DBI_1.3.0                   ggforce_0.5.0              
 #>  [57] MASS_7.3-65                 rappdirs_0.3.4             
-#>  [59] DelayedArray_0.38.1         bluster_1.22.0             
+#>  [59] DelayedArray_0.38.2         bluster_1.22.0             
 #>  [61] biomformat_1.40.0           permute_0.9-10             
 #>  [63] tools_4.6.0                 vipor_0.4.7                
 #>  [65] otel_0.2.0                  beeswarm_0.4.0             
@@ -209,7 +209,7 @@ sessionInfo()
 #>  [69] nlme_3.1-169                grid_4.6.0                 
 #>  [71] cluster_2.1.8.2             reshape2_1.4.5             
 #>  [73] ade4_1.7-24                 gtable_0.3.6               
-#>  [75] tidyr_1.3.2                 data.table_1.18.2.1        
+#>  [75] tidyr_1.3.2                 data.table_1.18.4          
 #>  [77] BiocSingular_1.28.0         tidygraph_1.3.1            
 #>  [79] ScaledMatrix_1.20.0         ggrepel_0.9.8              
 #>  [81] foreach_1.5.2               pillar_1.11.1              
@@ -220,11 +220,11 @@ sessionInfo()
 #>  [91] tidyselect_1.2.1            DirichletMultinomial_1.54.0
 #>  [93] fontLiberation_0.1.0        knitr_1.51                 
 #>  [95] fontBitstreamVera_0.1.1     gridExtra_2.3              
-#>  [97] bookdown_0.46               xfun_0.57                  
+#>  [97] bookdown_0.46               xfun_0.58                  
 #>  [99] graphlayouts_1.2.3          stringi_1.8.7              
 #> [101] ggfun_0.2.0                 lazyeval_0.2.3             
 #> [103] yaml_2.3.12                 evaluate_1.0.5             
-#> [105] codetools_0.2-20            gdtools_0.5.0              
+#> [105] codetools_0.2-20            gdtools_0.5.1              
 #> [107] tibble_3.3.1                BiocManager_1.30.27        
 #> [109] ggplotify_0.1.3             cli_3.6.6                  
 #> [111] systemfonts_1.3.2           jquerylib_0.1.4            

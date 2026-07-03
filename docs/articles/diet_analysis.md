@@ -132,24 +132,24 @@ sessionInfo()
 #>  [3] Biobase_2.72.0              MatrixGenerics_1.24.0      
 #>  [5] matrixStats_1.5.0           GenomicRanges_1.64.0       
 #>  [7] Seqinfo_1.2.0               IRanges_2.46.0             
-#>  [9] S4Vectors_0.50.0            BiocGenerics_0.58.0        
+#>  [9] S4Vectors_0.50.1            BiocGenerics_0.58.1        
 #> [11] generics_0.1.4              phyloseq_1.56.0            
 #> [13] phylobar_0.99.12            BiocStyle_2.40.0           
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] ade4_1.7-24         tidyselect_1.2.1    dplyr_1.2.1        
-#>  [4] farver_2.1.2        Biostrings_2.80.0   S7_0.2.2           
+#>  [4] farver_2.1.2        Biostrings_2.80.1   S7_0.2.2           
 #>  [7] fastmap_1.2.0       digest_0.6.39       lifecycle_1.0.5    
 #> [10] cluster_2.1.8.2     survival_3.8-6      magrittr_2.0.5     
 #> [13] compiler_4.6.0      rlang_1.2.0         sass_0.4.10        
-#> [16] tools_4.6.0         igraph_2.3.1        yaml_2.3.12        
-#> [19] data.table_1.18.2.1 knitr_1.51          phangorn_2.12.1    
-#> [22] S4Arrays_1.12.0     htmlwidgets_1.6.4   DelayedArray_0.38.1
+#> [16] tools_4.6.0         igraph_2.3.2        yaml_2.3.12        
+#> [19] data.table_1.18.4   knitr_1.51          phangorn_2.12.1    
+#> [22] S4Arrays_1.12.0     htmlwidgets_1.6.4   DelayedArray_0.38.2
 #> [25] plyr_1.8.9          RColorBrewer_1.1-3  BiocParallel_1.46.0
 #> [28] abind_1.4-8         purrr_1.2.2         desc_1.4.3         
 #> [31] grid_4.6.0          multtest_2.68.0     biomformat_1.40.0  
 #> [34] ggplot2_4.0.3       scales_1.4.0        iterators_1.0.14   
-#> [37] MASS_7.3-65         cli_3.6.6           vegan_2.7-3        
+#> [37] MASS_7.3-65         cli_3.6.6           vegan_2.7-5        
 #> [40] rmarkdown_2.31      crayon_1.5.3        ragg_1.5.2         
 #> [43] otel_0.2.0          reshape2_1.4.5      ape_5.8-1          
 #> [46] cachem_1.1.0        stringr_1.6.0       splines_4.6.0      
@@ -161,8 +161,8 @@ sessionInfo()
 #> [64] gtable_0.3.6        quadprog_1.5-8      tibble_3.3.1       
 #> [67] pillar_1.11.1       htmltools_0.5.9     R6_2.6.1           
 #> [70] textshaping_1.0.5   evaluate_1.0.5      lattice_0.22-9     
-#> [73] bslib_0.10.0        Rcpp_1.1.1-1.1      fastmatch_1.1-8    
+#> [73] bslib_0.11.0        Rcpp_1.1.1-1.1      fastmatch_1.1-8    
 #> [76] permute_0.9-10      SparseArray_1.12.2  nlme_3.1-169       
-#> [79] mgcv_1.9-4          xfun_0.57           fs_2.1.0           
+#> [79] mgcv_1.9-4          xfun_0.58           fs_2.1.0           
 #> [82] pkgconfig_2.0.3
 ```

@@ -53,7 +53,7 @@ download_zenodo("10.5281/zenodo.18791960", tempdir())
 #> [zen4R][INFO] ZenodoRecord - Download in sequential mode
 #> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '18791960' (doi: '10.5281/zenodo.18791960') - total size: 76.2 KiB
 #> [zen4R][INFO] Downloading file 'HFHS-data.rds' - size: 76.2 KiB
-#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmpy1jRY8'.
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpvOv1Mx'.
 #> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
 #> [zen4R][INFO] File 'HFHS-data.rds': integrity verified (md5sum: 3266a55a3d0e01db0f0c99c7cb7a8e06)
 #> [zen4R][INFO] ZenodoRecord - End of download
@@ -295,10 +295,10 @@ sessionInfo()
 #> [34] vctrs_0.7.3         R6_2.6.1            lifecycle_1.0.5    
 #> [37] fs_2.1.0            htmlwidgets_1.6.4   ragg_1.5.2         
 #> [40] cluster_2.1.8.2     pkgconfig_2.0.3     desc_1.4.3         
-#> [43] pkgdown_2.2.0       bslib_0.10.0        pillar_1.11.1      
+#> [43] pkgdown_2.2.0       bslib_0.11.0        pillar_1.11.1      
 #> [46] glue_1.8.1          phangorn_2.12.1     Rcpp_1.1.1-1.1     
-#> [49] systemfonts_1.3.2   xfun_0.57           tibble_3.3.1       
+#> [49] systemfonts_1.3.2   xfun_0.58           tibble_3.3.1       
 #> [52] tidyselect_1.2.1    keyring_1.4.1       knitr_1.51         
-#> [55] htmltools_0.5.9     nlme_3.1-169        igraph_2.3.1       
+#> [55] htmltools_0.5.9     nlme_3.1-169        igraph_2.3.2       
 #> [58] rmarkdown_2.31      compiler_4.6.0      quadprog_1.5-8
 ```

@@ -33,7 +33,7 @@ download_zenodo("10.5281/zenodo.17477876", tempdir())
 #> [zen4R][INFO] ZenodoRecord - Download in sequential mode
 #> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '17477876' (doi: '10.5281/zenodo.17477876') - total size: 12.8 MiB
 #> [zen4R][INFO] Downloading file 'su-2020.rds' - size: 12.8 MiB
-#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpmDdLWr'.
+#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/Rtmpp2Ew2X'.
 #> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
 #> [zen4R][INFO] File 'su-2020.rds': integrity verified (md5sum: d35b5955552582e34ee8d722e96d70f5)
 #> [zen4R][INFO] ZenodoRecord - End of download
@@ -178,7 +178,7 @@ sessionInfo()
 #> [9] BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] fastmatch_1.1-8     xfun_0.57           bslib_0.10.0       
+#>  [1] fastmatch_1.1-8     xfun_0.58           bslib_0.11.0       
 #>  [4] htmlwidgets_1.6.4   lattice_0.22-9      tzdb_0.5.0         
 #>  [7] quadprog_1.5-8      vctrs_0.7.3         tools_4.6.0        
 #> [10] generics_0.1.4      curl_7.1.0          parallel_4.6.0     
@@ -193,9 +193,9 @@ sessionInfo()
 #> [37] digest_0.6.39       purrr_1.2.2         bookdown_0.46      
 #> [40] fastmap_1.2.0       grid_4.6.0          cli_3.6.6          
 #> [43] magrittr_2.0.5      XML_3.99-0.23       utf8_1.2.6         
-#> [46] withr_3.0.2         bit64_4.8.0         registry_0.5-1     
+#> [46] withr_3.0.2         bit64_4.8.2         registry_0.5-1     
 #> [49] rmarkdown_2.31      httr_1.4.8          bit_4.6.0          
-#> [52] igraph_2.3.1        otel_0.2.0          ragg_1.5.2         
+#> [52] igraph_2.3.2        otel_0.2.0          ragg_1.5.2         
 #> [55] hms_1.1.4           evaluate_1.0.5      knitr_1.51         
 #> [58] rlang_1.2.0         Rcpp_1.1.1-1.1      glue_1.8.1         
 #> [61] BiocManager_1.30.27 xml2_1.5.2          vroom_1.7.1        
