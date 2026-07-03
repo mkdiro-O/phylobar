@@ -14,7 +14,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/mkdiro-O/phylobar/blob/HEAD/inst/CITATION)
+[`inst/CITATION`](https://github.com/mkdiro-O/phylobar/blob/devel/inst/CITATION)
 
 Kuo M, Lê Cao K, Kodikara S, Mao J, Sankaran K (2025). “phylobar: an R
 package for multiresolution compositional barplots in omics studies.”

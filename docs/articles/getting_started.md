@@ -37,7 +37,6 @@ about the package in our preprint:
 You can install phylobar from Bioconductor using:
 
 ``` r
-
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -47,7 +46,6 @@ BiocManager::install("phylobar")
 Alternatively, you can install the development version from GitHub:
 
 ``` r
-
 remotes::install_github("mkdiro-o/phylobar")
 ```
 
@@ -58,7 +56,6 @@ to collapse a subtree, press the Control key to add a new color, and
 press the Escape key to freeze the view.
 
 ``` r
-
 library(ape)
 library(phylobar)
 
@@ -165,21 +162,23 @@ You can reach us by creating an
 promptly.
 
 ``` r
-
 sessionInfo()
-#> R version 4.6.0 (2026-04-24)
-#> Platform: aarch64-apple-darwin23
-#> Running under: macOS Sequoia 15.7.4
+#> R version 4.6.1 (2026-06-24)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Ubuntu 24.04.4 LTS
 #> 
 #> Matrix products: default
-#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #> 
 #> locale:
-#> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+#>  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+#>  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+#>  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+#> [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #> 
-#> time zone: America/Chicago
-#> tzcode source: internal
+#> time zone: UTC
+#> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -189,12 +188,12 @@ sessionInfo()
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] digest_0.6.39       desc_1.4.3          R6_2.6.1           
-#>  [4] bookdown_0.46       fastmap_1.2.0       xfun_0.58          
+#>  [4] bookdown_0.47       fastmap_1.2.0       xfun_0.59          
 #>  [7] cachem_1.1.0        knitr_1.51          htmltools_0.5.9    
 #> [10] rmarkdown_2.31      lifecycle_1.0.5     cli_3.6.6          
 #> [13] sass_0.4.10         pkgdown_2.2.0       textshaping_1.0.5  
-#> [16] jquerylib_0.1.4     systemfonts_1.3.2   compiler_4.6.0     
-#> [19] tools_4.6.0         ragg_1.5.2          bslib_0.11.0       
+#> [16] jquerylib_0.1.4     systemfonts_1.3.2   compiler_4.6.1     
+#> [19] tools_4.6.1         ragg_1.5.2          bslib_0.11.0       
 #> [22] evaluate_1.0.5      yaml_2.3.12         BiocManager_1.30.27
 #> [25] otel_0.2.0          jsonlite_2.0.0      rlang_1.2.0        
 #> [28] fs_2.1.0            htmlwidgets_1.6.4

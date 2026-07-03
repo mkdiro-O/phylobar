@@ -12,7 +12,6 @@ tree construction, highlight potential pitfalls in taxonomic labeling,
 and generate visualizations that summarize variation across samples.
 
 ``` r
-
 library(ape)
 library(phylobar)
 library(microbiome)
@@ -26,7 +25,6 @@ microbiome package as a
 Bioconductor container for microbiome data).
 
 ``` r
-
 data(atlas1006)
 pseq3 <- atlas1006 |>
     subset_samples(DNA_extraction_method == "r") |>
@@ -38,7 +36,6 @@ with the r DNA extraction method and transform abundances into
 compositional form (so each sample sums to 1).
 
 ``` r
-
 tree <- taxonomy_to_tree(tax_table(pseq3))
 checkValidPhylo(tree)
 #> Starting checking the validity of tree...
@@ -56,7 +53,6 @@ phylum, f\_ for family), ensuring that ancestor and descendant nodes
 have unique labels.
 
 ``` r
-
 taxa <- tax_table(pseq3)
 taxa <- cbind(Kingdom = "Bacteria", taxa)
 taxa <- phylobar::add_prefix(taxa)
@@ -75,7 +71,6 @@ representing taxonomic abundances, aligned with the corresponding
 branches of the tree.
 
 ``` r
-
 x <- t(otu_table(pseq3))
 phylobar(x, tree, sample_show_all = FALSE, rel_width = 0.2)
 ```
@@ -85,7 +80,6 @@ by subsampling representative samples. This preserves the main
 conclusions while reducing visual clutter.
 
 ``` r
-
 x_sub <- subset_cluster(x)
 x_sub <- x_sub[, colSums(x_sub) > 0]
 
@@ -98,12 +92,11 @@ By default, the
 [`subset_cluster()`](http://mkdiro-o.github.io/phylobar/reference/subset_cluster.md)
 function subsets to samples that are close to a cut hierarchical
 clustering tree’s centroids. Alternatively, setting `method = "medoid"`
-will choose representatives using $`K`$-medoids according to Bray-Curtis
+will choose representatives using $K$-medoids according to Bray-Curtis
 distance. The result is shown below, though our interpretation will
 focus on the hierarchical clustering version.
 
 ``` r
-
 x_sub_bc <- subset_cluster(x, method = "medoid")
 x_sub_bc <- x_sub[, colSums(x_sub) > 0]
 
@@ -141,21 +134,23 @@ the gut microbiome.
 ## Session Info
 
 ``` r
-
 sessionInfo()
-#> R version 4.6.0 (2026-04-24)
-#> Platform: aarch64-apple-darwin23
-#> Running under: macOS Sequoia 15.7.4
+#> R version 4.6.1 (2026-06-24)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Ubuntu 24.04.4 LTS
 #> 
 #> Matrix products: default
-#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #> 
 #> locale:
-#> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+#>  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+#>  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+#>  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+#> [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #> 
-#> time zone: America/Chicago
-#> tzcode source: internal
+#> time zone: UTC
+#> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -165,50 +160,32 @@ sessionInfo()
 #> [5] ape_5.8-1         BiocStyle_2.40.0 
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] ade4_1.7-24                 tidyselect_1.2.1           
-#>  [3] dplyr_1.2.1                 farver_2.1.2               
-#>  [5] Biostrings_2.80.1           S7_0.2.2                   
-#>  [7] fastmap_1.2.0               digest_0.6.39              
-#>  [9] lifecycle_1.0.5             cluster_2.1.8.2            
-#> [11] survival_3.8-6              magrittr_2.0.5             
-#> [13] compiler_4.6.0              rlang_1.2.0                
-#> [15] sass_0.4.10                 tools_4.6.0                
-#> [17] igraph_2.3.2                yaml_2.3.12                
-#> [19] data.table_1.18.4           knitr_1.51                 
-#> [21] phangorn_2.12.1             S4Arrays_1.12.0            
-#> [23] htmlwidgets_1.6.4           DelayedArray_0.38.2        
-#> [25] plyr_1.8.9                  RColorBrewer_1.1-3         
-#> [27] abind_1.4-8                 Rtsne_0.17                 
-#> [29] withr_3.0.2                 purrr_1.2.2                
-#> [31] BiocGenerics_0.58.1         desc_1.4.3                 
-#> [33] grid_4.6.0                  stats4_4.6.0               
-#> [35] multtest_2.68.0             biomformat_1.40.0          
-#> [37] scales_1.4.0                iterators_1.0.14           
-#> [39] MASS_7.3-65                 SummarizedExperiment_1.42.0
-#> [41] cli_3.6.6                   vegan_2.7-5                
-#> [43] rmarkdown_2.31              crayon_1.5.3               
-#> [45] ragg_1.5.2                  generics_0.1.4             
-#> [47] otel_0.2.0                  reshape2_1.4.5             
-#> [49] cachem_1.1.0                stringr_1.6.0              
-#> [51] splines_4.6.0               parallel_4.6.0             
-#> [53] BiocManager_1.30.27         XVector_0.52.0             
-#> [55] matrixStats_1.5.0           vctrs_0.7.3                
-#> [57] Matrix_1.7-5                jsonlite_2.0.0             
-#> [59] bookdown_0.46               IRanges_2.46.0             
-#> [61] S4Vectors_0.50.1            systemfonts_1.3.2          
-#> [63] foreach_1.5.2               tidyr_1.3.2                
-#> [65] jquerylib_0.1.4             glue_1.8.1                 
-#> [67] pkgdown_2.2.0               codetools_0.2-20           
-#> [69] stringi_1.8.7               gtable_0.3.6               
-#> [71] GenomicRanges_1.64.0        quadprog_1.5-8             
-#> [73] tibble_3.3.1                pillar_1.11.1              
-#> [75] htmltools_0.5.9             Seqinfo_1.2.0              
-#> [77] R6_2.6.1                    textshaping_1.0.5          
-#> [79] evaluate_1.0.5              lattice_0.22-9             
-#> [81] Biobase_2.72.0              bslib_0.11.0               
-#> [83] Rcpp_1.1.1-1.1              fastmatch_1.1-8            
-#> [85] permute_0.9-10              SparseArray_1.12.2         
-#> [87] nlme_3.1-169                mgcv_1.9-4                 
-#> [89] xfun_0.58                   fs_2.1.0                   
-#> [91] MatrixGenerics_1.24.0       pkgconfig_2.0.3
+#>  [1] ade4_1.7-24         tidyselect_1.2.1    dplyr_1.2.1        
+#>  [4] farver_2.1.2        Biostrings_2.80.1   S7_0.2.2           
+#>  [7] fastmap_1.2.0       digest_0.6.39       lifecycle_1.0.5    
+#> [10] cluster_2.1.8.2     survival_3.8-6      magrittr_2.0.5     
+#> [13] compiler_4.6.1      rlang_1.2.0         sass_0.4.10        
+#> [16] tools_4.6.1         igraph_2.3.3        yaml_2.3.12        
+#> [19] data.table_1.18.4   knitr_1.51          phangorn_2.12.1    
+#> [22] htmlwidgets_1.6.4   plyr_1.8.9          RColorBrewer_1.1-3 
+#> [25] Rtsne_0.17          withr_3.0.3         purrr_1.2.2        
+#> [28] BiocGenerics_0.58.1 desc_1.4.3          grid_4.6.1         
+#> [31] stats4_4.6.1        multtest_2.68.0     biomformat_1.40.0  
+#> [34] scales_1.4.0        iterators_1.0.14    MASS_7.3-65        
+#> [37] cli_3.6.6           rmarkdown_2.31      vegan_2.7-5        
+#> [40] crayon_1.5.3        ragg_1.5.2          generics_0.1.4     
+#> [43] otel_0.2.0          reshape2_1.4.5      cachem_1.1.0       
+#> [46] stringr_1.6.0       splines_4.6.1       parallel_4.6.1     
+#> [49] BiocManager_1.30.27 XVector_0.52.0      vctrs_0.7.3        
+#> [52] Matrix_1.7-5        jsonlite_2.0.0      bookdown_0.47      
+#> [55] IRanges_2.46.0      S4Vectors_0.50.1    systemfonts_1.3.2  
+#> [58] foreach_1.5.2       tidyr_1.3.2         jquerylib_0.1.4    
+#> [61] glue_1.8.1          pkgdown_2.2.0       codetools_0.2-20   
+#> [64] stringi_1.8.7       gtable_0.3.6        quadprog_1.5-8     
+#> [67] tibble_3.3.1        pillar_1.11.1       htmltools_0.5.9    
+#> [70] Seqinfo_1.2.0       R6_2.6.1            textshaping_1.0.5  
+#> [73] evaluate_1.0.5      lattice_0.22-9      Biobase_2.72.0     
+#> [76] bslib_0.11.0        Rcpp_1.1.1-1.1      fastmatch_1.1-8    
+#> [79] nlme_3.1-169        permute_0.9-10      mgcv_1.9-4         
+#> [82] xfun_0.59           fs_2.1.0            pkgconfig_2.0.3
 ```

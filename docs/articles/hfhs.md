@@ -34,7 +34,6 @@ which levels warrant downstream testing.
 The following code block loads the packages required for this analysis.
 
 ``` r
-
 library(phylobar)   # phylogeny-aware bar plots
 library(dplyr)      # data wrangling
 library(ape)        # phylogenetic tree manipulation
@@ -48,12 +47,11 @@ mice fed either a normal diet or an HFHS diet, along with the
 corresponding taxonomic annotations.
 
 ``` r
-
 download_zenodo("10.5281/zenodo.18791960", tempdir())
 #> [zen4R][INFO] ZenodoRecord - Download in sequential mode
 #> [zen4R][INFO] ZenodoRecord - Will download 1 file from record '18791960' (doi: '10.5281/zenodo.18791960') - total size: 76.2 KiB
 #> [zen4R][INFO] Downloading file 'HFHS-data.rds' - size: 76.2 KiB
-#> [zen4R][INFO] File downloaded at '/private/var/folders/mt/w0x_hxms30qch78n14v9zz0h0000gn/T/RtmpvOv1Mx'.
+#> [zen4R][INFO] File downloaded at '/tmp/RtmpOAvuVy'.
 #> [zen4R][INFO] ZenodoRecord - Verifying file integrity...
 #> [zen4R][INFO] File 'HFHS-data.rds': integrity verified (md5sum: 3266a55a3d0e01db0f0c99c7cb7a8e06)
 #> [zen4R][INFO] ZenodoRecord - End of download
@@ -71,7 +69,6 @@ from the phylobar package is used to convert the taxonomic data into a
 phylogenetic tree structure.
 
 ``` r
-
 tree <- taxa |>
     select(-X1, X1) |>
     mutate(
@@ -102,7 +99,6 @@ samples to indicate their diet group (N for normal diet and H for HFHS
 diet).
 
 ``` r
-
 # Extract day 7 samples and rename
 normal_day7 <- normal[,, 4]
 rownames(normal_day7) <- str_replace(rownames(normal_day7), "M_", "N")
@@ -132,7 +128,6 @@ x <- all_day7[sample_order, species_order]
 Finally we convert to compositions and visualize.
 
 ``` r
-
 comp <- x / rowSums(x)
 colnames(comp) <- colnames(all_day7)[species_order]
 phylobar(comp, tree, hclust_order = FALSE, sample_font_size = 9)
@@ -182,7 +177,6 @@ mice, and aligning samples by individual helps highlight true
 longitudinal shifts.
 
 ``` r
-
 y <- hfhs[sample_order2, species_order, ] |>
     aperm(c(1, 3, 2)) |>
     matrix(nrow = nrow(hfhs)*dim(hfhs)[3] , ncol = ncol(hfhs))
@@ -197,14 +191,12 @@ We now convert to compositions and visualize the longitudinal data for
 the HFHS diet group.
 
 ``` r
-
 comp <- y / rowSums(y)
 colnames(comp) <- colnames(hfhs)[species_order]
 phylobar(comp, tree, hclust_order = FALSE, sample_font_size = 9)
 ```
 
 ``` r
-
 
 # p <- phylobar(
 #     comp, tree, hclust_order = FALSE,
@@ -244,7 +236,6 @@ the left to the right side of the stacked bars gives a sense of the
 change over time within these HFHS diet mice.
 
 ``` r
-
 time <- as.numeric(sub("-.*", "", rownames(comp)))
 mouse <- factor(
     sub(".*-", "", rownames(comp)),
@@ -257,21 +248,23 @@ phylobar(comp_sort, tree, hclust_order = FALSE, sample_font_size = 9)
 ## Session Info
 
 ``` r
-
 sessionInfo()
-#> R version 4.6.0 (2026-04-24)
-#> Platform: aarch64-apple-darwin23
-#> Running under: macOS Sequoia 15.7.4
+#> R version 4.6.1 (2026-06-24)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Ubuntu 24.04.4 LTS
 #> 
 #> Matrix products: default
-#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #> 
 #> locale:
-#> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+#>  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+#>  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+#>  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+#> [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #> 
-#> time zone: America/Chicago
-#> tzcode source: internal
+#> time zone: UTC
+#> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -282,23 +275,23 @@ sessionInfo()
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] utf8_1.2.6          sass_0.4.10         generics_0.1.4     
-#>  [4] xml2_1.5.2          stringi_1.8.7       lattice_0.22-9     
+#>  [4] xml2_1.6.0          stringi_1.8.7       lattice_0.22-9     
 #>  [7] digest_0.6.39       magrittr_2.0.5      evaluate_1.0.5     
-#> [10] grid_4.6.0          bookdown_0.46       fastmap_1.2.0      
+#> [10] grid_4.6.1          bookdown_0.47       fastmap_1.2.0      
 #> [13] plyr_1.8.9          jsonlite_2.0.0      Matrix_1.7-5       
 #> [16] BiocManager_1.30.27 httr_1.4.8          purrr_1.2.2        
 #> [19] XML_3.99-0.23       codetools_0.2-20    textshaping_1.0.5  
 #> [22] jquerylib_0.1.4     cli_3.6.6           rlang_1.2.0        
-#> [25] withr_3.0.2         cachem_1.1.0        yaml_2.3.12        
-#> [28] otel_0.2.0          tools_4.6.0         parallel_4.6.0     
-#> [31] fastmatch_1.1-8     curl_7.1.0          png_0.1-9          
-#> [34] vctrs_0.7.3         R6_2.6.1            lifecycle_1.0.5    
-#> [37] fs_2.1.0            htmlwidgets_1.6.4   ragg_1.5.2         
-#> [40] cluster_2.1.8.2     pkgconfig_2.0.3     desc_1.4.3         
-#> [43] pkgdown_2.2.0       bslib_0.11.0        pillar_1.11.1      
-#> [46] glue_1.8.1          phangorn_2.12.1     Rcpp_1.1.1-1.1     
-#> [49] systemfonts_1.3.2   xfun_0.58           tibble_3.3.1       
-#> [52] tidyselect_1.2.1    keyring_1.4.1       knitr_1.51         
-#> [55] htmltools_0.5.9     nlme_3.1-169        igraph_2.3.2       
-#> [58] rmarkdown_2.31      compiler_4.6.0      quadprog_1.5-8
+#> [25] withr_3.0.3         cachem_1.1.0        yaml_2.3.12        
+#> [28] otel_0.2.0          tools_4.6.1         parallel_4.6.1     
+#> [31] fastmatch_1.1-8     curl_7.1.0          vctrs_0.7.3        
+#> [34] R6_2.6.1            lifecycle_1.0.5     fs_2.1.0           
+#> [37] htmlwidgets_1.6.4   ragg_1.5.2          cluster_2.1.8.2    
+#> [40] pkgconfig_2.0.3     desc_1.4.3          pkgdown_2.2.0      
+#> [43] bslib_0.11.0        pillar_1.11.1       glue_1.8.1         
+#> [46] phangorn_2.12.1     Rcpp_1.1.1-1.1      systemfonts_1.3.2  
+#> [49] xfun_0.59           tibble_3.3.1        tidyselect_1.2.1   
+#> [52] keyring_1.4.1       knitr_1.51          htmltools_0.5.9    
+#> [55] nlme_3.1-169        igraph_2.3.3        rmarkdown_2.31     
+#> [58] compiler_4.6.1      quadprog_1.5-8
 ```

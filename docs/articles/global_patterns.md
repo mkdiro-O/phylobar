@@ -9,7 +9,6 @@ work with the same dataset (GlobalPatterns) stored in both formats.
 ## Setup
 
 ``` r
-
 library(ape)
 library(phylobar)
 library(phyloseq)
@@ -25,7 +24,6 @@ subtree. We can extract the relevant sample composition using the
 otu_table accessor function.
 
 ``` r
-
 data(GlobalPatterns, package = "phyloseq")
 chlamydiae <- subset_taxa(GlobalPatterns, Phylum == "Chlamydiae")
 x_phylo <- t(otu_table(chlamydiae))
@@ -40,7 +38,6 @@ subtree. There are now some samples without any observed counts.
 Therefore, we will remove the samples from the view.
 
 ``` r
-
 tree_phylo <- phy_tree(chlamydiae)
 x_phylo <- x_phylo[rowSums(x_phylo) > 0, ]
 x_phylo <- x_phylo / rowSums(x_phylo)
@@ -49,7 +46,6 @@ x_phylo <- x_phylo / rowSums(x_phylo)
 We can now create our phylobar plot.
 
 ``` r
-
 phylobar(x_phylo, tree_phylo, width = 900)
 ```
 
@@ -63,7 +59,6 @@ that the names are distinct between parents and children by adding in
 the taxonomic rank to each name.
 
 ``` r
-
 taxa <- tax_table(chlamydiae) |>
     as.data.frame()
 taxa$ASV <- rownames(taxa)
@@ -75,7 +70,6 @@ taxonomy. Note that this is not a binary tree, since several taxonomic
 categories descended from a single node.
 
 ``` r
-
 tax_tree <- taxonomy_to_tree(taxa)
 plot(tax_tree)
 ```
@@ -86,7 +80,6 @@ Given our new taxonomy and the earlier sample information, we can now
 create a phylobar plot.
 
 ``` r
-
 phylobar(x_phylo, tax_tree, width = 900)
 ```
 
@@ -101,7 +94,6 @@ we’ll use a relative abundance transformation, so that we left with a
 composition of our plot rather than a more general stacked bar plot.
 
 ``` r
-
 data(GlobalPatterns, package = "mia")
 prev_species <- getPrevalent(GlobalPatterns, rank = "Species", detection = 0.01)
 GlobalPatterns_tse <- GlobalPatterns[
@@ -117,7 +109,6 @@ Let’s keep only those taxes that are observed in at least one sample. We
 also need to filter the tree to reflect this reduced subset of taxa.
 
 ``` r
-
 x_tse <- t(assay(GlobalPatterns_tse, "relabundance"))
 x_tse <- x_tse[, colSums(x_tse) > 0]
 tree_tse <- rowTree(GlobalPatterns_tse) |>
@@ -131,33 +122,34 @@ phyloseq can essentially be used interchangeably when constructing the
 necessary inputs for these visualizations.
 
 ``` r
-
 phylobar(x_tse, tree_tse, width = 900)
 ```
 
 ``` r
-
 sessionInfo()
-#> R version 4.6.0 (2026-04-24)
-#> Platform: aarch64-apple-darwin23
-#> Running under: macOS Sequoia 15.7.4
+#> R version 4.6.1 (2026-06-24)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Ubuntu 24.04.4 LTS
 #> 
 #> Matrix products: default
-#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #> 
 #> locale:
-#> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+#>  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+#>  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+#>  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+#> [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #> 
-#> time zone: America/Chicago
-#> tzcode source: internal
+#> time zone: UTC
+#> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats4    stats     graphics  grDevices utils     datasets  methods  
 #> [8] base     
 #> 
 #> other attached packages:
-#>  [1] scater_1.40.1                   scuttle_1.22.0                 
+#>  [1] scater_1.40.2                   scuttle_1.22.0                 
 #>  [3] miaViz_1.20.0                   mia_1.20.0                     
 #>  [5] TreeSummarizedExperiment_2.20.0 Biostrings_2.80.1              
 #>  [7] XVector_0.52.0                  SingleCellExperiment_1.34.0    
@@ -185,28 +177,28 @@ sessionInfo()
 #>  [21] bslib_0.11.0                tokenizers_0.3.0           
 #>  [23] htmlwidgets_1.6.4           desc_1.4.3                 
 #>  [25] plyr_1.8.9                  DECIPHER_3.8.0             
-#>  [27] cachem_1.1.0                igraph_2.3.2               
+#>  [27] cachem_1.1.0                igraph_2.3.3               
 #>  [29] lifecycle_1.0.5             iterators_1.0.14           
 #>  [31] pkgconfig_2.0.3             rsvd_1.0.5                 
 #>  [33] Matrix_1.7-5                R6_2.6.1                   
 #>  [35] fastmap_1.2.0               tidytext_0.4.3             
-#>  [37] aplot_0.2.9                 digest_0.6.39              
+#>  [37] aplot_0.3.0                 digest_0.6.39              
 #>  [39] ggnewscale_0.5.2            patchwork_1.3.2            
 #>  [41] irlba_2.3.7                 SnowballC_0.7.1            
 #>  [43] textshaping_1.0.5           vegan_2.7-5                
 #>  [45] beachmat_2.28.0             polyclip_1.10-7            
 #>  [47] abind_1.4-8                 mgcv_1.9-4                 
-#>  [49] compiler_4.6.0              fontquiver_0.2.1           
-#>  [51] withr_3.0.2                 S7_0.2.2                   
+#>  [49] compiler_4.6.1              fontquiver_0.2.1           
+#>  [51] withr_3.0.3                 S7_0.2.2                   
 #>  [53] BiocParallel_1.46.0         viridis_0.6.5              
 #>  [55] DBI_1.3.0                   ggforce_0.5.0              
 #>  [57] MASS_7.3-65                 rappdirs_0.3.4             
-#>  [59] DelayedArray_0.38.2         bluster_1.22.0             
-#>  [61] biomformat_1.40.0           permute_0.9-10             
-#>  [63] tools_4.6.0                 vipor_0.4.7                
+#>  [59] DelayedArray_0.38.2         biomformat_1.40.0          
+#>  [61] bluster_1.22.0              permute_0.9-10             
+#>  [63] tools_4.6.1                 vipor_0.4.7                
 #>  [65] otel_0.2.0                  beeswarm_0.4.0             
 #>  [67] glue_1.8.1                  quadprog_1.5-8             
-#>  [69] nlme_3.1-169                grid_4.6.0                 
+#>  [69] nlme_3.1-169                grid_4.6.1                 
 #>  [71] cluster_2.1.8.2             reshape2_1.4.5             
 #>  [73] ade4_1.7-24                 gtable_0.3.6               
 #>  [75] tidyr_1.3.2                 data.table_1.18.4          
@@ -214,25 +206,25 @@ sessionInfo()
 #>  [79] ScaledMatrix_1.20.0         ggrepel_0.9.8              
 #>  [81] foreach_1.5.2               pillar_1.11.1              
 #>  [83] stringr_1.6.0               yulab.utils_0.2.4          
-#>  [85] splines_4.6.0               dplyr_1.2.1                
+#>  [85] splines_4.6.1               dplyr_1.2.1                
 #>  [87] tweenr_2.0.3                treeio_1.36.1              
 #>  [89] lattice_0.22-9              survival_3.8-6             
 #>  [91] tidyselect_1.2.1            DirichletMultinomial_1.54.0
 #>  [93] fontLiberation_0.1.0        knitr_1.51                 
-#>  [95] fontBitstreamVera_0.1.1     gridExtra_2.3              
-#>  [97] bookdown_0.46               xfun_0.58                  
-#>  [99] graphlayouts_1.2.3          stringi_1.8.7              
-#> [101] ggfun_0.2.0                 lazyeval_0.2.3             
+#>  [95] fontBitstreamVera_0.1.1     gridExtra_2.3.1            
+#>  [97] bookdown_0.47               xfun_0.59                  
+#>  [99] graphlayouts_1.2.4          stringi_1.8.7              
+#> [101] ggfun_0.2.1                 lazyeval_0.2.3             
 #> [103] yaml_2.3.12                 evaluate_1.0.5             
 #> [105] codetools_0.2-20            gdtools_0.5.1              
 #> [107] tibble_3.3.1                BiocManager_1.30.27        
 #> [109] ggplotify_0.1.3             cli_3.6.6                  
 #> [111] systemfonts_1.3.2           jquerylib_0.1.4            
-#> [113] Rcpp_1.1.1-1.1              parallel_4.6.0             
+#> [113] Rcpp_1.1.1-1.1              parallel_4.6.1             
 #> [115] pkgdown_2.2.0               ecodive_2.2.6              
 #> [117] sparseMatrixStats_1.24.0    phangorn_2.12.1            
 #> [119] decontam_1.32.0             viridisLite_0.4.3          
-#> [121] tidytree_0.4.7              ggiraph_0.9.6              
+#> [121] tidytree_0.4.8              ggiraph_0.9.6              
 #> [123] scales_1.4.0                purrr_1.2.2                
 #> [125] crayon_1.5.3                rlang_1.2.0                
 #> [127] fastmatch_1.1-8

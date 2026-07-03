@@ -13,7 +13,6 @@ work, you will need to use Google Chrome and install the bookmarklet
 illustrate the process using the simple randomly generatred tree below.
 
 ``` r
-
 library(ape)
 library(phylobar)
 
@@ -33,10 +32,6 @@ click, and the associated graphic will appear in your Downloads folder.
 Note that you can scroll down to other phylobar visualizations and you
 would see other buttons for downloading those plots.
 
-# An error occurred.
-
-Unable to execute JavaScript.
-
 ## Step 2: Open in Editor
 
 The downloaded file is an ordinary SVG, which means it can be edited in
@@ -50,10 +45,6 @@ the original DOM structure created by the D3 visualization code. The
 recording below shows how we can navigate this layer structure within
 Inkscape.
 
-# An error occurred.
-
-Unable to execute JavaScript.
-
 ## Step 3: Modify and Save
 
 From here, we could edit if we want (e.g., to add a comment about an
@@ -65,26 +56,24 @@ subtree so that it uses dashed (rather than solid) lines to link the
 nodes. Once we have our final version, we export the graphic to PNG
 format.
 
-# An error occurred.
-
-Unable to execute JavaScript.
-
 ``` r
-
 sessionInfo()
-#> R version 4.6.0 (2026-04-24)
-#> Platform: aarch64-apple-darwin23
-#> Running under: macOS Sequoia 15.7.4
+#> R version 4.6.1 (2026-06-24)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Ubuntu 24.04.4 LTS
 #> 
 #> Matrix products: default
-#> BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #> 
 #> locale:
-#> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+#>  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+#>  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+#>  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+#> [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #> 
-#> time zone: America/Chicago
-#> tzcode source: internal
+#> time zone: UTC
+#> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -93,20 +82,20 @@ sessionInfo()
 #> [1] phylobar_0.99.12 ape_5.8-1        BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.6.0     
-#>  [4] BiocManager_1.30.27 Rcpp_1.1.1-1.1      parallel_4.6.0     
+#>  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.6.1     
+#>  [4] BiocManager_1.30.27 Rcpp_1.1.1-1.1      parallel_4.6.1     
 #>  [7] cluster_2.1.8.2     jquerylib_0.1.4     systemfonts_1.3.2  
 #> [10] textshaping_1.0.5   yaml_2.3.12         fastmap_1.2.0      
 #> [13] lattice_0.22-9      R6_2.6.1            generics_0.1.4     
-#> [16] igraph_2.3.2        knitr_1.51          htmlwidgets_1.6.4  
-#> [19] bookdown_0.46       desc_1.4.3          bslib_0.11.0       
+#> [16] igraph_2.3.3        knitr_1.51          htmlwidgets_1.6.4  
+#> [19] bookdown_0.47       desc_1.4.3          bslib_0.11.0       
 #> [22] rlang_1.2.0         fastmatch_1.1-8     cachem_1.1.0       
-#> [25] xfun_0.58           quadprog_1.5-8      fs_2.1.0           
+#> [25] xfun_0.59           quadprog_1.5-8      fs_2.1.0           
 #> [28] sass_0.4.10         otel_0.2.0          cli_3.6.6          
 #> [31] pkgdown_2.2.0       magrittr_2.0.5      phangorn_2.12.1    
-#> [34] digest_0.6.39       grid_4.6.0          lifecycle_1.0.5    
+#> [34] digest_0.6.39       grid_4.6.1          lifecycle_1.0.5    
 #> [37] nlme_3.1-169        vctrs_0.7.3         evaluate_1.0.5     
 #> [40] codetools_0.2-20    ragg_1.5.2          purrr_1.2.2        
-#> [43] rmarkdown_2.31      tools_4.6.0         pkgconfig_2.0.3    
+#> [43] rmarkdown_2.31      tools_4.6.1         pkgconfig_2.0.3    
 #> [46] htmltools_0.5.9
 ```

@@ -25,7 +25,6 @@ doi:10.1093/bioinformatics/btag151](https://doi.org/10.1093/bioinformatics/btag1
 You can install phylobar from Bioconductor using:
 
 ``` r
-
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -35,7 +34,6 @@ BiocManager::install("phylobar")
 Alternatively, you can install the development version from GitHub:
 
 ``` r
-
 remotes::install_github("mkdiro-o/phylobar")
 ```
 
@@ -44,7 +42,6 @@ remotes::install_github("mkdiro-o/phylobar")
 This block applies phylobar to a small random data set:
 
 ``` r
-
 library(ape)
 library(phylobar)
 
