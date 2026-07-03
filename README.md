@@ -54,7 +54,7 @@ try some examples right away, we have precompiled
 [articles](https://mkdiro-o.github.io/phylobar/articles). Here’s a
 recording of interactions with the HFHS data.
 
-<video src="phylobar-overview.mp4" controls="controls" style="max-width: 730px;"></video>
+<video src="https://raw.githubusercontent.com/mkdiro-O/phylobar/main/phylobar-overview.mp4" controls="controls" style="max-width: 730px;"></video>
 
 ## Common Tasks
 
